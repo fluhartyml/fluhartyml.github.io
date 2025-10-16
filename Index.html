@@ -1,1 +1,586 @@
+<!DOCTYPE html>
 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michael Lee Fluharty | AppleOS Developer Portfolio</title>
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f5f5;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --accent: #007AFF;
+            --border: #e0e0e0;
+            --card-bg: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+```
+    [data-theme="dark"] {
+        --bg-primary: #1a1a1a;
+        --bg-secondary: #2d2d2d;
+        --text-primary: #ffffff;
+        --text-secondary: #b0b0b0;
+        --accent: #0A84FF;
+        --border: #3d3d3d;
+        --card-bg: #2d2d2d;
+        --shadow: rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.6;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    header {
+        background-color: var(--bg-secondary);
+        padding: 1rem 2rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(10px);
+    }
+
+    nav {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--accent);
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        align-items: center;
+    }
+
+    .nav-links a {
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+        color: var(--accent);
+    }
+
+    .theme-toggle {
+        background: none;
+        border: 2px solid var(--border);
+        color: var(--text-primary);
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: all 0.3s;
+    }
+
+    .theme-toggle:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+
+    .hero {
+        max-width: 1200px;
+        margin: 4rem auto;
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, var(--accent), #5856D6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero .tagline {
+        font-size: 1.5rem;
+        color: var(--text-secondary);
+        margin-bottom: 2rem;
+    }
+
+    .hero .description {
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+        max-width: 700px;
+        margin: 0 auto 2rem;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+
+    .social-links a {
+        color: var(--text-primary);
+        text-decoration: none;
+        padding: 0.75rem 1.5rem;
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .social-links a:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        transform: translateY(-2px);
+    }
+
+    .stats {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        margin: 3rem 0;
+        padding: 2rem;
+        background-color: var(--bg-secondary);
+        border-radius: 12px;
+    }
+
+    .stat {
+        text-align: center;
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: var(--accent);
+    }
+
+    .stat-label {
+        color: var(--text-secondary);
+        margin-top: 0.5rem;
+    }
+
+    section {
+        max-width: 1200px;
+        margin: 4rem auto;
+        padding: 2rem;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .filter-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 3rem;
+        flex-wrap: wrap;
+    }
+
+    .filter-btn {
+        padding: 0.75rem 1.5rem;
+        background-color: var(--bg-secondary);
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        color: var(--text-primary);
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+        background-color: var(--accent);
+        color: white;
+        border-color: var(--accent);
+    }
+
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2rem;
+    }
+
+    .project-card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 2rem;
+        transition: all 0.3s;
+        cursor: pointer;
+    }
+
+    .project-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 24px var(--shadow);
+        border-color: var(--accent);
+    }
+
+    .project-card h3 {
+        color: var(--accent);
+        margin-bottom: 1rem;
+    }
+
+    .project-description {
+        color: var(--text-secondary);
+        margin-bottom: 1rem;
+    }
+
+    .project-tech {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+    }
+
+    .tech-tag {
+        padding: 0.25rem 0.75rem;
+        background-color: var(--bg-secondary);
+        border-radius: 4px;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+    }
+
+    .timeline {
+        position: relative;
+        padding: 2rem 0;
+    }
+
+    .timeline-item {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 3rem;
+        position: relative;
+    }
+
+    .timeline-date {
+        min-width: 120px;
+        font-weight: bold;
+        color: var(--accent);
+    }
+
+    .timeline-content {
+        flex: 1;
+        background-color: var(--card-bg);
+        padding: 1.5rem;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+    }
+
+    .contact-form {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--text-primary);
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: var(--bg-secondary);
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        color: var(--text-primary);
+        font-family: inherit;
+        transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+    }
+
+    .form-group textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 1rem;
+        background-color: var(--accent);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: opacity 0.3s;
+    }
+
+    .submit-btn:hover {
+        opacity: 0.9;
+    }
+
+    footer {
+        background-color: var(--bg-secondary);
+        text-align: center;
+        padding: 2rem;
+        margin-top: 4rem;
+        border-top: 1px solid var(--border);
+    }
+
+    .visitor-counter {
+        text-align: center;
+        padding: 1rem;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+        .hero h1 {
+            font-size: 2.5rem;
+        }
+
+        .nav-links {
+            gap: 1rem;
+        }
+
+        .projects-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .stats {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+    }
+</style>
+```
+
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">MLF</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#timeline">Timeline</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()">🌓 Theme</button></li>
+            </ul>
+        </nav>
+    </header>
+
+```
+<main>
+    <section id="home" class="hero">
+        <h1>Michael Lee Fluharty</h1>
+        <p class="tagline">AppleOS Developer Creating Practical and Useful Tools</p>
+        <p class="description">
+            Retired Electronics Technician turned hobbyist developer. Apple Developer since 2009, 
+            now publishing apps to the App Store. Building tools in the Apple ecosystem because I can, not because I have to.
+        </p>
+
+        <div class="social-links">
+            <a href="https://github.com/fluhartyml" target="_blank">
+                <span>GitHub</span>
+            </a>
+            <a href="https://x.com/fluhartyml" target="_blank">
+                <span>X (Twitter)</span>
+            </a>
+            <a href="https://www.linkedin.com/in/michael-fluharty-b18a5438a/" target="_blank">
+                <span>LinkedIn</span>
+            </a>
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">2009</div>
+                <div class="stat-label">Apple Developer Since</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">2025</div>
+                <div class="stat-label">First App Store Release</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">iOS/macOS</div>
+                <div class="stat-label">Platforms</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="ios">iOS</button>
+            <button class="filter-btn" data-filter="macos">macOS</button>
+            <button class="filter-btn" data-filter="swift">Swift</button>
+            <button class="filter-btn" data-filter="swiftui">SwiftUI</button>
+        </div>
+
+        <div class="projects-grid">
+            <!-- Projects will be added here -->
+            <div class="project-card" data-tech="ios swift swiftui">
+                <h3>Coming Soon</h3>
+                <p class="project-description">
+                    Projects showcasing development work will be added here soon.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">Swift</span>
+                    <span class="tech-tag">SwiftUI</span>
+                    <span class="tech-tag">iOS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="timeline">
+        <h2>Development Timeline</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">October 2025</div>
+                <div class="timeline-content">
+                    <h3>First App Store Release</h3>
+                    <p>Published first application to the App Store after years as a registered developer.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2009</div>
+                <div class="timeline-content">
+                    <h3>Became Apple Developer</h3>
+                    <p>Registered as Apple Developer during the OS X era to access beta software and development tools.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2004-2005</div>
+                <div class="timeline-content">
+                    <h3>Computer Electronics Engineering</h3>
+                    <p>Studied Computer Electronics Engineering Technologies at ITT San Diego, including software programming.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">1980s-1990s</div>
+                <div class="timeline-content">
+                    <h3>Early Programming</h3>
+                    <p>Started programming journey with Turbo BASIC in the late 1980s through the mid-1990s.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Get In Touch</h2>
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+    </section>
+
+    <div class="visitor-counter">
+        <p>👁️ Visitor tracking coming soon</p>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2025 Michael Lee Fluharty. All rights reserved.</p>
+    <p>Built with HTML, CSS, and JavaScript</p>
+</footer>
+
+<script>
+    // Theme toggle
+    function toggleTheme() {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+    }
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    // Filter projects
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Update active button
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            const filter = button.getAttribute('data-filter');
+
+            // Filter projects
+            projectCards.forEach(card => {
+                if (filter === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    const tech = card.getAttribute('data-tech');
+                    card.style.display = tech && tech.includes(filter) ? 'block' : 'none';
+                }
+            });
+        });
+    });
+
+    // Form submission
+    function handleSubmit(event) {
+        event.preventDefault();
+        alert('Contact form submitted! (Form handling will be implemented later)');
+        event.target.reset();
+    }
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+</script>
+```
+
+</body>
+</html>
