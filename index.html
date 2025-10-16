@@ -226,13 +226,18 @@
 
     .social-links a {
         padding: 0.75rem 1.5rem;
-        background-color: var(--bg-secondary);
+        background-color: rgba(255, 255, 255, 0.05);
         color: var(--text-primary);
         text-decoration: none;
         border-radius: 8px;
         border: 1px solid var(--border);
         transition: all 0.3s;
         font-weight: 500;
+        backdrop-filter: blur(3px);
+    }
+    
+    [data-theme="dark"] .social-links a {
+        background-color: rgba(0, 0, 0, 0.05);
     }
 
     .social-links a:hover {
@@ -252,7 +257,7 @@
     .stat-card {
         text-align: center;
         padding: 2rem;
-        background-color: rgba(245, 245, 245, 0.05);
+        background-color: rgba(255, 255, 255, 0.05);
         border-radius: 12px;
         border: 1px solid var(--border);
         transition: transform 0.3s, box-shadow 0.3s;
@@ -260,7 +265,7 @@
     }
     
     [data-theme="dark"] .stat-card {
-        background-color: rgba(26, 26, 26, 0.05);
+        background-color: rgba(0, 0, 0, 0.05);
     }
 
     .stat-card:hover {
@@ -348,10 +353,16 @@
         padding: 0.75rem;
         border: 1px solid var(--border);
         border-radius: 8px;
-        background-color: var(--bg-secondary);
+        background-color: rgba(255, 255, 255, 0.05);
         color: var(--text-primary);
         font-family: inherit;
         transition: border-color 0.3s;
+        backdrop-filter: blur(3px);
+    }
+    
+    [data-theme="dark"] .form-group input,
+    [data-theme="dark"] .form-group textarea {
+        background-color: rgba(0, 0, 0, 0.05);
     }
 
     .form-group input:focus,
