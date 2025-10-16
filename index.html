@@ -110,10 +110,13 @@
     .hero h1 {
         font-size: 3.5rem;
         margin-bottom: 1rem;
-        background: linear-gradient(135deg, var(--accent), #5856D6);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: #000000;
+        text-shadow: 2px 2px 4px rgba(200, 200, 200, 0.3);
+    }
+
+    [data-theme="dark"] .hero h1 {
+        color: #ffffff;
+        text-shadow: 2px 2px 4px rgba(100, 100, 100, 0.5);
     }
 
     .hero .tagline {
@@ -172,6 +175,16 @@
         font-size: 2.5rem;
         font-weight: bold;
         color: var(--accent);
+    }
+
+    .stat-number a {
+        color: var(--accent);
+        text-decoration: none;
+        transition: opacity 0.3s;
+    }
+
+    .stat-number a:hover {
+        opacity: 0.8;
     }
 
     .stat-label {
@@ -421,8 +434,8 @@
                 <div class="stat-label">Apple Developer Since</div>
             </div>
             <div class="stat">
-                <div class="stat-number">2025</div>
-                <div class="stat-label">First App Store Release</div>
+                <div class="stat-number"><a href="https://apps.apple.com/us/app/takeachanceonme/id6753626820" target="_blank">2025</a></div>
+                <div class="stat-label">TakeAChanceOnMe</div>
             </div>
             <div class="stat">
                 <div class="stat-number">iOS/macOS</div>
@@ -443,7 +456,6 @@
         </div>
 
         <div class="projects-grid">
-            <!-- Projects will be added here -->
             <div class="project-card" data-tech="ios swift swiftui">
                 <h3>Coming Soon</h3>
                 <p class="project-description">
@@ -521,6 +533,20 @@
     <p>Built with HTML, CSS, and JavaScript</p>
 </footer>
 
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/68f057f0965b721956897c64/1j7ldf0k3';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
 <script>
     // Theme toggle
     function toggleTheme() {
@@ -541,13 +567,11 @@
 
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
-            // Update active button
             filterButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
 
             const filter = button.getAttribute('data-filter');
 
-            // Filter projects
             projectCards.forEach(card => {
                 if (filter === 'all') {
                     card.style.display = 'block';
