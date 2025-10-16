@@ -142,15 +142,15 @@
         background: rgba(255, 255, 255, 0.3);
     }
 
-    /* Projects Section */
-    .projects-section, .blog-section {
+    /* Sections */
+    .projects-section, .blog-section, .timeline-section {
         min-height: 100vh;
         padding: 6rem 2rem 4rem;
         max-width: 1200px;
         margin: 0 auto;
     }
 
-    .projects-section h2, .blog-section h2 {
+    .projects-section h2, .blog-section h2, .timeline-section h2 {
         font-size: 2.5rem;
         margin-bottom: 3rem;
         text-align: center;
@@ -163,7 +163,7 @@
         gap: 2rem;
     }
 
-    .project-card, .blog-post {
+    .project-card, .blog-post, .activity-item {
         background: var(--card-bg);
         border: 1px solid var(--border-color);
         border-radius: 12px;
@@ -171,31 +171,31 @@
         transition: transform 0.3s, box-shadow 0.3s;
     }
 
-    .project-card:hover, .blog-post:hover {
+    .project-card:hover, .blog-post:hover, .activity-item:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
 
-    .project-card h3, .blog-post h3 {
+    .project-card h3, .blog-post h3, .activity-item h3 {
         font-size: 1.5rem;
         margin-bottom: 1rem;
         color: var(--accent-color);
     }
 
-    .project-card .description, .blog-post .content {
+    .project-card .description, .blog-post .content, .activity-item .description {
         margin-bottom: 1rem;
         color: var(--text-color);
         opacity: 0.8;
     }
 
-    .project-card .tech-stack, .blog-post .meta {
+    .project-card .tech-stack, .blog-post .meta, .activity-item .meta {
         display: flex;
         gap: 0.5rem;
         flex-wrap: wrap;
         margin-bottom: 1rem;
     }
 
-    .tech-badge, .repo-badge, .label-badge {
+    .tech-badge, .repo-badge, .label-badge, .activity-badge {
         background: var(--accent-color);
         color: white;
         padding: 0.25rem 0.75rem;
@@ -211,23 +211,27 @@
         background: #FF9500;
     }
 
-    .project-links, .blog-post .actions {
+    .activity-badge {
+        background: #5856D6;
+    }
+
+    .project-links, .blog-post .actions, .activity-item .actions {
         display: flex;
         gap: 1rem;
         margin-top: 1rem;
     }
 
-    .project-links a, .blog-post .actions a {
+    .project-links a, .blog-post .actions a, .activity-item .actions a {
         color: var(--accent-color);
         text-decoration: none;
         font-weight: 500;
     }
 
-    .project-links a:hover, .blog-post .actions a:hover {
+    .project-links a:hover, .blog-post .actions a:hover, .activity-item .actions a:hover {
         text-decoration: underline;
     }
 
-    .blog-post .date {
+    .blog-post .date, .activity-item .date {
         font-size: 0.875rem;
         color: var(--text-color);
         opacity: 0.6;
@@ -252,6 +256,64 @@
         font-weight: 500;
         margin-top: 0.5rem;
         display: inline-block;
+    }
+
+    /* Timeline Specific */
+    .contribution-graph {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 3rem;
+        text-align: center;
+    }
+
+    .contribution-graph h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        color: var(--accent-color);
+    }
+
+    .contribution-graph img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    .activity-feed {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .activity-item {
+        position: relative;
+        padding-left: 3rem;
+    }
+
+    .activity-item::before {
+        content: '';
+        position: absolute;
+        left: 1rem;
+        top: 2rem;
+        bottom: -1.5rem;
+        width: 2px;
+        background: var(--border-color);
+    }
+
+    .activity-item:last-child::before {
+        display: none;
+    }
+
+    .activity-item::after {
+        content: '';
+        position: absolute;
+        left: 0.5rem;
+        top: 2rem;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--accent-color);
     }
 
     .loading {
@@ -331,6 +393,23 @@
     <div class="blog-posts"></div>
 </section>
 
+<!-- Timeline Section -->
+<section id="timeline" class="timeline-section hidden">
+    <h2>Activity Timeline</h2>
+    
+    <!-- GitHub Contribution Graph -->
+    <div class="contribution-graph">
+        <h3>GitHub Activity</h3>
+        <img src="https://ghchart.rshah.org/007AFF/fluhartyml" alt="GitHub Contribution Graph">
+        <p style="margin-top: 1rem; opacity: 0.7;">
+            <a href="https://github.com/fluhartyml" target="_blank" style="color: var(--accent-color);">View full profile on GitHub →</a>
+        </p>
+    </div>
+
+    <div class="loading">Loading activity feed...</div>
+    <div class="activity-feed"></div>
+</section>
+
 <!-- Tawk.to Chat Widget -->
 <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
@@ -370,13 +449,10 @@
             const targetSection = document.getElementById(targetId);
             
             if (targetSection) {
-                // Show the target section
                 document.querySelectorAll('section').forEach(section => {
                     section.classList.add('hidden');
                 });
                 targetSection.classList.remove('hidden');
-                
-                // Scroll to top of section
                 targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
@@ -389,48 +465,37 @@
         const loading = document.querySelector('.projects-section .loading');
         
         try {
-            // Fetch all public repositories
             const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
             const repos = await reposResponse.json();
             
             loading.style.display = 'none';
             
-            // Process each repo
             for (const repo of repos) {
-                // Try to fetch wiki content
                 const wikiContent = await fetchWikiContent(username, repo.name);
-                
-                // Create project card
                 const card = createProjectCard(repo, wikiContent);
                 projectsGrid.appendChild(card);
             }
             
             if (projectsGrid.children.length === 0) {
-                projectsGrid.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">No projects with Wiki documentation found yet. Create Wiki pages for your repos to see them here!</p>';
+                projectsGrid.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">No projects found.</p>';
             }
             
         } catch (error) {
             console.error('Error fetching projects:', error);
-            loading.textContent = 'Error loading projects. Please try again later.';
+            loading.textContent = 'Error loading projects.';
         }
     }
 
-    // Fetch Wiki content for a repo
     async function fetchWikiContent(username, repoName) {
         try {
             const wikiUrl = `https://api.github.com/repos/${username}/${repoName}/contents`;
             const response = await fetch(wikiUrl);
-            
-            if (response.ok) {
-                return { exists: true };
-            }
-            return { exists: false };
+            return { exists: response.ok };
         } catch (error) {
             return { exists: false };
         }
     }
 
-    // Create project card HTML
     function createProjectCard(repo, wikiContent) {
         const card = document.createElement('div');
         card.className = 'project-card';
@@ -455,18 +520,16 @@
         return card;
     }
 
-    // GitHub API - Fetch Blog Posts (Issues)
+    // GitHub API - Fetch Blog Posts
     async function fetchBlogPosts() {
         const username = 'fluhartyml';
         const blogContainer = document.querySelector('.blog-posts');
         const loading = document.querySelector('.blog-section .loading');
         
         try {
-            // Fetch all repositories first
             const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
             const repos = await reposResponse.json();
             
-            // Fetch issues from each repo
             let allIssues = [];
             
             for (const repo of repos) {
@@ -474,7 +537,6 @@
                     const issuesResponse = await fetch(`https://api.github.com/repos/${username}/${repo.name}/issues?state=all&per_page=100`);
                     const issues = await issuesResponse.json();
                     
-                    // Add repo name to each issue
                     issues.forEach(issue => {
                         issue.repoName = repo.name;
                     });
@@ -487,26 +549,23 @@
             
             loading.style.display = 'none';
             
-            // Sort by date (newest first)
             allIssues.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
             
-            // Create blog post cards
             if (allIssues.length > 0) {
                 allIssues.forEach(issue => {
                     const post = createBlogPost(issue);
                     blogContainer.appendChild(post);
                 });
             } else {
-                blogContainer.innerHTML = '<p style="text-align: center;">No blog posts yet. Create Issues in your repos to start blogging!</p>';
+                blogContainer.innerHTML = '<p style="text-align: center;">No blog posts yet.</p>';
             }
             
         } catch (error) {
             console.error('Error fetching blog posts:', error);
-            loading.textContent = 'Error loading blog posts. Please try again later.';
+            loading.textContent = 'Error loading blog posts.';
         }
     }
 
-    // Create blog post HTML
     function createBlogPost(issue) {
         const post = document.createElement('div');
         post.className = 'blog-post';
@@ -517,7 +576,6 @@
             day: 'numeric'
         });
         
-        // Truncate body if too long
         const body = issue.body || 'No content';
         const isLong = body.length > 500;
         const displayBody = isLong ? body.substring(0, 500) + '...' : body;
@@ -536,7 +594,6 @@
             </div>
         `;
         
-        // Add read more functionality
         if (isLong) {
             const readMore = post.querySelector('.read-more');
             const content = post.querySelector('.content');
@@ -556,7 +613,113 @@
         return post;
     }
 
-    // Load projects when Projects section is visible
+    // GitHub API - Fetch Activity Timeline
+    async function fetchTimeline() {
+        const username = 'fluhartyml';
+        const activityFeed = document.querySelector('.activity-feed');
+        const loading = document.querySelector('.timeline-section .loading');
+        
+        try {
+            // Fetch user events (commits, issues, PRs, etc.)
+            const eventsResponse = await fetch(`https://api.github.com/users/${username}/events/public?per_page=100`);
+            const events = await eventsResponse.json();
+            
+            loading.style.display = 'none';
+            
+            // Sort by date (newest first)
+            events.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            
+            if (events.length > 0) {
+                events.forEach(event => {
+                    const item = createActivityItem(event);
+                    if (item) {
+                        activityFeed.appendChild(item);
+                    }
+                });
+            } else {
+                activityFeed.innerHTML = '<p style="text-align: center;">No recent activity found.</p>';
+            }
+            
+        } catch (error) {
+            console.error('Error fetching timeline:', error);
+            loading.textContent = 'Error loading activity timeline.';
+        }
+    }
+
+    function createActivityItem(event) {
+        const item = document.createElement('div');
+        item.className = 'activity-item';
+        
+        const date = new Date(event.created_at).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        
+        let title = '';
+        let description = '';
+        let activityType = '';
+        
+        // Parse different event types
+        switch(event.type) {
+            case 'PushEvent':
+                activityType = 'Commit';
+                const commitCount = event.payload.commits ? event.payload.commits.length : 0;
+                title = `Pushed ${commitCount} commit${commitCount !== 1 ? 's' : ''} to ${event.repo.name}`;
+                if (event.payload.commits && event.payload.commits[0]) {
+                    description = event.payload.commits[0].message;
+                }
+                break;
+            case 'CreateEvent':
+                activityType = 'Created';
+                title = `Created ${event.payload.ref_type} in ${event.repo.name}`;
+                description = event.payload.description || '';
+                break;
+            case 'IssuesEvent':
+                activityType = 'Issue';
+                title = `${event.payload.action} issue in ${event.repo.name}`;
+                description = event.payload.issue.title;
+                break;
+            case 'IssueCommentEvent':
+                activityType = 'Comment';
+                title = `Commented on issue in ${event.repo.name}`;
+                description = event.payload.comment.body.substring(0, 200);
+                break;
+            case 'PullRequestEvent':
+                activityType = 'Pull Request';
+                title = `${event.payload.action} pull request in ${event.repo.name}`;
+                description = event.payload.pull_request.title;
+                break;
+            case 'WatchEvent':
+                activityType = 'Starred';
+                title = `Starred ${event.repo.name}`;
+                break;
+            case 'ForkEvent':
+                activityType = 'Forked';
+                title = `Forked ${event.repo.name}`;
+                break;
+            default:
+                return null; // Skip unknown event types
+        }
+        
+        item.innerHTML = `
+            <div class="date">${date}</div>
+            <div class="meta">
+                <span class="activity-badge">${activityType}</span>
+            </div>
+            <h3>${title}</h3>
+            ${description ? `<div class="description">${description}</div>` : ''}
+            <div class="actions">
+                <a href="https://github.com/${event.repo.name}" target="_blank">View Repository</a>
+            </div>
+        `;
+        
+        return item;
+    }
+
+    // Load sections on demand
     let projectsLoaded = false;
     document.querySelector('a[href="#projects"]').addEventListener('click', () => {
         if (!projectsLoaded) {
@@ -565,12 +728,19 @@
         }
     });
 
-    // Load blog posts when Blog section is visible
     let blogLoaded = false;
     document.querySelector('a[href="#blog"]').addEventListener('click', () => {
         if (!blogLoaded) {
             fetchBlogPosts();
             blogLoaded = true;
+        }
+    });
+
+    let timelineLoaded = false;
+    document.querySelector('a[href="#timeline"]').addEventListener('click', () => {
+        if (!timelineLoaded) {
+            fetchTimeline();
+            timelineLoaded = true;
         }
     });
 
