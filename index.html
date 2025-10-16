@@ -322,7 +322,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
                     url('IMG_1271.jpeg') center/cover;
     }
 
@@ -360,20 +360,20 @@
         opacity: 0.8;
     }
 
-    .chat-cta {
+    .email-cta {
         background: var(--accent-color);
         color: white;
         padding: 1rem 2rem;
         border-radius: 8px;
         font-size: 1.1rem;
         font-weight: 600;
-        border: none;
-        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
         transition: opacity 0.3s;
         margin-bottom: 2rem;
     }
 
-    .chat-cta:hover {
+    .email-cta:hover {
         opacity: 0.9;
     }
 
@@ -506,9 +506,9 @@
         <p>Want to discuss a project, collaborate, or just say hi? I'm always happy to chat about AppleOS development, tool building, or anything tech-related.</p>
         
         <div class="contact-card">
-            <h3>💬 Start a Conversation</h3>
-            <p>Click the chat button below or use the chat widget in the bottom right corner to send me a message instantly.</p>
-            <button class="chat-cta" onclick="openTawkChat()">Open Chat Widget</button>
+            <h3>📧 Send Me an Email</h3>
+            <p>Click the button below to send me a message directly.</p>
+            <a href="mailto:michael@fluharty.com" class="email-cta">Email Me</a>
             
             <div style="border-top: 1px solid var(--border-color); padding-top: 2rem; margin-top: 2rem;">
                 <h3 style="margin-bottom: 1rem;">🔗 Connect on Social</h3>
@@ -522,27 +522,7 @@
     </div>
 </section>
 
-<!-- Tawk.to Chat Widget -->
-<script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-        s1.async=true;
-        s1.src='https://embed.tawk.to/68f057f0965b721956897c64/1j7ldf0k3';
-        s1.charset='UTF-8';
-        s1.setAttribute('crossorigin','*');
-        s0.parentNode.insertBefore(s1,s0);
-    })();
 
-    // Function to open Tawk.to chat
-    function openTawkChat() {
-        if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
-            Tawk_API.maximize();
-        } else {
-            alert('Chat widget is loading... Please try again in a moment or use the chat button in the bottom right corner.');
-        }
-    }
-</script>
 
 <script>
     // Theme Toggle
