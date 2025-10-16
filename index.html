@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,410 +18,407 @@
             --overlay: rgba(255, 255, 255, 0.85);
         }
 
-```
-    [data-theme="dark"] {
-        --bg-primary: #0a0a0a;
-        --bg-secondary: #1a1a1a;
-        --text-primary: #ffffff;
-        --text-secondary: #cccccc;
-        --accent: #0A84FF;
-        --border: #333333;
-        --card-bg: #1a1a1a;
-        --shadow: rgba(0, 0, 0, 0.5);
-        --overlay: rgba(0, 0, 0, 0.75);
-    }
+        [data-theme="dark"] {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --accent: #0A84FF;
+            --border: #333333;
+            --card-bg: #1a1a1a;
+            --shadow: rgba(0, 0, 0, 0.5);
+            --overlay: rgba(0, 0, 0, 0.75);
+        }
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        background-color: var(--bg-primary);
-        background-image: url('IMG_7907.jpeg');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        color: var(--text-primary);
-        line-height: 1.6;
-        transition: background-color 0.3s ease, color 0.3s ease;
-        position: relative;
-    }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-primary);
+            background-image: url('IMG_7907.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            position: relative;
+        }
 
-    body::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(255, 255, 255, 0.80);
-        z-index: 0;
-        pointer-events: none;
-    }
-    
-    [data-theme="dark"] body::before {
-        background-color: rgba(0, 0, 0, 0.70);
-    }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.80);
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        [data-theme="dark"] body::before {
+            background-color: rgba(0, 0, 0, 0.70);
+        }
 
-    header {
-        background-color: var(--bg-secondary);
-        padding: 1rem 2rem;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        border-bottom: 1px solid var(--border);
-        backdrop-filter: blur(10px);
-    }
+        header {
+            background-color: var(--bg-secondary);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
 
-    nav {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: relative;
-        z-index: 1;
-    }
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
 
-    .logo {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: var(--accent);
-    }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
 
-    .nav-links {
-        display: flex;
-        gap: 2rem;
-        list-style: none;
-        align-items: center;
-    }
-
-    .nav-links a {
-        color: var(--text-primary);
-        text-decoration: none;
-        transition: color 0.3s;
-        font-weight: 500;
-    }
-
-    .nav-links a:hover {
-        color: var(--accent);
-    }
-
-    .theme-toggle {
-        background: none;
-        border: 2px solid var(--border);
-        color: var(--text-primary);
-        padding: 0.5rem 1rem;
-        border-radius: 8px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        transition: all 0.3s;
-        font-weight: 500;
-    }
-
-    .theme-toggle:hover {
-        border-color: var(--accent);
-        color: var(--accent);
-    }
-
-    main {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 2rem;
-        position: relative;
-        z-index: 1;
-    }
-
-    section {
-        margin-bottom: 4rem;
-        background-color: rgba(255, 255, 255, 0.05);
-        padding: 2rem;
-        border-radius: 12px;
-        box-shadow: 0 4px 6px var(--shadow);
-        backdrop-filter: blur(3px);
-    }
-    
-    [data-theme="dark"] section {
-        background-color: rgba(26, 26, 26, 0.05);
-    }
-
-    h1, h2, h3 {
-        margin-bottom: 1rem;
-    }
-
-    h1 {
-        font-size: 3rem;
-        color: #000000;
-        text-shadow: 2px 2px 4px rgba(128, 128, 128, 0.5);
-    }
-    
-    [data-theme="dark"] h1 {
-        color: #ffffff;
-        text-shadow: 2px 2px 4px rgba(128, 128, 128, 0.8);
-    }
-
-    h2 {
-        font-size: 2rem;
-        color: var(--text-primary);
-        border-bottom: 2px solid var(--accent);
-        padding-bottom: 0.5rem;
-    }
-
-    .hero {
-        text-align: center;
-        padding: 4rem 2rem;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 12px;
-        margin-bottom: 2rem;
-        backdrop-filter: blur(3px);
-    }
-    
-    [data-theme="dark"] .hero {
-        background: rgba(26, 26, 26, 0.05);
-    }
-
-    .hero h1 {
-        font-size: 3.5rem;
-        margin-bottom: 1rem;
-    }
-
-    .hero p {
-        font-size: 1.25rem;
-        color: #4a3728;
-        max-width: 600px;
-        margin: 0 auto 2rem;
-        text-shadow: 1px 1px 3px rgba(128, 128, 128, 0.5);
-    }
-    
-    [data-theme="dark"] .hero p {
-        color: #d4a574;
-        text-shadow: 1px 1px 3px rgba(128, 128, 128, 0.8);
-    }
-
-    .bio {
-        font-size: 1.1rem;
-        line-height: 1.8;
-        color: #4a3728;
-        text-shadow: 1px 1px 3px rgba(128, 128, 128, 0.5);
-    }
-    
-    [data-theme="dark"] .bio {
-        color: #d4a574;
-        text-shadow: 1px 1px 3px rgba(128, 128, 128, 0.8);
-    }
-
-    .social-links {
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        margin-top: 2rem;
-    }
-
-    .social-links a {
-        padding: 0.75rem 1.5rem;
-        background-color: rgba(255, 255, 255, 0.05);
-        color: var(--text-primary);
-        text-decoration: none;
-        border-radius: 8px;
-        border: 1px solid var(--border);
-        transition: all 0.3s;
-        font-weight: 500;
-        backdrop-filter: blur(3px);
-    }
-    
-    [data-theme="dark"] .social-links a {
-        background-color: rgba(0, 0, 0, 0.05);
-    }
-
-    .social-links a:hover {
-        background-color: var(--accent);
-        color: white;
-        border-color: var(--accent);
-        transform: translateY(-2px);
-    }
-
-    .stats {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
-        margin-top: 2rem;
-    }
-
-    .stat-card {
-        text-align: center;
-        padding: 2rem;
-        background-color: rgba(255, 255, 255, 0.05);
-        border-radius: 12px;
-        border: 1px solid var(--border);
-        transition: transform 0.3s, box-shadow 0.3s;
-        backdrop-filter: blur(3px);
-    }
-    
-    [data-theme="dark"] .stat-card {
-        background-color: rgba(0, 0, 0, 0.05);
-    }
-
-    .stat-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 16px var(--shadow);
-    }
-
-    .stat-number {
-        font-size: 3rem;
-        font-weight: bold;
-        color: var(--accent);
-        margin-bottom: 0.5rem;
-    }
-
-    .stat-label {
-        font-size: 1rem;
-        color: var(--text-secondary);
-    }
-
-    .timeline {
-        position: relative;
-        padding-left: 2rem;
-    }
-
-    .timeline::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 2px;
-        background: var(--accent);
-    }
-
-    .timeline-item {
-        position: relative;
-        margin-bottom: 2rem;
-        padding-left: 2rem;
-    }
-
-    .timeline-item::before {
-        content: '';
-        position: absolute;
-        left: -2.5rem;
-        top: 0.5rem;
-        width: 1rem;
-        height: 1rem;
-        background: var(--accent);
-        border-radius: 50%;
-        border: 3px solid var(--bg-primary);
-    }
-
-    .timeline-year {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: var(--accent);
-        margin-bottom: 0.5rem;
-    }
-
-    .timeline-content {
-        color: var(--text-secondary);
-    }
-
-    .contact-form {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        max-width: 600px;
-        margin: 0 auto;
-    }
-
-    .form-group {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .form-group label {
-        margin-bottom: 0.5rem;
-        font-weight: 500;
-        color: var(--text-primary);
-    }
-
-    .form-group input,
-    .form-group textarea {
-        padding: 0.75rem;
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        background-color: rgba(255, 255, 255, 0.05);
-        color: var(--text-primary);
-        font-family: inherit;
-        transition: border-color 0.3s;
-        backdrop-filter: blur(3px);
-    }
-    
-    [data-theme="dark"] .form-group input,
-    [data-theme="dark"] .form-group textarea {
-        background-color: rgba(0, 0, 0, 0.05);
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-        outline: none;
-        border-color: var(--accent);
-    }
-
-    .form-group textarea {
-        min-height: 150px;
-        resize: vertical;
-    }
-
-    .submit-btn {
-        padding: 1rem 2rem;
-        background-color: var(--accent);
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 1rem;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.3s;
-    }
-
-    .submit-btn:hover {
-        background-color: #0056b3;
-        transform: translateY(-2px);
-    }
-
-    footer {
-        background-color: var(--bg-secondary);
-        padding: 2rem;
-        text-align: center;
-        border-top: 1px solid var(--border);
-        margin-top: 4rem;
-        position: relative;
-        z-index: 1;
-    }
-
-    @media (max-width: 768px) {
         .nav-links {
-            gap: 1rem;
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--border);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        section {
+            margin-bottom: 4rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px var(--shadow);
+            backdrop-filter: blur(3px);
+        }
+        
+        [data-theme="dark"] section {
+            background-color: rgba(26, 26, 26, 0.05);
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 1rem;
         }
 
         h1 {
+            font-size: 3rem;
+            color: #000000;
+            text-shadow: 2px 2px 4px rgba(128, 128, 128, 0.5);
+        }
+        
+        [data-theme="dark"] h1 {
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(128, 128, 128, 0.8);
+        }
+
+        h2 {
             font-size: 2rem;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(3px);
+        }
+        
+        [data-theme="dark"] .hero {
+            background: rgba(26, 26, 26, 0.05);
         }
 
         .hero h1 {
-            font-size: 2.5rem;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #4a3728;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            text-shadow: 1px 1px 3px rgba(128, 128, 128, 0.5);
+        }
+        
+        [data-theme="dark"] .hero p {
+            color: #d4a574;
+            text-shadow: 1px 1px 3px rgba(128, 128, 128, 0.8);
+        }
+
+        .bio {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #4a3728;
+            text-shadow: 1px 1px 3px rgba(128, 128, 128, 0.5);
+        }
+        
+        [data-theme="dark"] .bio {
+            color: #d4a574;
+            text-shadow: 1px 1px 3px rgba(128, 128, 128, 0.8);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            padding: 0.75rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+            font-weight: 500;
+            backdrop-filter: blur(3px);
+        }
+        
+        [data-theme="dark"] .social-links a {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            transform: translateY(-2px);
         }
 
         .stats {
-            grid-template-columns: 1fr;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
-    }
-</style>
-```
 
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(3px);
+        }
+        
+        [data-theme="dark"] .stat-card {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--accent);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid var(--bg-primary);
+        }
+
+        .timeline-year {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content {
+            color: var(--text-secondary);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            font-family: inherit;
+            transition: border-color 0.3s;
+            backdrop-filter: blur(3px);
+        }
+        
+        [data-theme="dark"] .form-group input,
+        [data-theme="dark"] .form-group textarea {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            padding: 1rem 2rem;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background-color: var(--bg-secondary);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -443,190 +439,187 @@
         </nav>
     </header>
 
-```
-<main>
-    <section id="home" class="hero">
-        <h1>Michael Lee Fluharty</h1>
-        <p class="bio">AppleOS Developer Creating Practical and Useful Tools</p>
-        <p class="bio">Retired Electronics Technician turned hobbyist developer. Apple Developer since 2009, now publishing apps to the App Store. Building tools in the Apple ecosystem because I can, not because I have to.</p>
-        
-        <div class="social-links">
-            <a href="https://github.com/fluhartyml" target="_blank">GitHub</a>
-            <a href="https://x.com/fluhartyml" target="_blank">X (Twitter)</a>
-            <a href="https://linkedin.com/in/fluhartyml" target="_blank">LinkedIn</a>
-        </div>
-    </section>
+    <main>
+        <section id="home" class="hero">
+            <h1>Michael Lee Fluharty</h1>
+            <p class="bio">AppleOS Developer Creating Practical and Useful Tools</p>
+            <p class="bio">Retired Electronics Technician turned hobbyist developer. Apple Developer since 2009, now publishing apps to the App Store. Building tools in the Apple ecosystem because I can, not because I have to.</p>
+            
+            <div class="social-links">
+                <a href="https://github.com/fluhartyml" target="_blank">GitHub</a>
+                <a href="https://x.com/fluhartyml" target="_blank">X (Twitter)</a>
+                <a href="https://linkedin.com/in/fluhartyml" target="_blank">LinkedIn</a>
+            </div>
+        </section>
 
-    <section id="stats">
-        <h2>Journey Highlights</h2>
-        <div class="stats">
-            <div class="stat-card">
-                <div class="stat-number">2009</div>
-                <div class="stat-label">Apple Developer Since</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">2025</div>
-                <div class="stat-label"><a href="https://apps.apple.com/us/app/takeachanceonme/id6738127782" target="_blank" style="color: inherit; text-decoration: none;">TakeAChanceOnMe</a></div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">iOS/macOS</div>
-                <div class="stat-label">Platforms</div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects">
-        <h2>Projects</h2>
-        <p style="color: var(--text-secondary); margin-bottom: 2rem;">Building practical tools for the Apple ecosystem. Organized by product ecosystem and purpose.</p>
-        
-        <div style="margin-bottom: 3rem;">
-            <h3 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.5rem;">NightGard Ecosystem</h3>
-            <div style="background: rgba(var(--accent-rgb), 0.1); padding: 1.5rem; border-radius: 8px; border-left: 3px solid var(--accent);">
-                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-                    <strong><a href="https://github.com/fluhartyml/NightGard" target="_blank" style="color: var(--accent); text-decoration: none;">NightGard/NiteGard</a></strong> - macOS BBS system with multi-module Sysop Console architecture, inspired by classic Renegade BBS
-                </p>
-                <p style="color: var(--text-secondary);">
-                    <strong><a href="https://github.com/fluhartyml/NGWebPortal" target="_blank" style="color: var(--accent); text-decoration: none;">NG Web Portal</a></strong> - Mac app for creating and hosting portfolio/blog websites with localhost server
-                </p>
-            </div>
-        </div>
-        
-        <div style="margin-bottom: 3rem;">
-            <h3 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.5rem;">Inkwell Suite</h3>
-            <div style="background: rgba(var(--accent-rgb), 0.1); padding: 1.5rem; border-radius: 8px; border-left: 3px solid var(--accent);">
-                <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">
-                    <strong><a href="https://github.com/fluhartyml/InkwellBinary" target="_blank" style="color: var(--accent); text-decoration: none;">InkwellBinary</a></strong> - Binary clock app with device-adaptive modes (iPhone bedside red theme, iPad desk full-color)
-                </p>
-                <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">
-                    <strong><a href="https://github.com/fluhartyml/Inkwell-Journal" target="_blank" style="color: var(--accent); text-decoration: none;">InkwellJournal</a></strong> - Personal journaling application (on break)
-                </p>
-                <p style="color: var(--text-secondary);">
-                    <strong><a href="https://github.com/fluhartyml/InkwellParallelWorkflowTimer" target="_blank" style="color: var(--accent); text-decoration: none;">InkwellParallelWorkflowTimer</a></strong> - Workflow timing and productivity tool
-                </p>
-            </div>
-        </div>
-        
-        <div style="margin-bottom: 3rem;">
-            <h3 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.5rem;">Published Apps</h3>
-            <div style="background: rgba(var(--accent-rgb), 0.1); padding: 1.5rem; border-radius: 8px; border-left: 3px solid var(--accent);">
-                <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">
-                    <strong><a href="https://apps.apple.com/us/app/takeachanceonme/id6738127782" target="_blank" style="color: var(--accent); text-decoration: none;">TakeAChanceOnMe</a></strong> - Random number generator app, published to App Store 2025
-                </p>
-                <p style="color: var(--text-secondary);">
-                    <strong><a href="https://github.com/fluhartyml/TallyMatrices" target="_blank" style="color: var(--accent); text-decoration: none;">TallyMatrices</a></strong> - Apple TV tally matrix clock with customizable patterns and themes
-                </p>
-            </div>
-        </div>
-        
-        <div>
-            <h3 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.5rem;">Experimental & Learning</h3>
-            <div style="background: rgba(var(--accent-rgb), 0.1); padding: 1.5rem; border-radius: 8px; border-left: 3px solid var(--accent);">
-                <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">
-                    <strong><a href="https://github.com/fluhartyml/FluhartyGPT" target="_blank" style="color: var(--accent); text-decoration: none;">FluhartyGPT</a></strong> & <strong><a href="https://github.com/fluhartyml/Chat-GPT" target="_blank" style="color: var(--accent); text-decoration: none;">Chat-GPT</a></strong> - AI integration experiments
-                </p>
-                <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">
-                    <strong><a href="https://github.com/fluhartyml/JournalApp" target="_blank" style="color: var(--accent); text-decoration: none;">JournalApp</a></strong> - Alternative journaling concept
-                </p>
-                <p style="color: var(--text-secondary);">
-                    <strong><a href="https://github.com/fluhartyml/rust" target="_blank" style="color: var(--accent); text-decoration: none;">rust</a></strong> - Rust programming language exploration
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section id="timeline">
-        <h2>Timeline</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-year">2009</div>
-                <div class="timeline-content">
-                    Joined the Apple Developer Program. Started learning iOS development.
+        <section id="stats">
+            <h2>Journey Highlights</h2>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">2009</div>
+                    <div class="stat-label">Apple Developer Since</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2025</div>
+                    <div class="stat-label"><a href="https://apps.apple.com/us/app/takeachanceonme/id6738127782" target="_blank" style="color: inherit; text-decoration: none;">TakeAChanceOnMe</a></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">iOS/macOS</div>
+                    <div class="stat-label">Platforms</div>
                 </div>
             </div>
-            <div class="timeline-item">
-                <div class="timeline-year">2010-2024</div>
-                <div class="timeline-content">
-                    Built numerous personal projects and prototypes. Refined development skills across iOS, iPadOS, and macOS platforms.
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">Building practical tools for the Apple ecosystem. Organized by product ecosystem and purpose.</p>
+            
+            <div style="margin-bottom: 3rem;">
+                <h3 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.5rem;">NightGard Ecosystem</h3>
+                <div style="background: rgba(var(--accent-rgb), 0.1); padding: 1.5rem; border-radius: 8px; border-left: 3px solid var(--accent);">
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                        <strong><a href="https://github.com/fluhartyml/NightGard" target="_blank" style="color: var(--accent); text-decoration: none;">NightGard/NiteGard</a></strong> - macOS BBS system with multi-module Sysop Console architecture, inspired by classic Renegade BBS
+                    </p>
+                    <p style="color: var(--text-secondary);">
+                        <strong><a href="https://github.com/fluhartyml/NGWebPortal" target="_blank" style="color: var(--accent); text-decoration: none;">NG Web Portal</a></strong> - Mac app for creating and hosting portfolio/blog websites with localhost server
+                    </p>
                 </div>
             </div>
-            <div class="timeline-item">
-                <div class="timeline-year">2025</div>
-                <div class="timeline-content">
-                    Published first app to the App Store: TakeAChanceOnMe. Continuing to develop practical tools for the Apple ecosystem.
+            
+            <div style="margin-bottom: 3rem;">
+                <h3 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.5rem;">Inkwell Suite</h3>
+                <div style="background: rgba(var(--accent-rgb), 0.1); padding: 1.5rem; border-radius: 8px; border-left: 3px solid var(--accent);">
+                    <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">
+                        <strong><a href="https://github.com/fluhartyml/InkwellBinary" target="_blank" style="color: var(--accent); text-decoration: none;">InkwellBinary</a></strong> - Binary clock app with device-adaptive modes (iPhone bedside red theme, iPad desk full-color)
+                    </p>
+                    <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">
+                        <strong><a href="https://github.com/fluhartyml/Inkwell-Journal" target="_blank" style="color: var(--accent); text-decoration: none;">InkwellJournal</a></strong> - Personal journaling application (on break)
+                    </p>
+                    <p style="color: var(--text-secondary);">
+                        <strong><a href="https://github.com/fluhartyml/InkwellParallelWorkflowTimer" target="_blank" style="color: var(--accent); text-decoration: none;">InkwellParallelWorkflowTimer</a></strong> - Workflow timing and productivity tool
+                    </p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="contact">
-        <h2>Contact</h2>
-        <form class="contact-form" id="contactForm">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required>
+            
+            <div style="margin-bottom: 3rem;">
+                <h3 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.5rem;">Published Apps</h3>
+                <div style="background: rgba(var(--accent-rgb), 0.1); padding: 1.5rem; border-radius: 8px; border-left: 3px solid var(--accent);">
+                    <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">
+                        <strong><a href="https://apps.apple.com/us/app/takeachanceonme/id6738127782" target="_blank" style="color: var(--accent); text-decoration: none;">TakeAChanceOnMe</a></strong> - Random number generator app, published to App Store 2025
+                    </p>
+                    <p style="color: var(--text-secondary);">
+                        <strong><a href="https://github.com/fluhartyml/TallyMatrices" target="_blank" style="color: var(--accent); text-decoration: none;">TallyMatrices</a></strong> - Apple TV tally matrix clock with customizable patterns and themes
+                    </p>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
+            
+            <div>
+                <h3 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.5rem;">Experimental & Learning</h3>
+                <div style="background: rgba(var(--accent-rgb), 0.1); padding: 1.5rem; border-radius: 8px; border-left: 3px solid var(--accent);">
+                    <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">
+                        <strong><a href="https://github.com/fluhartyml/FluhartyGPT" target="_blank" style="color: var(--accent); text-decoration: none;">FluhartyGPT</a></strong> & <strong><a href="https://github.com/fluhartyml/Chat-GPT" target="_blank" style="color: var(--accent); text-decoration: none;">Chat-GPT</a></strong> - AI integration experiments
+                    </p>
+                    <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">
+                        <strong><a href="https://github.com/fluhartyml/JournalApp" target="_blank" style="color: var(--accent); text-decoration: none;">JournalApp</a></strong> - Alternative journaling concept
+                    </p>
+                    <p style="color: var(--text-secondary);">
+                        <strong><a href="https://github.com/fluhartyml/rust" target="_blank" style="color: var(--accent); text-decoration: none;">rust</a></strong> - Rust programming language exploration
+                    </p>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" required></textarea>
+        </section>
+
+        <section id="timeline">
+            <h2>Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2009</div>
+                    <div class="timeline-content">
+                        Joined the Apple Developer Program. Started learning iOS development.
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2010-2024</div>
+                    <div class="timeline-content">
+                        Built numerous personal projects and prototypes. Refined development skills across iOS, iPadOS, and macOS platforms.
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2025</div>
+                    <div class="timeline-content">
+                        Published first app to the App Store: TakeAChanceOnMe. Continuing to develop practical tools for the Apple ecosystem.
+                    </div>
+                </div>
             </div>
-            <button type="submit" class="submit-btn">Send Message</button>
-        </form>
-    </section>
-</main>
+        </section>
 
-<footer>
-    <p>&copy; 2025 Michael Lee Fluharty. All rights reserved.</p>
-</footer>
+        <section id="contact">
+            <h2>Contact</h2>
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </section>
+    </main>
 
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/68f057f0965b721956897c64/1j7ldf0k3';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+    <footer>
+        <p>&copy; 2025 Michael Lee Fluharty. All rights reserved.</p>
+    </footer>
 
-<script>
-    // Theme toggle functionality
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.querySelector('.theme-icon');
-    const html = document.documentElement;
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/68f057f0965b721956897c64/1j7ldf0k3';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
 
-    // Check for saved theme preference or default to light mode
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    html.setAttribute('data-theme', currentTheme);
-    updateThemeIcon(currentTheme);
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.querySelector('.theme-icon');
+        const html = document.documentElement;
 
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = html.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        
-        html.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcon(newTheme);
-    });
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', currentTheme);
+        updateThemeIcon(currentTheme);
 
-    function updateThemeIcon(theme) {
-        themeIcon.textContent = theme === 'light' ? '🌙' : '☀️';
-    }
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
 
-    // Contact form handling
-    document.getElementById('contactForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert('Thank you for your message! This is a demo form. Use the Tawk.to chat widget to contact me directly.');
-    });
-</script>
-```
+        function updateThemeIcon(theme) {
+            themeIcon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
 
+        // Contact form handling
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! This is a demo form. Use the Tawk.to chat widget to contact me directly.');
+        });
+    </script>
 </body>
 </html>
