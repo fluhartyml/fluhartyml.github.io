@@ -143,14 +143,14 @@
     }
 
     /* Sections */
-    .projects-section, .blog-section, .timeline-section {
+    .projects-section, .blog-section, .timeline-section, .contact-section {
         min-height: 100vh;
         padding: 6rem 2rem 4rem;
         max-width: 1200px;
         margin: 0 auto;
     }
 
-    .projects-section h2, .blog-section h2, .timeline-section h2 {
+    .projects-section h2, .blog-section h2, .timeline-section h2, .contact-section h2 {
         font-size: 2.5rem;
         margin-bottom: 3rem;
         text-align: center;
@@ -316,6 +316,88 @@
         background: var(--accent-color);
     }
 
+    /* Contact Section Specific */
+    .contact-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .contact-content {
+        text-align: center;
+        max-width: 600px;
+    }
+
+    .contact-content p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        opacity: 0.8;
+    }
+
+    .contact-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 3rem;
+        margin-top: 2rem;
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .contact-card h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        color: var(--accent-color);
+    }
+
+    .contact-card p {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        opacity: 0.8;
+    }
+
+    .chat-cta {
+        background: var(--accent-color);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: opacity 0.3s;
+        margin-bottom: 2rem;
+    }
+
+    .chat-cta:hover {
+        opacity: 0.9;
+    }
+
+    .contact-social-links {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .contact-social-links a {
+        color: var(--text-color);
+        text-decoration: none;
+        padding: 0.75rem 1.5rem;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        transition: all 0.3s;
+        font-weight: 500;
+    }
+
+    .contact-social-links a:hover {
+        background: var(--accent-color);
+        color: white;
+        border-color: var(--accent-color);
+    }
+
     .loading {
         text-align: center;
         padding: 4rem;
@@ -344,6 +426,10 @@
 
         .projects-grid {
             grid-template-columns: 1fr;
+        }
+
+        .contact-card {
+            padding: 2rem;
         }
     }
 </style>
@@ -410,6 +496,29 @@
     <div class="activity-feed"></div>
 </section>
 
+<!-- Contact Section -->
+<section id="contact" class="contact-section hidden">
+    <div class="contact-content">
+        <h2>Let's Connect</h2>
+        <p>Want to discuss a project, collaborate, or just say hi? I'm always happy to chat about AppleOS development, tool building, or anything tech-related.</p>
+        
+        <div class="contact-card">
+            <h3>💬 Start a Conversation</h3>
+            <p>Click the chat button below or use the chat widget in the bottom right corner to send me a message instantly.</p>
+            <button class="chat-cta" onclick="openTawkChat()">Open Chat Widget</button>
+            
+            <div style="border-top: 1px solid var(--border-color); padding-top: 2rem; margin-top: 2rem;">
+                <h3 style="margin-bottom: 1rem;">🔗 Connect on Social</h3>
+                <div class="contact-social-links">
+                    <a href="https://github.com/fluhartyml" target="_blank">GitHub</a>
+                    <a href="https://twitter.com/fluhartyml" target="_blank">X (Twitter)</a>
+                    <a href="https://linkedin.com/in/fluhartyml" target="_blank">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Tawk.to Chat Widget -->
 <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
@@ -421,6 +530,15 @@
         s1.setAttribute('crossorigin','*');
         s0.parentNode.insertBefore(s1,s0);
     })();
+
+    // Function to open Tawk.to chat
+    function openTawkChat() {
+        if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
+            Tawk_API.maximize();
+        } else {
+            alert('Chat widget is loading... Please try again in a moment or use the chat button in the bottom right corner.');
+        }
+    }
 </script>
 
 <script>
@@ -620,13 +738,11 @@
         const loading = document.querySelector('.timeline-section .loading');
         
         try {
-            // Fetch user events (commits, issues, PRs, etc.)
             const eventsResponse = await fetch(`https://api.github.com/users/${username}/events/public?per_page=100`);
             const events = await eventsResponse.json();
             
             loading.style.display = 'none';
             
-            // Sort by date (newest first)
             events.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
             
             if (events.length > 0) {
@@ -662,7 +778,6 @@
         let description = '';
         let activityType = '';
         
-        // Parse different event types
         switch(event.type) {
             case 'PushEvent':
                 activityType = 'Commit';
@@ -701,7 +816,7 @@
                 title = `Forked ${event.repo.name}`;
                 break;
             default:
-                return null; // Skip unknown event types
+                return null;
         }
         
         item.innerHTML = `
