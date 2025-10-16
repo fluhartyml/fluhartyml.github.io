@@ -143,14 +143,14 @@
     }
 
     /* Projects Section */
-    .projects-section {
+    .projects-section, .blog-section {
         min-height: 100vh;
         padding: 6rem 2rem 4rem;
         max-width: 1200px;
         margin: 0 auto;
     }
 
-    .projects-section h2 {
+    .projects-section h2, .blog-section h2 {
         font-size: 2.5rem;
         margin-bottom: 3rem;
         text-align: center;
@@ -163,7 +163,7 @@
         gap: 2rem;
     }
 
-    .project-card {
+    .project-card, .blog-post {
         background: var(--card-bg);
         border: 1px solid var(--border-color);
         border-radius: 12px;
@@ -171,31 +171,31 @@
         transition: transform 0.3s, box-shadow 0.3s;
     }
 
-    .project-card:hover {
+    .project-card:hover, .blog-post:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
 
-    .project-card h3 {
+    .project-card h3, .blog-post h3 {
         font-size: 1.5rem;
         margin-bottom: 1rem;
         color: var(--accent-color);
     }
 
-    .project-card .description {
+    .project-card .description, .blog-post .content {
         margin-bottom: 1rem;
         color: var(--text-color);
         opacity: 0.8;
     }
 
-    .project-card .tech-stack {
+    .project-card .tech-stack, .blog-post .meta {
         display: flex;
         gap: 0.5rem;
         flex-wrap: wrap;
         margin-bottom: 1rem;
     }
 
-    .tech-badge {
+    .tech-badge, .repo-badge, .label-badge {
         background: var(--accent-color);
         color: white;
         padding: 0.25rem 0.75rem;
@@ -203,20 +203,55 @@
         font-size: 0.875rem;
     }
 
-    .project-links {
+    .repo-badge {
+        background: #34C759;
+    }
+
+    .label-badge {
+        background: #FF9500;
+    }
+
+    .project-links, .blog-post .actions {
         display: flex;
         gap: 1rem;
         margin-top: 1rem;
     }
 
-    .project-links a {
+    .project-links a, .blog-post .actions a {
         color: var(--accent-color);
         text-decoration: none;
         font-weight: 500;
     }
 
-    .project-links a:hover {
+    .project-links a:hover, .blog-post .actions a:hover {
         text-decoration: underline;
+    }
+
+    .blog-post .date {
+        font-size: 0.875rem;
+        color: var(--text-color);
+        opacity: 0.6;
+        margin-bottom: 0.5rem;
+    }
+
+    .blog-post .content {
+        line-height: 1.8;
+        white-space: pre-wrap;
+        max-height: 300px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .blog-post .content.expanded {
+        max-height: none;
+    }
+
+    .read-more {
+        color: var(--accent-color);
+        cursor: pointer;
+        font-weight: 500;
+        margin-top: 0.5rem;
+        display: inline-block;
     }
 
     .loading {
@@ -259,6 +294,7 @@
             <li class="logo">MLF</li>
             <li><a href="#home">Home</a></li>
             <li><a href="#projects">Projects</a></li>
+            <li><a href="#blog">Blog</a></li>
             <li><a href="#timeline">Timeline</a></li>
             <li><a href="#contact">Contact</a></li>
             <li><button class="theme-toggle" onclick="toggleTheme()">🌙</button></li>
@@ -286,6 +322,13 @@
     <h2>My Projects</h2>
     <div class="loading">Loading projects from GitHub...</div>
     <div class="projects-grid"></div>
+</section>
+
+<!-- Blog Section -->
+<section id="blog" class="blog-section hidden">
+    <h2>Development Blog</h2>
+    <div class="loading">Loading blog posts from GitHub...</div>
+    <div class="blog-posts"></div>
 </section>
 
 <!-- Tawk.to Chat Widget -->
@@ -343,7 +386,7 @@
     async function fetchProjects() {
         const username = 'fluhartyml';
         const projectsGrid = document.querySelector('.projects-grid');
-        const loading = document.querySelector('.loading');
+        const loading = document.querySelector('.projects-section .loading');
         
         try {
             // Fetch all public repositories
@@ -375,8 +418,6 @@
     // Fetch Wiki content for a repo
     async function fetchWikiContent(username, repoName) {
         try {
-            // GitHub doesn't have a direct Wiki API, so we check if wiki exists
-            // by trying to fetch the wiki repository
             const wikiUrl = `https://api.github.com/repos/${username}/${repoName}/contents`;
             const response = await fetch(wikiUrl);
             
@@ -394,7 +435,6 @@
         const card = document.createElement('div');
         card.className = 'project-card';
         
-        // Extract language/tech stack
         const language = repo.language || 'Unknown';
         
         card.innerHTML = `
@@ -415,12 +455,122 @@
         return card;
     }
 
+    // GitHub API - Fetch Blog Posts (Issues)
+    async function fetchBlogPosts() {
+        const username = 'fluhartyml';
+        const blogContainer = document.querySelector('.blog-posts');
+        const loading = document.querySelector('.blog-section .loading');
+        
+        try {
+            // Fetch all repositories first
+            const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
+            const repos = await reposResponse.json();
+            
+            // Fetch issues from each repo
+            let allIssues = [];
+            
+            for (const repo of repos) {
+                try {
+                    const issuesResponse = await fetch(`https://api.github.com/repos/${username}/${repo.name}/issues?state=all&per_page=100`);
+                    const issues = await issuesResponse.json();
+                    
+                    // Add repo name to each issue
+                    issues.forEach(issue => {
+                        issue.repoName = repo.name;
+                    });
+                    
+                    allIssues = allIssues.concat(issues);
+                } catch (error) {
+                    console.log(`No issues in ${repo.name}`);
+                }
+            }
+            
+            loading.style.display = 'none';
+            
+            // Sort by date (newest first)
+            allIssues.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            
+            // Create blog post cards
+            if (allIssues.length > 0) {
+                allIssues.forEach(issue => {
+                    const post = createBlogPost(issue);
+                    blogContainer.appendChild(post);
+                });
+            } else {
+                blogContainer.innerHTML = '<p style="text-align: center;">No blog posts yet. Create Issues in your repos to start blogging!</p>';
+            }
+            
+        } catch (error) {
+            console.error('Error fetching blog posts:', error);
+            loading.textContent = 'Error loading blog posts. Please try again later.';
+        }
+    }
+
+    // Create blog post HTML
+    function createBlogPost(issue) {
+        const post = document.createElement('div');
+        post.className = 'blog-post';
+        
+        const date = new Date(issue.created_at).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        
+        // Truncate body if too long
+        const body = issue.body || 'No content';
+        const isLong = body.length > 500;
+        const displayBody = isLong ? body.substring(0, 500) + '...' : body;
+        
+        post.innerHTML = `
+            <div class="date">${date}</div>
+            <h3>${issue.title}</h3>
+            <div class="meta">
+                <span class="repo-badge">${issue.repoName}</span>
+                ${issue.labels.map(label => `<span class="label-badge">${label.name}</span>`).join('')}
+            </div>
+            <div class="content">${displayBody}</div>
+            ${isLong ? '<span class="read-more">Read more...</span>' : ''}
+            <div class="actions">
+                <a href="${issue.html_url}" target="_blank">View on GitHub & Comment</a>
+            </div>
+        `;
+        
+        // Add read more functionality
+        if (isLong) {
+            const readMore = post.querySelector('.read-more');
+            const content = post.querySelector('.content');
+            readMore.addEventListener('click', () => {
+                if (content.classList.contains('expanded')) {
+                    content.textContent = displayBody;
+                    content.classList.remove('expanded');
+                    readMore.textContent = 'Read more...';
+                } else {
+                    content.textContent = body;
+                    content.classList.add('expanded');
+                    readMore.textContent = 'Read less';
+                }
+            });
+        }
+        
+        return post;
+    }
+
     // Load projects when Projects section is visible
     let projectsLoaded = false;
     document.querySelector('a[href="#projects"]').addEventListener('click', () => {
         if (!projectsLoaded) {
             fetchProjects();
             projectsLoaded = true;
+        }
+    });
+
+    // Load blog posts when Blog section is visible
+    let blogLoaded = false;
+    document.querySelector('a[href="#blog"]').addEventListener('click', () => {
+        if (!blogLoaded) {
+            fetchBlogPosts();
+            blogLoaded = true;
         }
     });
 
