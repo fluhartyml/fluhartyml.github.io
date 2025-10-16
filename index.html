@@ -149,11 +149,13 @@
 
     h1 {
         font-size: 3rem;
-        background: linear-gradient(135deg, var(--accent), #5856D6);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        color: #000000;
+        text-shadow: 2px 2px 4px rgba(128, 128, 128, 0.5);
+    }
+    
+    [data-theme="dark"] h1 {
+        color: #ffffff;
+        text-shadow: 2px 2px 4px rgba(128, 128, 128, 0.8);
     }
 
     h2 {
@@ -166,9 +168,14 @@
     .hero {
         text-align: center;
         padding: 4rem 2rem;
-        background: var(--card-bg);
+        background: rgba(255, 255, 255, 0.6);
         border-radius: 12px;
         margin-bottom: 2rem;
+        backdrop-filter: blur(10px);
+    }
+    
+    [data-theme="dark"] .hero {
+        background: rgba(26, 26, 26, 0.6);
     }
 
     .hero h1 {
@@ -178,15 +185,27 @@
 
     .hero p {
         font-size: 1.25rem;
-        color: var(--text-secondary);
+        color: #4a3728;
         max-width: 600px;
         margin: 0 auto 2rem;
+        text-shadow: 1px 1px 3px rgba(128, 128, 128, 0.5);
+    }
+    
+    [data-theme="dark"] .hero p {
+        color: #d4a574;
+        text-shadow: 1px 1px 3px rgba(128, 128, 128, 0.8);
     }
 
     .bio {
         font-size: 1.1rem;
         line-height: 1.8;
-        color: var(--text-secondary);
+        color: #4a3728;
+        text-shadow: 1px 1px 3px rgba(128, 128, 128, 0.5);
+    }
+    
+    [data-theme="dark"] .bio {
+        color: #d4a574;
+        text-shadow: 1px 1px 3px rgba(128, 128, 128, 0.8);
     }
 
     .social-links {
