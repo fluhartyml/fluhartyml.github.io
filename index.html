@@ -84,6 +84,12 @@
             background: rgba(0, 0, 0, 0.8);
         }
 
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         nav ul {
             display: flex;
             justify-content: center;
@@ -107,7 +113,6 @@
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--accent-color);
-            margin-right: auto;
         }
 
         .theme-toggle {
@@ -115,7 +120,6 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            margin-left: auto;
         }
 
         /* Hamburger Menu */
@@ -123,7 +127,7 @@
             display: none;
             background: none;
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
             color: var(--text-color);
             padding: 0.5rem;
@@ -461,7 +465,8 @@
                 display: block;
             }
 
-            nav ul {
+            .nav-menu-items {
+                display: none;
                 position: fixed;
                 top: 60px;
                 left: 0;
@@ -471,36 +476,26 @@
                 flex-direction: column;
                 gap: 0;
                 padding: 1rem 0;
-                transform: translateY(-100%);
-                transition: transform 0.3s ease;
                 box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             }
 
-            [data-theme="dark"] nav ul {
+            [data-theme="dark"] .nav-menu-items {
                 background: rgba(0, 0, 0, 0.95);
             }
 
-            nav ul.mobile-menu-open {
-                transform: translateY(0);
+            .nav-menu-items.mobile-menu-open {
+                display: flex;
             }
 
-            nav ul li {
+            .nav-menu-items li {
                 width: 100%;
                 text-align: center;
                 padding: 0.75rem 0;
                 border-bottom: 1px solid var(--border-color);
             }
 
-            nav ul li:last-child {
+            .nav-menu-items li:last-child {
                 border-bottom: none;
-            }
-
-            .logo {
-                margin-right: 0;
-            }
-
-            .theme-toggle {
-                margin-left: 0;
             }
 
             .hero h1 {
@@ -528,16 +523,18 @@
 </head>
 <body>
     <nav>
-        <ul>
-            <li class="logo">MLF</li>
+        <div class="nav-container">
+            <span class="logo">MLF</span>
             <button class="hamburger" onclick="toggleMobileMenu()">☰</button>
-            <li><a href="#home" onclick="closeMobileMenu()">Home</a></li>
-            <li><a href="#projects" onclick="closeMobileMenu()">Projects</a></li>
-            <li><a href="#blog" onclick="closeMobileMenu()">Blog</a></li>
-            <li><a href="#timeline" onclick="closeMobileMenu()">Timeline</a></li>
-            <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
-            <li><button class="theme-toggle" onclick="toggleTheme()">🌙</button></li>
-        </ul>
+            <ul class="nav-menu-items">
+                <li><a href="#home" onclick="closeMobileMenu()">Home</a></li>
+                <li><a href="#projects" onclick="closeMobileMenu()">Projects</a></li>
+                <li><a href="#blog" onclick="closeMobileMenu()">Blog</a></li>
+                <li><a href="#timeline" onclick="closeMobileMenu()">Timeline</a></li>
+                <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+        </div>
     </nav>
 
     <!-- Home Section -->
@@ -672,12 +669,12 @@
     <script>
         // Mobile Menu Toggle
         function toggleMobileMenu() {
-            const menu = document.querySelector('nav ul');
+            const menu = document.querySelector('.nav-menu-items');
             menu.classList.toggle('mobile-menu-open');
         }
 
         function closeMobileMenu() {
-            const menu = document.querySelector('nav ul');
+            const menu = document.querySelector('.nav-menu-items');
             menu.classList.remove('mobile-menu-open');
         }
 
