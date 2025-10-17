@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,523 +11,520 @@
             box-sizing: border-box;
         }
 
-```
-    :root {
-        --bg-color: #ffffff;
-        --text-color: #1a1a1a;
-        --accent-color: #007AFF;
-        --card-bg: #f5f5f7;
-        --border-color: #d2d2d7;
-    }
-
-    [data-theme="dark"] {
-        --bg-color: #000000;
-        --text-color: #f5f5f7;
-        --accent-color: #0A84FF;
-        --card-bg: #1c1c1e;
-        --border-color: #38383a;
-    }
-
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        line-height: 1.6;
-        transition: background-color 0.3s, color 0.3s;
-    }
-
-    /* Hero Section with Background */
-    .hero {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                    url('IMG_7907.jpeg') center/cover;
-    }
-
-    .hero-content {
-        text-align: center;
-        z-index: 2;
-        padding: 2rem;
-        max-width: 800px;
-    }
-
-    .hero h1 {
-        font-size: 3.5rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        color: #ffffff;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-    }
-
-    .hero p {
-        font-size: 1.5rem;
-        margin-bottom: 2rem;
-        color: #ffffff;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-    }
-
-    /* Navigation */
-    nav {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(10px);
-        padding: 1rem 2rem;
-        z-index: 1000;
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    [data-theme="dark"] nav {
-        background: rgba(0, 0, 0, 0.8);
-    }
-
-    nav ul {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        list-style: none;
-        gap: 2rem;
-    }
-
-    nav a {
-        color: var(--text-color);
-        text-decoration: none;
-        font-weight: 500;
-        transition: color 0.3s;
-    }
-
-    nav a:hover {
-        color: var(--accent-color);
-    }
-
-    .logo {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--accent-color);
-        margin-right: auto;
-    }
-
-    .theme-toggle {
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-        margin-left: auto;
-    }
-
-    /* Hamburger Menu */
-    .hamburger {
-        display: none;
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-        color: var(--text-color);
-        padding: 0.5rem;
-    }
-
-    /* Social Links */
-    .social-links {
-        display: flex;
-        gap: 1.5rem;
-        justify-content: center;
-        margin-top: 2rem;
-    }
-
-    .social-links a {
-        color: #ffffff;
-        text-decoration: none;
-        padding: 0.75rem 1.5rem;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 8px;
-        transition: background 0.3s;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-    }
-
-    .social-links a:hover {
-        background: rgba(255, 255, 255, 0.3);
-    }
-
-    /* Sections */
-    .projects-section, .blog-section, .timeline-section, .contact-section {
-        min-height: 100vh;
-        padding: 6rem 2rem 4rem;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .projects-section h2, .blog-section h2, .timeline-section h2 {
-        font-size: 2.5rem;
-        margin-bottom: 3rem;
-        text-align: center;
-        color: var(--accent-color);
-    }
-
-    .projects-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-        gap: 2rem;
-    }
-
-    .project-card, .blog-post, .activity-item {
-        background: var(--card-bg);
-        border: 1px solid var(--border-color);
-        border-radius: 12px;
-        padding: 2rem;
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .project-card:hover, .blog-post:hover, .activity-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-
-    .project-card h3, .blog-post h3, .activity-item h3 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-        color: var(--accent-color);
-    }
-
-    .project-card .description, .blog-post .content, .activity-item .description {
-        margin-bottom: 1rem;
-        color: var(--text-color);
-        opacity: 0.8;
-    }
-
-    .project-card .tech-stack, .blog-post .meta, .activity-item .meta {
-        display: flex;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-        margin-bottom: 1rem;
-    }
-
-    .tech-badge, .repo-badge, .label-badge, .activity-badge {
-        background: var(--accent-color);
-        color: white;
-        padding: 0.25rem 0.75rem;
-        border-radius: 12px;
-        font-size: 0.875rem;
-    }
-
-    .repo-badge {
-        background: #34C759;
-    }
-
-    .label-badge {
-        background: #FF9500;
-    }
-
-    .activity-badge {
-        background: #5856D6;
-    }
-
-    .project-links, .blog-post .actions, .activity-item .actions {
-        display: flex;
-        gap: 1rem;
-        margin-top: 1rem;
-    }
-
-    .project-links a, .blog-post .actions a, .activity-item .actions a {
-        color: var(--accent-color);
-        text-decoration: none;
-        font-weight: 500;
-    }
-
-    .project-links a:hover, .blog-post .actions a:hover, .activity-item .actions a:hover {
-        text-decoration: underline;
-    }
-
-    .blog-post .date, .activity-item .date {
-        font-size: 0.875rem;
-        color: var(--text-color);
-        opacity: 0.6;
-        margin-bottom: 0.5rem;
-    }
-
-    .blog-post .content {
-        line-height: 1.8;
-        white-space: pre-wrap;
-        max-height: 300px;
-        overflow: hidden;
-        position: relative;
-    }
-
-    .blog-post .content.expanded {
-        max-height: none;
-    }
-
-    .read-more {
-        color: var(--accent-color);
-        cursor: pointer;
-        font-weight: 500;
-        margin-top: 0.5rem;
-        display: inline-block;
-    }
-
-    /* Timeline Specific */
-    .contribution-graph {
-        background: var(--card-bg);
-        border: 1px solid var(--border-color);
-        border-radius: 12px;
-        padding: 2rem;
-        margin-bottom: 3rem;
-        text-align: center;
-    }
-
-    .contribution-graph h3 {
-        font-size: 1.5rem;
-        margin-bottom: 1.5rem;
-        color: var(--accent-color);
-    }
-
-    .contribution-graph img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 8px;
-    }
-
-    .activity-feed {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-
-    .activity-item {
-        position: relative;
-        padding-left: 3rem;
-    }
-
-    .activity-item::before {
-        content: '';
-        position: absolute;
-        left: 1rem;
-        top: 2rem;
-        bottom: -1.5rem;
-        width: 2px;
-        background: var(--border-color);
-    }
-
-    .activity-item:last-child::before {
-        display: none;
-    }
-
-    .activity-item::after {
-        content: '';
-        position: absolute;
-        left: 0.5rem;
-        top: 2rem;
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: var(--accent-color);
-    }
-
-    /* Contact Section Specific */
-    .contact-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), 
-                    url('IMG_1271.jpeg') center/cover;
-    }
-
-    .contact-content {
-        text-align: center;
-        max-width: 600px;
-    }
-
-    .contact-content p {
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
-        color: #ffffff;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-    }
-
-    .contact-card {
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 12px;
-        padding: 3rem;
-        margin-top: 2rem;
-        width: 100%;
-        max-width: 600px;
-        backdrop-filter: blur(10px);
-    }
-
-    .contact-card h3 {
-        font-size: 1.8rem;
-        margin-bottom: 1.5rem;
-        color: var(--accent-color);
-    }
-
-    .contact-card p {
-        font-size: 1.1rem;
-        margin-bottom: 2rem;
-        opacity: 0.8;
-    }
-
-    .email-cta {
-        background: var(--accent-color);
-        color: white;
-        padding: 1rem 2rem;
-        border-radius: 8px;
-        font-size: 1.1rem;
-        font-weight: 600;
-        text-decoration: none;
-        display: inline-block;
-        transition: opacity 0.3s;
-        margin-bottom: 2rem;
-    }
-
-    .email-cta:hover {
-        opacity: 0.9;
-    }
-
-    .contact-social-links {
-        display: flex;
-        gap: 1.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .contact-social-links a {
-        color: var(--text-color);
-        text-decoration: none;
-        padding: 0.75rem 1.5rem;
-        background: var(--card-bg);
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-        transition: all 0.3s;
-        font-weight: 500;
-    }
-
-    .contact-social-links a:hover {
-        background: var(--accent-color);
-        color: white;
-        border-color: var(--accent-color);
-    }
-
-    /* Footer */
-    footer {
-        background: var(--card-bg);
-        border-top: 1px solid var(--border-color);
-        padding: 2rem;
-        text-align: center;
-        margin-top: 4rem;
-    }
-
-    .footer-links {
-        display: flex;
-        gap: 1.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-bottom: 1rem;
-    }
-
-    .footer-links a {
-        color: var(--accent-color);
-        text-decoration: none;
-        font-weight: 500;
-    }
-
-    .footer-links a:hover {
-        text-decoration: underline;
-    }
-
-    .footer-license {
-        color: var(--text-color);
-        opacity: 0.7;
-        font-size: 0.9rem;
-    }
-
-    .loading {
-        text-align: center;
-        padding: 4rem;
-        font-size: 1.2rem;
-        color: var(--accent-color);
-    }
-
-    .hidden {
-        display: none;
-    }
-
-    /* Responsive - Mobile Navigation */
-    @media (max-width: 768px) {
-        .hamburger {
-            display: block;
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #1a1a1a;
+            --accent-color: #007AFF;
+            --card-bg: #f5f5f7;
+            --border-color: #d2d2d7;
         }
 
-        nav ul {
-            position: fixed;
-            top: 60px;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            flex-direction: column;
-            gap: 0;
-            padding: 1rem 0;
-            transform: translateY(-100%);
-            transition: transform 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        [data-theme="dark"] {
+            --bg-color: #000000;
+            --text-color: #f5f5f7;
+            --accent-color: #0A84FF;
+            --card-bg: #1c1c1e;
+            --border-color: #38383a;
         }
 
-        [data-theme="dark"] nav ul {
-            background: rgba(0, 0, 0, 0.95);
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        nav ul.mobile-menu-open {
-            transform: translateY(0);
+        /* Hero Section with Background */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('IMG_7907.jpeg') center/cover;
         }
 
-        nav ul li {
-            width: 100%;
+        .hero-content {
             text-align: center;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        nav ul li:last-child {
-            border-bottom: none;
-        }
-
-        .logo {
-            margin-right: 0;
-        }
-
-        .theme-toggle {
-            margin-left: 0;
+            z-index: 2;
+            padding: 2rem;
+            max-width: 800px;
         }
 
         .hero h1 {
-            font-size: 2rem;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
 
         .hero p {
-            font-size: 1rem;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        [data-theme="dark"] nav {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-right: auto;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-left: auto;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+            padding: 0.5rem;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            transition: background 0.3s;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .social-links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Sections */
+        .projects-section, .blog-section, .timeline-section, .contact-section {
+            min-height: 100vh;
+            padding: 6rem 2rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .projects-section h2, .blog-section h2, .timeline-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--accent-color);
         }
 
         .projects-grid {
-            grid-template-columns: 1fr;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card, .blog-post, .activity-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover, .blog-post:hover, .activity-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .project-card h3, .blog-post h3, .activity-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .project-card .description, .blog-post .content, .activity-item .description {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .project-card .tech-stack, .blog-post .meta, .activity-item .meta {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .tech-badge, .repo-badge, .label-badge, .activity-badge {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+        }
+
+        .repo-badge {
+            background: #34C759;
+        }
+
+        .label-badge {
+            background: #FF9500;
+        }
+
+        .activity-badge {
+            background: #5856D6;
+        }
+
+        .project-links, .blog-post .actions, .activity-item .actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .project-links a, .blog-post .actions a, .activity-item .actions a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .project-links a:hover, .blog-post .actions a:hover, .activity-item .actions a:hover {
+            text-decoration: underline;
+        }
+
+        .blog-post .date, .activity-item .date {
+            font-size: 0.875rem;
+            color: var(--text-color);
+            opacity: 0.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-post .content {
+            line-height: 1.8;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .blog-post .content.expanded {
+            max-height: none;
+        }
+
+        .read-more {
+            color: var(--accent-color);
+            cursor: pointer;
+            font-weight: 500;
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+
+        /* Timeline Specific */
+        .contribution-graph {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .contribution-graph h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .contribution-graph img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .activity-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .activity-item {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .activity-item::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 2rem;
+            bottom: -1.5rem;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .activity-item:last-child::before {
+            display: none;
+        }
+
+        .activity-item::after {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 2rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-color);
+        }
+
+        /* Contact Section Specific */
+        .contact-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), 
+                        url('IMG_1271.jpeg') center/cover;
+        }
+
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .contact-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
 
         .contact-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 3rem;
+            margin-top: 2rem;
+            width: 100%;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .contact-card p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+
+        .email-cta {
+            background: var(--accent-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.3s;
+            margin-bottom: 2rem;
+        }
+
+        .email-cta:hover {
+            opacity: 0.9;
+        }
+
+        .contact-social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-social-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .contact-social-links a:hover {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
             padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
         }
 
         .footer-links {
-            flex-direction: column;
-            gap: 0.75rem;
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
         }
-    }
-</style>
-```
 
+        .footer-links a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-license {
+            color: var(--text-color);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 4rem;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Responsive - Mobile Navigation */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                gap: 0;
+                padding: 1rem 0;
+                transform: translateY(-100%);
+                transition: transform 0.3s ease;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+
+            [data-theme="dark"] nav ul {
+                background: rgba(0, 0, 0, 0.95);
+            }
+
+            nav ul.mobile-menu-open {
+                transform: translateY(0);
+            }
+
+            nav ul li {
+                width: 100%;
+                text-align: center;
+                padding: 0.75rem 0;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            nav ul li:last-child {
+                border-bottom: none;
+            }
+
+            .logo {
+                margin-right: 0;
+            }
+
+            .theme-toggle {
+                margin-left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-card {
+                padding: 2rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <nav>
@@ -544,469 +540,466 @@
         </ul>
     </nav>
 
-```
-<!-- Home Section -->
-<section id="home" class="hero">
-    <div class="hero-content">
-        <h1>Michael Lee Fluharty</h1>
-        <p>AppleOS Developer Creating Practical and Useful Tools</p>
-        <p style="font-size: 1.2rem;">Retired Electronics Technician turned hobbyist developer. Apple Developer since 2009, now publishing apps to the App Store. Building tools in the Apple ecosystem because I can, not because I have to.</p>
-        
-        <div class="social-links">
-            <a href="https://github.com/fluhartyml" target="_blank">GitHub</a>
-            <a href="https://twitter.com/fluhartyml" target="_blank">X (Twitter)</a>
-            <a href="https://linkedin.com/in/fluhartyml" target="_blank">LinkedIn</a>
-        </div>
-    </div>
-</section>
-
-<!-- Projects Section -->
-<section id="projects" class="projects-section hidden">
-    <h2>My Projects</h2>
-    <div class="loading">Loading projects from GitHub...</div>
-    <div class="projects-grid"></div>
-    
-    <footer>
-        <div class="footer-links">
-            <a href="https://fluhartyml.github.io">Portfolio</a>
-            <span>•</span>
-            <a href="https://github.com/fluhartyml">GitHub</a>
-            <span>•</span>
-            <a href="mailto:michael@fluharty.com">Email</a>
-            <span>•</span>
-            <a href="https://github.com/fluhartyml/fluhartyml.github.io/wiki/EULA-End-User-License-Agreement" target="_blank">EULA</a>
-        </div>
-        <div class="footer-license">
-            Licensed under GPL v3 - Share and share alike with attribution required
-        </div>
-    </footer>
-</section>
-
-<!-- Blog Section -->
-<section id="blog" class="blog-section hidden">
-    <h2>Development Blog</h2>
-    <div class="loading">Loading blog posts from GitHub...</div>
-    <div class="blog-posts"></div>
-    
-    <footer>
-        <div class="footer-links">
-            <a href="https://fluhartyml.github.io">Portfolio</a>
-            <span>•</span>
-            <a href="https://github.com/fluhartyml">GitHub</a>
-            <span>•</span>
-            <a href="mailto:michael@fluharty.com">Email</a>
-            <span>•</span>
-            <a href="https://github.com/fluhartyml/fluhartyml.github.io/wiki/EULA-End-User-License-Agreement" target="_blank">EULA</a>
-        </div>
-        <div class="footer-license">
-            Licensed under GPL v3 - Share and share alike with attribution required
-        </div>
-    </footer>
-</section>
-
-<!-- Timeline Section -->
-<section id="timeline" class="timeline-section hidden">
-    <h2>Activity Timeline</h2>
-    
-    <!-- GitHub Contribution Graph -->
-    <div class="contribution-graph">
-        <h3>GitHub Activity</h3>
-        <img src="https://ghchart.rshah.org/007AFF/fluhartyml" alt="GitHub Contribution Graph">
-        <p style="margin-top: 1rem; opacity: 0.7;">
-            <a href="https://github.com/fluhartyml" target="_blank" style="color: var(--accent-color);">View full profile on GitHub →</a>
-        </p>
-    </div>
-
-    <div class="loading">Loading activity feed...</div>
-    <div class="activity-feed"></div>
-    
-    <footer>
-        <div class="footer-links">
-            <a href="https://fluhartyml.github.io">Portfolio</a>
-            <span>•</span>
-            <a href="https://github.com/fluhartyml">GitHub</a>
-            <span>•</span>
-            <a href="mailto:michael@fluharty.com">Email</a>
-            <span>•</span>
-            <a href="https://github.com/fluhartyml/fluhartyml.github.io/wiki/EULA-End-User-License-Agreement" target="_blank">EULA</a>
-        </div>
-        <div class="footer-license">
-            Licensed under GPL v3 - Share and share alike with attribution required
-        </div>
-    </footer>
-</section>
-
-<!-- Contact Section -->
-<section id="contact" class="contact-section hidden">
-    <div class="contact-content">
-        <h2>Let's Connect</h2>
-        <p>Want to discuss a project, collaborate, or just say hi? I'm always happy to chat about AppleOS development, tool building, or anything tech-related.</p>
-        
-        <div class="contact-card">
-            <h3>📧 Send Me an Email</h3>
-            <p>Click the button below to send me a message directly.</p>
-            <a href="mailto:michael@fluharty.com" class="email-cta">Email Me</a>
+    <!-- Home Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Michael Lee Fluharty</h1>
+            <p>AppleOS Developer Creating Practical and Useful Tools</p>
+            <p style="font-size: 1.2rem;">Retired Electronics Technician turned hobbyist developer. Apple Developer since 2009, now publishing apps to the App Store. Building tools in the Apple ecosystem because I can, not because I have to.</p>
             
-            <div style="border-top: 1px solid var(--border-color); padding-top: 2rem; margin-top: 2rem;">
-                <h3 style="margin-bottom: 1rem;">🔗 Connect on Social</h3>
-                <div class="contact-social-links">
-                    <a href="https://github.com/fluhartyml" target="_blank">GitHub</a>
-                    <a href="https://twitter.com/fluhartyml" target="_blank">X (Twitter)</a>
-                    <a href="https://linkedin.com/in/fluhartyml" target="_blank">LinkedIn</a>
+            <div class="social-links">
+                <a href="https://github.com/fluhartyml" target="_blank">GitHub</a>
+                <a href="https://twitter.com/fluhartyml" target="_blank">X (Twitter)</a>
+                <a href="https://linkedin.com/in/fluhartyml" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section hidden">
+        <h2>My Projects</h2>
+        <div class="loading">Loading projects from GitHub...</div>
+        <div class="projects-grid"></div>
+        
+        <footer>
+            <div class="footer-links">
+                <a href="https://fluhartyml.github.io">Portfolio</a>
+                <span>•</span>
+                <a href="https://github.com/fluhartyml">GitHub</a>
+                <span>•</span>
+                <a href="mailto:michael@fluharty.com">Email</a>
+                <span>•</span>
+                <a href="https://github.com/fluhartyml/fluhartyml.github.io/wiki/EULA-End-User-License-Agreement" target="_blank">EULA</a>
+            </div>
+            <div class="footer-license">
+                Licensed under GPL v3 - Share and share alike with attribution required
+            </div>
+        </footer>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog-section hidden">
+        <h2>Development Blog</h2>
+        <div class="loading">Loading blog posts from GitHub...</div>
+        <div class="blog-posts"></div>
+        
+        <footer>
+            <div class="footer-links">
+                <a href="https://fluhartyml.github.io">Portfolio</a>
+                <span>•</span>
+                <a href="https://github.com/fluhartyml">GitHub</a>
+                <span>•</span>
+                <a href="mailto:michael@fluharty.com">Email</a>
+                <span>•</span>
+                <a href="https://github.com/fluhartyml/fluhartyml.github.io/wiki/EULA-End-User-License-Agreement" target="_blank">EULA</a>
+            </div>
+            <div class="footer-license">
+                Licensed under GPL v3 - Share and share alike with attribution required
+            </div>
+        </footer>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="timeline-section hidden">
+        <h2>Activity Timeline</h2>
+        
+        <!-- GitHub Contribution Graph -->
+        <div class="contribution-graph">
+            <h3>GitHub Activity</h3>
+            <img src="https://ghchart.rshah.org/007AFF/fluhartyml" alt="GitHub Contribution Graph">
+            <p style="margin-top: 1rem; opacity: 0.7;">
+                <a href="https://github.com/fluhartyml" target="_blank" style="color: var(--accent-color);">View full profile on GitHub →</a>
+            </p>
+        </div>
+
+        <div class="loading">Loading activity feed...</div>
+        <div class="activity-feed"></div>
+        
+        <footer>
+            <div class="footer-links">
+                <a href="https://fluhartyml.github.io">Portfolio</a>
+                <span>•</span>
+                <a href="https://github.com/fluhartyml">GitHub</a>
+                <span>•</span>
+                <a href="mailto:michael@fluharty.com">Email</a>
+                <span>•</span>
+                <a href="https://github.com/fluhartyml/fluhartyml.github.io/wiki/EULA-End-User-License-Agreement" target="_blank">EULA</a>
+            </div>
+            <div class="footer-license">
+                Licensed under GPL v3 - Share and share alike with attribution required
+            </div>
+        </footer>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section hidden">
+        <div class="contact-content">
+            <h2>Let's Connect</h2>
+            <p>Want to discuss a project, collaborate, or just say hi? I'm always happy to chat about AppleOS development, tool building, or anything tech-related.</p>
+            
+            <div class="contact-card">
+                <h3>📧 Send Me an Email</h3>
+                <p>Click the button below to send me a message directly.</p>
+                <a href="mailto:michael@fluharty.com" class="email-cta">Email Me</a>
+                
+                <div style="border-top: 1px solid var(--border-color); padding-top: 2rem; margin-top: 2rem;">
+                    <h3 style="margin-bottom: 1rem;">🔗 Connect on Social</h3>
+                    <div class="contact-social-links">
+                        <a href="https://github.com/fluhartyml" target="_blank">GitHub</a>
+                        <a href="https://twitter.com/fluhartyml" target="_blank">X (Twitter)</a>
+                        <a href="https://linkedin.com/in/fluhartyml" target="_blank">LinkedIn</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <footer>
-        <div class="footer-links">
-            <a href="https://fluhartyml.github.io">Portfolio</a>
-            <span>•</span>
-            <a href="https://github.com/fluhartyml">GitHub</a>
-            <span>•</span>
-            <a href="mailto:michael@fluharty.com">Email</a>
-            <span>•</span>
-            <a href="https://github.com/fluhartyml/fluhartyml.github.io/wiki/EULA-End-User-License-Agreement" target="_blank">EULA</a>
-        </div>
-        <div class="footer-license">
-            Licensed under GPL v3 - Share and share alike with attribution required
-        </div>
-    </footer>
-</section>
-
-<script>
-    // Mobile Menu Toggle
-    function toggleMobileMenu() {
-        const menu = document.querySelector('nav ul');
-        menu.classList.toggle('mobile-menu-open');
-    }
-
-    function closeMobileMenu() {
-        const menu = document.querySelector('nav ul');
-        menu.classList.remove('mobile-menu-open');
-    }
-
-    // Theme Toggle
-    function toggleTheme() {
-        const html = document.documentElement;
-        const currentTheme = html.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        html.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
         
-        const toggle = document.querySelector('.theme-toggle');
-        toggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
-    }
+        <footer>
+            <div class="footer-links">
+                <a href="https://fluhartyml.github.io">Portfolio</a>
+                <span>•</span>
+                <a href="https://github.com/fluhartyml">GitHub</a>
+                <span>•</span>
+                <a href="mailto:michael@fluharty.com">Email</a>
+                <span>•</span>
+                <a href="https://github.com/fluhartyml/fluhartyml.github.io/wiki/EULA-End-User-License-Agreement" target="_blank">EULA</a>
+            </div>
+            <div class="footer-license">
+                Licensed under GPL v3 - Share and share alike with attribution required
+            </div>
+        </footer>
+    </section>
 
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    document.querySelector('.theme-toggle').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
-
-    // Smooth scroll for navigation
-    document.querySelectorAll('nav a').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-            
-            if (targetSection) {
-                document.querySelectorAll('section').forEach(section => {
-                    section.classList.add('hidden');
-                });
-                targetSection.classList.remove('hidden');
-                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-    });
-
-    // GitHub API - Fetch Projects
-    async function fetchProjects() {
-        const username = 'fluhartyml';
-        const projectsGrid = document.querySelector('.projects-grid');
-        const loading = document.querySelector('.projects-section .loading');
-        
-        try {
-            const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
-            const repos = await reposResponse.json();
-            
-            loading.style.display = 'none';
-            
-            for (const repo of repos) {
-                const wikiContent = await fetchWikiContent(username, repo.name);
-                const card = createProjectCard(repo, wikiContent);
-                projectsGrid.appendChild(card);
-            }
-            
-            if (projectsGrid.children.length === 0) {
-                projectsGrid.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">No projects found.</p>';
-            }
-            
-        } catch (error) {
-            console.error('Error fetching projects:', error);
-            loading.textContent = 'Error loading projects.';
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.querySelector('nav ul');
+            menu.classList.toggle('mobile-menu-open');
         }
-    }
 
-    async function fetchWikiContent(username, repoName) {
-        try {
-            const wikiUrl = `https://api.github.com/repos/${username}/${repoName}/contents`;
-            const response = await fetch(wikiUrl);
-            return { exists: response.ok };
-        } catch (error) {
-            return { exists: false };
+        function closeMobileMenu() {
+            const menu = document.querySelector('nav ul');
+            menu.classList.remove('mobile-menu-open');
         }
-    }
 
-    function createProjectCard(repo, wikiContent) {
-        const card = document.createElement('div');
-        card.className = 'project-card';
-        
-        const language = repo.language || 'Unknown';
-        
-        card.innerHTML = `
-            <h3>${repo.name}</h3>
-            <div class="description">
-                ${repo.description || 'No description available'}
-            </div>
-            <div class="tech-stack">
-                <span class="tech-badge">${language}</span>
-                ${repo.topics ? repo.topics.map(topic => `<span class="tech-badge">${topic}</span>`).join('') : ''}
-            </div>
-            <div class="project-links">
-                <a href="${repo.html_url}" target="_blank">View Code</a>
-                ${wikiContent.exists ? `<a href="${repo.html_url}/wiki" target="_blank">Documentation</a>` : ''}
-            </div>
-        `;
-        
-        return card;
-    }
+        // Theme Toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            const toggle = document.querySelector('.theme-toggle');
+            toggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        }
 
-    // GitHub API - Fetch Blog Posts
-    async function fetchBlogPosts() {
-        const username = 'fluhartyml';
-        const blogContainer = document.querySelector('.blog-posts');
-        const loading = document.querySelector('.blog-section .loading');
-        
-        try {
-            const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
-            const repos = await reposResponse.json();
-            
-            let allIssues = [];
-            
-            for (const repo of repos) {
-                try {
-                    const issuesResponse = await fetch(`https://api.github.com/repos/${username}/${repo.name}/issues?state=all&per_page=100`);
-                    const issues = await issuesResponse.json();
-                    
-                    issues.forEach(issue => {
-                        issue.repoName = repo.name;
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.querySelector('.theme-toggle').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection) {
+                    document.querySelectorAll('section').forEach(section => {
+                        section.classList.add('hidden');
                     });
-                    
-                    allIssues = allIssues.concat(issues);
-                } catch (error) {
-                    console.log(`No issues in ${repo.name}`);
-                }
-            }
-            
-            loading.style.display = 'none';
-            
-            allIssues.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-            
-            if (allIssues.length > 0) {
-                allIssues.forEach(issue => {
-                    const post = createBlogPost(issue);
-                    blogContainer.appendChild(post);
-                });
-            } else {
-                blogContainer.innerHTML = '<p style="text-align: center;">No blog posts yet.</p>';
-            }
-            
-        } catch (error) {
-            console.error('Error fetching blog posts:', error);
-            loading.textContent = 'Error loading blog posts.';
-        }
-    }
-
-    function createBlogPost(issue) {
-        const post = document.createElement('div');
-        post.className = 'blog-post';
-        
-        const date = new Date(issue.created_at).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-        
-        const body = issue.body || 'No content';
-        const isLong = body.length > 500;
-        const displayBody = isLong ? body.substring(0, 500) + '...' : body;
-        
-        post.innerHTML = `
-            <div class="date">${date}</div>
-            <h3>${issue.title}</h3>
-            <div class="meta">
-                <span class="repo-badge">${issue.repoName}</span>
-                ${issue.labels.map(label => `<span class="label-badge">${label.name}</span>`).join('')}
-            </div>
-            <div class="content">${displayBody}</div>
-            ${isLong ? '<span class="read-more">Read more...</span>' : ''}
-            <div class="actions">
-                <a href="${issue.html_url}" target="_blank">View on GitHub & Comment</a>
-            </div>
-        `;
-        
-        if (isLong) {
-            const readMore = post.querySelector('.read-more');
-            const content = post.querySelector('.content');
-            readMore.addEventListener('click', () => {
-                if (content.classList.contains('expanded')) {
-                    content.textContent = displayBody;
-                    content.classList.remove('expanded');
-                    readMore.textContent = 'Read more...';
-                } else {
-                    content.textContent = body;
-                    content.classList.add('expanded');
-                    readMore.textContent = 'Read less';
+                    targetSection.classList.remove('hidden');
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
-        }
-        
-        return post;
-    }
+        });
 
-    // GitHub API - Fetch Activity Timeline
-    async function fetchTimeline() {
-        const username = 'fluhartyml';
-        const activityFeed = document.querySelector('.activity-feed');
-        const loading = document.querySelector('.timeline-section .loading');
-        
-        try {
-            const eventsResponse = await fetch(`https://api.github.com/users/${username}/events/public?per_page=100`);
-            const events = await eventsResponse.json();
+        // GitHub API - Fetch Projects
+        async function fetchProjects() {
+            const username = 'fluhartyml';
+            const projectsGrid = document.querySelector('.projects-grid');
+            const loading = document.querySelector('.projects-section .loading');
             
-            loading.style.display = 'none';
+            try {
+                const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
+                const repos = await reposResponse.json();
+                
+                loading.style.display = 'none';
+                
+                for (const repo of repos) {
+                    const wikiContent = await fetchWikiContent(username, repo.name);
+                    const card = createProjectCard(repo, wikiContent);
+                    projectsGrid.appendChild(card);
+                }
+                
+                if (projectsGrid.children.length === 0) {
+                    projectsGrid.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">No projects found.</p>';
+                }
+                
+            } catch (error) {
+                console.error('Error fetching projects:', error);
+                loading.textContent = 'Error loading projects.';
+            }
+        }
+
+        async function fetchWikiContent(username, repoName) {
+            try {
+                const wikiUrl = `https://api.github.com/repos/${username}/${repoName}/contents`;
+                const response = await fetch(wikiUrl);
+                return { exists: response.ok };
+            } catch (error) {
+                return { exists: false };
+            }
+        }
+
+        function createProjectCard(repo, wikiContent) {
+            const card = document.createElement('div');
+            card.className = 'project-card';
             
-            events.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            const language = repo.language || 'Unknown';
             
-            if (events.length > 0) {
-                events.forEach(event => {
-                    const item = createActivityItem(event);
-                    if (item) {
-                        activityFeed.appendChild(item);
+            card.innerHTML = `
+                <h3>${repo.name}</h3>
+                <div class="description">
+                    ${repo.description || 'No description available'}
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-badge">${language}</span>
+                    ${repo.topics ? repo.topics.map(topic => `<span class="tech-badge">${topic}</span>`).join('') : ''}
+                </div>
+                <div class="project-links">
+                    <a href="${repo.html_url}" target="_blank">View Code</a>
+                    ${wikiContent.exists ? `<a href="${repo.html_url}/wiki" target="_blank">Documentation</a>` : ''}
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // GitHub API - Fetch Blog Posts
+        async function fetchBlogPosts() {
+            const username = 'fluhartyml';
+            const blogContainer = document.querySelector('.blog-posts');
+            const loading = document.querySelector('.blog-section .loading');
+            
+            try {
+                const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
+                const repos = await reposResponse.json();
+                
+                let allIssues = [];
+                
+                for (const repo of repos) {
+                    try {
+                        const issuesResponse = await fetch(`https://api.github.com/repos/${username}/${repo.name}/issues?state=all&per_page=100`);
+                        const issues = await issuesResponse.json();
+                        
+                        issues.forEach(issue => {
+                            issue.repoName = repo.name;
+                        });
+                        
+                        allIssues = allIssues.concat(issues);
+                    } catch (error) {
+                        console.log(`No issues in ${repo.name}`);
+                    }
+                }
+                
+                loading.style.display = 'none';
+                
+                allIssues.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                
+                if (allIssues.length > 0) {
+                    allIssues.forEach(issue => {
+                        const post = createBlogPost(issue);
+                        blogContainer.appendChild(post);
+                    });
+                } else {
+                    blogContainer.innerHTML = '<p style="text-align: center;">No blog posts yet.</p>';
+                }
+                
+            } catch (error) {
+                console.error('Error fetching blog posts:', error);
+                loading.textContent = 'Error loading blog posts.';
+            }
+        }
+
+        function createBlogPost(issue) {
+            const post = document.createElement('div');
+            post.className = 'blog-post';
+            
+            const date = new Date(issue.created_at).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            const body = issue.body || 'No content';
+            const isLong = body.length > 500;
+            const displayBody = isLong ? body.substring(0, 500) + '...' : body;
+            
+            post.innerHTML = `
+                <div class="date">${date}</div>
+                <h3>${issue.title}</h3>
+                <div class="meta">
+                    <span class="repo-badge">${issue.repoName}</span>
+                    ${issue.labels.map(label => `<span class="label-badge">${label.name}</span>`).join('')}
+                </div>
+                <div class="content">${displayBody}</div>
+                ${isLong ? '<span class="read-more">Read more...</span>' : ''}
+                <div class="actions">
+                    <a href="${issue.html_url}" target="_blank">View on GitHub & Comment</a>
+                </div>
+            `;
+            
+            if (isLong) {
+                const readMore = post.querySelector('.read-more');
+                const content = post.querySelector('.content');
+                readMore.addEventListener('click', () => {
+                    if (content.classList.contains('expanded')) {
+                        content.textContent = displayBody;
+                        content.classList.remove('expanded');
+                        readMore.textContent = 'Read more...';
+                    } else {
+                        content.textContent = body;
+                        content.classList.add('expanded');
+                        readMore.textContent = 'Read less';
                     }
                 });
-            } else {
-                activityFeed.innerHTML = '<p style="text-align: center;">No recent activity found.</p>';
             }
             
-        } catch (error) {
-            console.error('Error fetching timeline:', error);
-            loading.textContent = 'Error loading activity timeline.';
+            return post;
         }
-    }
 
-    function createActivityItem(event) {
-        const item = document.createElement('div');
-        item.className = 'activity-item';
-        
-        const date = new Date(event.created_at).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        });
-        
-        let title = '';
-        let description = '';
-        let activityType = '';
-        
-        switch(event.type) {
-            case 'PushEvent':
-                activityType = 'Commit';
-                const commitCount = event.payload.commits ? event.payload.commits.length : 0;
-                title = `Pushed ${commitCount} commit${commitCount !== 1 ? 's' : ''} to ${event.repo.name}`;
-                if (event.payload.commits && event.payload.commits[0]) {
-                    description = event.payload.commits[0].message;
+        // GitHub API - Fetch Activity Timeline
+        async function fetchTimeline() {
+            const username = 'fluhartyml';
+            const activityFeed = document.querySelector('.activity-feed');
+            const loading = document.querySelector('.timeline-section .loading');
+            
+            try {
+                const eventsResponse = await fetch(`https://api.github.com/users/${username}/events/public?per_page=100`);
+                const events = await eventsResponse.json();
+                
+                loading.style.display = 'none';
+                
+                events.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                
+                if (events.length > 0) {
+                    events.forEach(event => {
+                        const item = createActivityItem(event);
+                        if (item) {
+                            activityFeed.appendChild(item);
+                        }
+                    });
+                } else {
+                    activityFeed.innerHTML = '<p style="text-align: center;">No recent activity found.</p>';
                 }
-                break;
-            case 'CreateEvent':
-                activityType = 'Created';
-                title = `Created ${event.payload.ref_type} in ${event.repo.name}`;
-                description = event.payload.description || '';
-                break;
-            case 'IssuesEvent':
-                activityType = 'Issue';
-                title = `${event.payload.action} issue in ${event.repo.name}`;
-                description = event.payload.issue.title;
-                break;
-            case 'IssueCommentEvent':
-                activityType = 'Comment';
-                title = `Commented on issue in ${event.repo.name}`;
-                description = event.payload.comment.body.substring(0, 200);
-                break;
-            case 'PullRequestEvent':
-                activityType = 'Pull Request';
-                title = `${event.payload.action} pull request in ${event.repo.name}`;
-                description = event.payload.pull_request.title;
-                break;
-            case 'WatchEvent':
-                activityType = 'Starred';
-                title = `Starred ${event.repo.name}`;
-                break;
-            case 'ForkEvent':
-                activityType = 'Forked';
-                title = `Forked ${event.repo.name}`;
-                break;
-            default:
-                return null;
+                
+            } catch (error) {
+                console.error('Error fetching timeline:', error);
+                loading.textContent = 'Error loading activity timeline.';
+            }
         }
-        
-        item.innerHTML = `
-            <div class="date">${date}</div>
-            <div class="meta">
-                <span class="activity-badge">${activityType}</span>
-            </div>
-            <h3>${title}</h3>
-            ${description ? `<div class="description">${description}</div>` : ''}
-            <div class="actions">
-                <a href="https://github.com/${event.repo.name}" target="_blank">View Repository</a>
-            </div>
-        `;
-        
-        return item;
-    }
 
-    // Load sections on demand
-    let projectsLoaded = false;
-    document.querySelector('a[href="#projects"]').addEventListener('click', () => {
-        if (!projectsLoaded) {
-            fetchProjects();
-            projectsLoaded = true;
+        function createActivityItem(event) {
+            const item = document.createElement('div');
+            item.className = 'activity-item';
+            
+            const date = new Date(event.created_at).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            let title = '';
+            let description = '';
+            let activityType = '';
+            
+            switch(event.type) {
+                case 'PushEvent':
+                    activityType = 'Commit';
+                    const commitCount = event.payload.commits ? event.payload.commits.length : 0;
+                    title = `Pushed ${commitCount} commit${commitCount !== 1 ? 's' : ''} to ${event.repo.name}`;
+                    if (event.payload.commits && event.payload.commits[0]) {
+                        description = event.payload.commits[0].message;
+                    }
+                    break;
+                case 'CreateEvent':
+                    activityType = 'Created';
+                    title = `Created ${event.payload.ref_type} in ${event.repo.name}`;
+                    description = event.payload.description || '';
+                    break;
+                case 'IssuesEvent':
+                    activityType = 'Issue';
+                    title = `${event.payload.action} issue in ${event.repo.name}`;
+                    description = event.payload.issue.title;
+                    break;
+                case 'IssueCommentEvent':
+                    activityType = 'Comment';
+                    title = `Commented on issue in ${event.repo.name}`;
+                    description = event.payload.comment.body.substring(0, 200);
+                    break;
+                case 'PullRequestEvent':
+                    activityType = 'Pull Request';
+                    title = `${event.payload.action} pull request in ${event.repo.name}`;
+                    description = event.payload.pull_request.title;
+                    break;
+                case 'WatchEvent':
+                    activityType = 'Starred';
+                    title = `Starred ${event.repo.name}`;
+                    break;
+                case 'ForkEvent':
+                    activityType = 'Forked';
+                    title = `Forked ${event.repo.name}`;
+                    break;
+                default:
+                    return null;
+            }
+            
+            item.innerHTML = `
+                <div class="date">${date}</div>
+                <div class="meta">
+                    <span class="activity-badge">${activityType}</span>
+                </div>
+                <h3>${title}</h3>
+                ${description ? `<div class="description">${description}</div>` : ''}
+                <div class="actions">
+                    <a href="https://github.com/${event.repo.name}" target="_blank">View Repository</a>
+                </div>
+            `;
+            
+            return item;
         }
-    });
 
-    let blogLoaded = false;
-    document.querySelector('a[href="#blog"]').addEventListener('click', () => {
-        if (!blogLoaded) {
-            fetchBlogPosts();
-            blogLoaded = true;
-        }
-    });
+        // Load sections on demand
+        let projectsLoaded = false;
+        document.querySelector('a[href="#projects"]').addEventListener('click', () => {
+            if (!projectsLoaded) {
+                fetchProjects();
+                projectsLoaded = true;
+            }
+        });
 
-    let timelineLoaded = false;
-    document.querySelector('a[href="#timeline"]').addEventListener('click', () => {
-        if (!timelineLoaded) {
-            fetchTimeline();
-            timelineLoaded = true;
-        }
-    });
+        let blogLoaded = false;
+        document.querySelector('a[href="#blog"]').addEventListener('click', () => {
+            if (!blogLoaded) {
+                fetchBlogPosts();
+                blogLoaded = true;
+            }
+        });
 
-    // Show home section by default
-    document.getElementById('home').classList.remove('hidden');
-</script>
-```
+        let timelineLoaded = false;
+        document.querySelector('a[href="#timeline"]').addEventListener('click', () => {
+            if (!timelineLoaded) {
+                fetchTimeline();
+                timelineLoaded = true;
+            }
+        });
 
+        // Show home section by default
+        document.getElementById('home').classList.remove('hidden');
+    </script>
 </body>
 </html>
