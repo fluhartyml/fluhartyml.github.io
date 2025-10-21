@@ -775,8 +775,8 @@
                 ${repo.topics ? repo.topics.map(topic => `<span class="tech-badge">${topic}</span>`).join('') : ''}
             </div>
             <div class="project-links">
-                <a href="${repo.html_url}" target="_blank">View Code</a>
-                ${wikiContent.exists ? `<a href="${repo.html_url}/wiki" target="_blank">Documentation</a>` : ''}
+                <a href="${repo.html_url}" target="_blank">Git Code</a>
+                ${wikiContent.exists ? `<a href="${repo.html_url}/wiki" target="_blank">Wiki/Documentation</a>` : ''}
             </div>
         `;
         
