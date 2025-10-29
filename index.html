@@ -24,21 +24,21 @@
     </header>
 
     <main>
-        <section id="home" class="hero">
+        <section id="home" class="hero" style="min-height: 25vh; padding: 3rem 2rem;">
             <h1 style="color: #000000; text-shadow: 2px 2px 4px rgba(200, 200, 200, 0.5);">Michael Lee Fluharty</h1>
             <p class="tagline" style="color: #4a3520; text-shadow: 1px 1px 2px rgba(200, 200, 200, 0.5);">AppleOS Developer Creating Practical and Useful Tools</p>
             <p class="bio" style="color: #4a3520; text-shadow: 1px 1px 2px rgba(200, 200, 200, 0.5);">
-                Retired Electronics Technician turned hobbyist app developer. I enjoy building applications 
+                Retired Computer Electronics Repair Technician turned hobbyist app developer. I enjoy building applications 
                 for macOS, iOS, and iPadOS using Swift and SwiftUI - not because I want to, but because I have to.
             </p>
-            <div class="social-links">
+            <div class="social-links" style="justify-content: center;">
                 <a href="https://github.com/fluhartyml" target="_blank">GitHub</a>
                 <a href="https://x.com/fluhartyml" target="_blank">X / Twitter</a>
                 <a href="https://linkedin.com/in/fluhartyml" target="_blank">LinkedIn</a>
             </div>
         </section>
 
-        <section id="stats">
+        <section id="stats" style="margin-top: 50vh;">
             <div class="stats-container">
                 <div class="stat-card">
                     <div class="stat-number">2009</div>
@@ -57,9 +57,38 @@
 
         <section id="projects">
             <h2>Projects</h2>
-            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
-                Coming soon...
-            </p>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>GIT IssueTracker LIGHT</h3>
+                    <p>Native macOS application for managing GitHub issues with real-time API integration and debug monitoring.</p>
+                    <a href="https://github.com/fluhartyml" target="_blank">View on GitHub →</a>
+                </div>
+                <div class="project-card">
+                    <h3>NightGard</h3>
+                    <p>BBS-style bulletin board system for macOS with SwiftData persistence and CloudKit synchronization.</p>
+                    <a href="https://github.com/fluhartyml" target="_blank">View on GitHub →</a>
+                </div>
+                <div class="project-card">
+                    <h3>NG Web Portal</h3>
+                    <p>Static site generator and content management system for macOS. Create and publish blogs and portfolios.</p>
+                    <a href="https://github.com/fluhartyml" target="_blank">View on GitHub →</a>
+                </div>
+                <div class="project-card">
+                    <h3>InkwellBinary</h3>
+                    <p>Educational binary clock and alarm app for iPhone and iPad with passive learning features.</p>
+                    <a href="https://github.com/fluhartyml" target="_blank">View on GitHub →</a>
+                </div>
+                <div class="project-card">
+                    <h3>SVG Paint</h3>
+                    <p>Image to SVG converter with built-in pixel art drawing canvas for creating scalable graphics.</p>
+                    <a href="https://github.com/fluhartyml" target="_blank">View on GitHub →</a>
+                </div>
+                <div class="project-card">
+                    <h3>SnazzyShareScan</h3>
+                    <p>Network discovery and file sharing utility for macOS with intuitive interface.</p>
+                    <a href="https://github.com/fluhartyml" target="_blank">View on GitHub →</a>
+                </div>
+            </div>
         </section>
 
         <section id="timeline">
@@ -80,7 +109,21 @@
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-year">1980s</div>
+                    <div class="timeline-year">2004</div>
+                    <div class="timeline-content">
+                        <h3>ITT Technical Institute</h3>
+                        <p>Associate of Science in Computer and Electronics Engineering Technology</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2002</div>
+                    <div class="timeline-content">
+                        <h3>Early Web Development</h3>
+                        <p>Professional web development work for motorsports and media companies</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1990</div>
                     <div class="timeline-content">
                         <h3>First Programming Experience</h3>
                         <p>Learned BASIC in middle school with Ms. Wahl</p>
@@ -91,21 +134,12 @@
 
         <section id="contact">
             <h2>Get in Touch</h2>
-            <form onsubmit="return false;">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Send Message</button>
-            </form>
+            <p style="text-align: center; margin-bottom: 2rem;">Use the chat widget in the bottom-right corner to send me a message directly.</p>
+            <div class="social-links" style="justify-content: center;">
+                <a href="https://github.com/fluhartyml" target="_blank">GitHub</a>
+                <a href="https://x.com/fluhartyml" target="_blank">X / Twitter</a>
+                <a href="https://linkedin.com/in/fluhartyml" target="_blank">LinkedIn</a>
+            </div>
         </section>
     </main>
 
