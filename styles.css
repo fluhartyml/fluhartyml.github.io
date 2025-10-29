@@ -8,8 +8,29 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
     color: #333;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background-image: url('IMG_7907.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     min-height: 100vh;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.60);
+    backdrop-filter: blur(10px);
+    z-index: 0;
+}
+
+body > * {
+    position: relative;
+    z-index: 1;
 }
 
 /* Header Styles */
@@ -32,11 +53,12 @@ header p {
 
 /* Navigation */
 nav {
-    background-color: #333;
+    background-color: rgba(51, 51, 51, 0.95);
     padding: 1rem 0;
     position: sticky;
     top: 0;
     z-index: 100;
+    backdrop-filter: blur(10px);
 }
 
 nav ul {
@@ -78,7 +100,7 @@ section h2 {
 
 /* About Section */
 #about {
-    background-color: #f8f9fa;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 2rem;
     border-radius: 8px;
 }
@@ -91,7 +113,7 @@ section h2 {
 }
 
 .project-card {
-    background: white;
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 8px;
     padding: 1.5rem;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -125,7 +147,7 @@ section h2 {
 
 /* Contact Section */
 #contact {
-    background-color: #f8f9fa;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 2rem;
     border-radius: 8px;
     text-align: center;
@@ -143,7 +165,7 @@ section h2 {
 
 /* Footer */
 footer {
-    background-color: #333;
+    background-color: rgba(51, 51, 51, 0.95);
     color: white;
     text-align: center;
     padding: 2rem 0;
@@ -166,29 +188,35 @@ footer {
     }
 }
 
-/* Hero Section - FIXED */
+/* Hero Section */
 .hero {
     text-align: center;
     padding: 3rem 2rem;
     min-height: 90vh;
-    background: transparent !important;
-    backdrop-filter: none !important;
+    background: transparent;
     border-radius: 0;
     margin-bottom: 0;
 }
 
-/* Stats section and below (YES vellum): */
-#stats,
-section {
+/* Stats section and below */
+#stats {
     margin-bottom: 4rem;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 2rem;
     border-radius: 12px;
-    box-shadow: 0 4px 6px var(--shadow);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(3px);
+}
+
+[data-theme="dark"] body {
+    background-image: url('IMG_7907.jpeg');
+}
+
+[data-theme="dark"] body::before {
+    background: rgba(0, 0, 0, 0.50);
 }
 
 [data-theme="dark"] #stats,
 [data-theme="dark"] section {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.3);
 }
