@@ -1,45 +1,47 @@
 <!--
   index.html
   Michael Lee Fluharty Portfolio
-  Updated: 2025-10-29 14:47
+  Original working version with Credentials added
+  Updated: 2025-10-29 19:54
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Michael Lee Fluharty | AppleOS Developer Portfolio</title>
+    <title>Michael Lee Fluharty - AppleOS Developer</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="home-page">
     <header>
-        <h1>MLF</h1>
+        <nav>
+            <div class="logo">MLF</div>
+            <div class="nav-links">
+                <a href="#home" class="active">Home</a>
+                <a href="credentials.html">Credentials</a>
+                <a href="#projects">Projects</a>
+                <a href="#timeline">Timeline</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <button id="theme-toggle" aria-label="Toggle theme">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </nav>
     </header>
-
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="credentials.html">Credentials</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#blog">Blog</a></li>
-            <li><a href="#timeline">Timeline</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
-    </nav>
 
     <main>
         <section id="home" class="hero">
-            <h2>Michael Lee Fluharty</h2>
+            <h1>Michael Lee Fluharty</h1>
             <p class="tagline">AppleOS Developer Creating Practical and Useful Tools</p>
             
             <p class="bio">
-                Retired Computer Electronics Repair Technician turned hobbyist app developer. Apple Developer since 2009, now publishing apps to the App Store. Building tools in the Apple ecosystem because I can, not because I have to.
+                Retired Computer Electronics Repair Technician turned hobbyist app developer. I enjoy building applications 
+                for macOS, iOS, and iPadOS using Swift and SwiftUI - not because I want to, but because I have to.
             </p>
 
-            <div class="social-links">
+            <div class="social-links-hero">
                 <a href="https://github.com/fluhartyml" target="_blank">GitHub</a>
-                <a href="https://x.com/fluhartyml" target="_blank">X (Twitter)</a>
+                <a href="https://x.com/fluhartyml" target="_blank">X / Twitter</a>
                 <a href="https://linkedin.com/in/fluhartyml" target="_blank">LinkedIn</a>
             </div>
         </section>
@@ -63,37 +65,61 @@
         </section>
 
         <section id="projects">
-            <h2>Projects</h2>
+            <h2>Featured Projects</h2>
             <div class="projects-grid">
                 <div class="project-card">
-                    <h3>Coming Soon</h3>
-                    <p>New projects launching to the App Store</p>
+                    <h3>Zipty Racing</h3>
+                    <p>Professional motorsports web development (2002)</p>
+                </div>
+                <div class="project-card">
+                    <h3>Pele Productions</h3>
+                    <p>Media company website - ITT Tech capstone project (2002)</p>
+                </div>
+                <div class="project-card">
+                    <h3>Current Projects</h3>
+                    <p>New apps coming soon to the App Store</p>
                 </div>
             </div>
         </section>
 
         <section id="timeline">
             <h2>Timeline</h2>
-            <div class="timeline-content">
+            <div class="timeline-container">
                 <div class="timeline-item">
-                    <h3>2009</h3>
-                    <p>Began Apple Developer journey</p>
+                    <div class="timeline-year">2009</div>
+                    <div class="timeline-content">
+                        <h3>Apple Developer Program</h3>
+                        <p>Began journey as registered Apple Developer</p>
+                    </div>
                 </div>
                 <div class="timeline-item">
-                    <h3>2004</h3>
-                    <p>Graduated ITT Technical Institute - AS in Computer and Electronics Engineering Technology</p>
+                    <div class="timeline-year">2004</div>
+                    <div class="timeline-content">
+                        <h3>ITT Technical Institute</h3>
+                        <p>Graduated with AS in Computer and Electronics Engineering Technology</p>
+                    </div>
                 </div>
                 <div class="timeline-item">
-                    <h3>Present</h3>
-                    <p>Publishing practical tools for the Apple ecosystem</p>
+                    <div class="timeline-year">2002</div>
+                    <div class="timeline-content">
+                        <h3>Web Development</h3>
+                        <p>Professional web development work for motorsports and media companies</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1990</div>
+                    <div class="timeline-content">
+                        <h3>First Programming Experience</h3>
+                        <p>Learned BASIC in middle school with Ms. Wahl</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="contact">
-            <h2>Contact</h2>
-            <p>Connect with me on social media or check out my work on GitHub.</p>
-            <div class="social-links">
+            <h2>Get in Touch</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">Use the chat widget in the bottom-right corner to send me a message directly.</p>
+            <div class="social-links" style="justify-content: center;">
                 <a href="https://github.com/fluhartyml" target="_blank">GitHub</a>
                 <a href="https://x.com/fluhartyml" target="_blank">X / Twitter</a>
                 <a href="https://linkedin.com/in/fluhartyml" target="_blank">LinkedIn</a>
