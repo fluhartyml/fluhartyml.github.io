@@ -169,6 +169,28 @@
             margin: 1rem 0;
         }
 
+        .back-button {
+            text-align: center;
+            margin: 3rem 0 2rem;
+        }
+
+        .back-button a {
+            display: inline-block;
+            background-color: rgba(102, 126, 234, 0.8);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .back-button a:hover {
+            background-color: rgba(102, 126, 234, 1);
+            transform: translateY(-2px);
+        }
+
         @media (max-width: 768px) {
             .project-hero h1 {
                 font-size: 2rem;
@@ -268,6 +290,10 @@
                 <div class="cta-buttons" style="justify-content: flex-start;">
                     <a href="https://fluhartyml.github.io/takeachanceonme-privacy/" target="_blank" class="cta-button secondary">Privacy Policy</a>
                 </div>
+            </div>
+
+            <div class="back-button">
+                <a href="../projects.html">← Back to Projects</a>
             </div>
         </main>
 
