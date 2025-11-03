@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The NightGard System: Self-Hosted Web Services - MLF Blog</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">MLF</div>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../credentials.html">Credentials</a>
+                <a href="../projects.html">Projects</a>
+                <a href="../blog.html" class="active">Blog</a>
+                <a href="../timeline.html">Timeline</a>
+                <a href="../contact.html">Contact</a>
+            </div>
+            <button id="theme-toggle" aria-label="Toggle theme">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="blog-post-page">
+        <article class="full-post">
+            <header class="post-header">
+                <a href="../blog.html" class="back-link">← Back to Blog</a>
+                <h1>The NightGard System: Self-Hosted Web Services</h1>
+                <div class="post-meta">
+                    <span class="post-date">November 2025</span>
+                    <span class="post-category">Projects</span>
+                    <span class="post-author">Michael Lee Fluharty</span>
+                </div>
+            </header>
+
+            <div class="post-content">
+                <p>NightGard is my answer to the complexity of modern web hosting. It's a suite of macOS tools designed to make self-hosting simple and accessible. The core wWw NGPortal application recently achieved MVP status—a fully functional local web server with DDNS integration.</p>
+
+                <p>The goal is to give individual developers and hobbyists the power to host their own content without relying on third-party services. Privacy, control, and simplicity are the driving principles.</p>
+
+                <h2>Why Self-Hosting Matters</h2>
+
+                <p>We've become too dependent on third-party hosting services. GitHub Pages, Netlify, Vercel—they're all great, but they come with limitations, tracking, and the risk of platform changes.</p>
+
+                <p>Self-hosting puts you back in control:</p>
+                <ul>
+                    <li>Your data stays on your hardware</li>
+                    <li>No platform lock-in or service changes</li>
+                    <li>Complete control over your infrastructure</li>
+                    <li>Zero recurring costs beyond your internet connection</li>
+                </ul>
+
+                <h2>The wWw NGPortal</h2>
+
+                <p>The first component of NightGard is wWw NGPortal—a macOS application that makes running a local web server as simple as clicking a button.</p>
+
+                <h3>Key Features:</h3>
+                <ul>
+                    <li><strong>Static File Serving</strong> - Drop your HTML/CSS/JS files in a folder and serve them instantly</li>
+                    <li><strong>DDNS Integration</strong> - Built-in DuckDNS support to give your home server a domain name</li>
+                    <li><strong>Zero Configuration</strong> - Works out of the box with sensible defaults</li>
+                    <li><strong>Un-sandboxed</strong> - Full system access for maximum flexibility</li>
+                </ul>
+
+                <h2>Technical Foundation</h2>
+
+                <p>NGPortal is built on Swift and the Vapor web framework. This gives us:</p>
+                <ul>
+                    <li>Native macOS performance</li>
+                    <li>Modern Swift concurrency</li>
+                    <li>Battle-tested HTTP server</li>
+                    <li>Easy extensibility for future features</li>
+                </ul>
+
+                <h2>MVP Achieved: November 2025</h2>
+
+                <p>After months of development and iteration, wWw NGPortal reached MVP status on November 1, 2025. The core features work reliably:</p>
+                <ul>
+                    <li>✅ Web server starts and serves files correctly</li>
+                    <li>✅ Accessible across local network (0.0.0.0 binding)</li>
+                    <li>✅ DDNS updater framework in place</li>
+                    <li>✅ Clean UI with status indicators</li>
+                    <li>✅ Reliable startup and shutdown</li>
+                </ul>
+
+                <h2>What's Next</h2>
+
+                <p>The NightGard ecosystem is just beginning. Future components include:</p>
+                <ul>
+                    <li><strong>NGWebPortal</strong> - CMS-like tool for blogs and portfolios</li>
+                    <li><strong>NightGard BBS</strong> - Modern take on bulletin board systems</li>
+                    <li><strong>Enhanced DDNS</strong> - Support for more providers beyond DuckDNS</li>
+                    <li><strong>Backup Tools</strong> - Automated backup and sync utilities</li>
+                </ul>
+
+                <h2>Philosophy: Simple, Not Simplistic</h2>
+
+                <p>NightGard aims to be simple to use, but not simplistic in capability. The goal is to hide complexity, not remove features.</p>
+
+                <p>A beginner should be able to get a web server running in minutes. An advanced user should have access to configuration and customization.</p>
+
+                <h2>Get Involved</h2>
+
+                <p>All NightGard components are developed openly on GitHub. Check out the source, report issues, or contribute features:</p>
+                <p><a href="https://github.com/fluhartyml/wWw-NGPortal" target="_blank">github.com/fluhartyml/wWw-NGPortal</a></p>
+            </div>
+
+            <footer class="post-footer">
+                <div class="post-tags">
+                    <span class="tag">NightGard</span>
+                    <span class="tag">Self-Hosting</span>
+                    <span class="tag">macOS</span>
+                    <span class="tag">Swift</span>
+                </div>
+                <div class="post-navigation">
+                    <a href="../blog.html" class="nav-button">← All Posts</a>
+                </div>
+            </footer>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Michael Lee Fluharty. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://github.com/fluhartyml" target="_blank">GitHub</a>
+                <a href="https://x.com/fluhartyml" target="_blank">X</a>
+                <a href="https://linkedin.com/in/fluhartyml" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../scripts.js"></script>
+</body>
+</html>
