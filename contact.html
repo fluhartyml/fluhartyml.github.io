@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Michael Lee Fluharty</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">MLF</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="credentials.html">Credentials</a>
+                <a href="projects.html">Projects</a>
+                <a href="blog.html">Blog</a>
+                <a href="timeline.html">Timeline</a>
+                <a href="contact.html" class="active">Contact</a>
+            </div>
+            <button id="theme-toggle" aria-label="Toggle theme">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="contact-page">
+        <section class="hero-section">
+            <h1>Get in Touch</h1>
+            <p class="subtitle">Let's talk about apps, tools, and the Apple ecosystem</p>
+        </section>
+
+        <section class="contact-info">
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3>📧 Email</h3>
+                    <p>For business inquiries, collaboration opportunities, or app support:</p>
+                    <a href="mailto:michael@fluharty.com" class="contact-link">michael@fluharty.com</a>
+                </div>
+
+                <div class="contact-card">
+                    <h3>🐙 GitHub</h3>
+                    <p>Follow my open development process and contribute to projects:</p>
+                    <a href="https://github.com/fluhartyml" target="_blank" class="contact-link">@fluhartyml</a>
+                </div>
+
+                <div class="contact-card">
+                    <h3>𝕏 X (Twitter)</h3>
+                    <p>Updates on new releases, development progress, and tech thoughts:</p>
+                    <a href="https://x.com/fluhartyml" target="_blank" class="contact-link">@fluhartyml</a>
+                </div>
+
+                <div class="contact-card">
+                    <h3>💼 LinkedIn</h3>
+                    <p>Professional network and career history:</p>
+                    <a href="https://linkedin.com/in/fluhartyml" target="_blank" class="contact-link">fluhartyml</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-form-section">
+            <h2>Send a Message</h2>
+            <p class="form-intro">Questions about my apps, collaboration ideas, or just want to say hi? Drop me a message below.</p>
+
+            <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Your name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">Select a topic...</option>
+                        <option value="app-support">App Support</option>
+                        <option value="collaboration">Collaboration</option>
+                        <option value="feedback">Feedback</option>
+                        <option value="business">Business Inquiry</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="6" required placeholder="Your message..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-button">Send Message</button>
+            </form>
+
+            <p class="form-note">Note: To enable this form, configure it with <a href="https://formspree.io" target="_blank">Formspree</a> or your preferred form handling service.</p>
+        </section>
+
+        <section class="app-support">
+            <h2>App Support</h2>
+            <p>Looking for help with one of my apps? Each app has dedicated support resources:</p>
+            <div class="support-links">
+                <div class="support-card">
+                    <h3>Tally Matrix Clock</h3>
+                    <p>tvOS entertainment app</p>
+                    <a href="https://apps.apple.com/app/id6754099799" target="_blank" class="support-link">App Store Page</a>
+                </div>
+                <div class="support-card">
+                    <h3>TakeAChanceOnMe</h3>
+                    <p>Multi-platform random number generator</p>
+                    <a href="https://apps.apple.com/app/id6753626820" target="_blank" class="support-link">App Store Page</a>
+                </div>
+                <div class="support-card">
+                    <h3>General Support</h3>
+                    <p>For all other inquiries</p>
+                    <a href="mailto:michael@fluharty.com" class="support-link">Email Support</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="availability">
+            <h2>Collaboration & Work</h2>
+            <div class="availability-content">
+                <p>I'm currently focused on building and publishing my own apps, but I'm always interested in:</p>
+                <ul class="interest-list">
+                    <li>Open source collaborations on Swift/SwiftUI projects</li>
+                    <li>Discussions about self-hosted web infrastructure</li>
+                    <li>Feedback and ideas for improving existing apps</li>
+                    <li>Interesting problems that need practical tool solutions</li>
+                </ul>
+                <p>Feel free to reach out—I may not take on every opportunity, but I'm always happy to connect with fellow developers and makers.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Michael Lee Fluharty. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://github.com/fluhartyml" target="_blank">GitHub</a>
+                <a href="https://x.com/fluhartyml" target="_blank">X</a>
+                <a href="https://linkedin.com/in/fluhartyml" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
