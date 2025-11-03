@@ -28,6 +28,12 @@ body::before {
     z-index: 0;
 }
 
+/* Remove frosted glass on home page */
+body.home-page::before {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: none;
+}
+
 body > * {
     position: relative;
     z-index: 1;
@@ -55,12 +61,29 @@ header p {
 
 /* Navigation */
 nav {
-    background-color: transparent;
-    padding: 1rem 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
     position: sticky;
     top: 0;
     z-index: 100;
-    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
 }
 
 nav ul {
@@ -76,10 +99,21 @@ nav a {
     font-weight: 500;
     transition: color 0.3s;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
 }
 
-nav a:hover {
+nav a:hover, nav a.active {
     color: #667eea;
+    background-color: rgba(102, 126, 234, 0.1);
+}
+
+#theme-toggle {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
 }
 
 /* Main Content */
@@ -177,17 +211,81 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    nav ul {
+    /* Stronger frosted glass reduction on mobile */
+    body::before {
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(5px);
+    }
+
+    body.home-page::before {
+        background: rgba(255, 255, 255, 0.90);
+        backdrop-filter: none;
+    }
+
+    /* Mobile navigation */
+    nav {
+        padding: 1rem;
         flex-direction: column;
         gap: 1rem;
     }
-    
+
+    .logo {
+        font-size: 1.8rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+    }
+
+    nav a {
+        display: block;
+        text-align: center;
+        padding: 0.75rem;
+        font-size: 1.1rem;
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 8px;
+    }
+
+    #theme-toggle {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+    }
+
+    nav ul li {
+        width: 100%;
+    }
+
+    nav ul li a {
+        display: block;
+        width: 100%;
+    }
+
     header h1 {
         font-size: 2rem;
     }
-    
+
+    main {
+        padding: 1rem;
+    }
+
     .projects-grid {
         grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding: 2rem 1rem;
+        min-height: auto;
     }
 }
 
