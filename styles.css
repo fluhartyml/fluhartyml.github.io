@@ -30,7 +30,7 @@ body::before {
 
 /* Remove frosted glass on home page */
 body.home-page::before {
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: none;
 }
 
@@ -73,12 +73,6 @@ nav {
     flex-wrap: wrap;
 }
 
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-}
 
 .nav-links {
     display: flex;
@@ -108,13 +102,6 @@ nav a:hover, nav a.active {
     background-color: rgba(102, 126, 234, 0.1);
 }
 
-#theme-toggle {
-    background: transparent;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 0.5rem;
-}
 
 /* Main Content */
 main {
@@ -236,7 +223,7 @@ footer a[aria-label="Return to home"] {
     }
 
     body.home-page::before {
-        background: rgba(255, 255, 255, 0.90);
+        background: rgba(255, 255, 255, 0.95);
         backdrop-filter: none;
     }
 
@@ -249,11 +236,6 @@ footer a[aria-label="Return to home"] {
         align-items: center;
     }
 
-    .logo {
-        font-size: 1.5rem;
-        width: 100%;
-        text-align: center;
-    }
 
     .nav-links {
         display: grid;
@@ -273,11 +255,6 @@ footer a[aria-label="Return to home"] {
         white-space: nowrap;
     }
 
-    #theme-toggle {
-        position: absolute;
-        top: 0.75rem;
-        right: 0.75rem;
-    }
 
     nav ul {
         flex-direction: column;
