@@ -16,23 +16,7 @@ body {
     min-height: 100vh;
 }
 
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.60);
-    backdrop-filter: blur(10px);
-    z-index: 0;
-}
-
-/* Remove frosted glass on home page */
-body.home-page::before {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: none;
-}
+/* Frosted glass removed entirely from all pages */
 
 body > * {
     position: relative;
@@ -61,8 +45,7 @@ header p {
 
 /* Navigation */
 nav {
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.85);
     padding: 1rem 2rem;
     position: sticky;
     top: 0;
@@ -216,16 +199,7 @@ footer a[aria-label="Return to home"] {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    /* Stronger frosted glass reduction on mobile */
-    body::before {
-        background: rgba(255, 255, 255, 0.75);
-        backdrop-filter: blur(5px);
-    }
-
-    body.home-page::before {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: none;
-    }
+    /* Mobile frosted glass removed */
 
     /* Mobile navigation - 2-3 rows evenly distributed */
     nav {
@@ -302,11 +276,10 @@ footer a[aria-label="Return to home"] {
 /* Stats section and below */
 #stats {
     margin-bottom: 4rem;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(3px);
 }
 
 [data-theme="dark"] body {
