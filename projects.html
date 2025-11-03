@@ -69,6 +69,22 @@
             padding: 2rem;
             border-radius: 12px;
             color: white;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .project-card:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+            transform: translateY(-5px) rotate(1deg);
+            animation: wiggle 0.5s ease;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: translateY(-5px) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(-1deg); }
+            75% { transform: translateY(-5px) rotate(1deg); }
         }
 
         .project-card h3 {
@@ -81,6 +97,21 @@
             font-size: 1rem;
             line-height: 1.8;
             margin-bottom: 1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: rgba(102, 126, 234, 0.6);
+            color: white;
+            padding: 0.3rem 0.7rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 0.25rem;
+        }
+
+        .badges {
+            margin: 1rem 0;
         }
 
         .project-link {
@@ -121,6 +152,31 @@
 
         <main>
             <h1>Projects & Apps</h1>
+
+            <div class="projects-grid">
+                <a href="projects/tally-matrix-clock.html" class="project-card">
+                    <h3>Tally Matrix Clock</h3>
+                    <div class="badges">
+                        <span class="badge">Live on App Store</span>
+                        <span class="badge">tvOS</span>
+                    </div>
+                    <p>Matrix-style time display for Apple TV. Time is displayed through illuminated colored squares in a matrix format, where the number of lit squares equals each digit's value.</p>
+                    <p><strong>Features:</strong> Multiple color schemes, dynamic patterns, 12/24-hour formats, privacy-first design</p>
+                </a>
+
+                <a href="projects/takeachanceonme.html" class="project-card">
+                    <h3>TakeAChanceOnMe</h3>
+                    <div class="badges">
+                        <span class="badge">Live on App Store</span>
+                        <span class="badge">iOS</span>
+                        <span class="badge">iPadOS</span>
+                        <span class="badge">macOS</span>
+                        <span class="badge">visionOS</span>
+                    </div>
+                    <p>Random number generator for all your Apple devices. Generate random numbers from 1 to 999,999,999 with a single tap.</p>
+                    <p><strong>⭐⭐⭐⭐⭐</strong> 5.0 rating • Zero data collection • Universal app</p>
+                </a>
+            </div>
         </main>
 
         {% include _footer.html %}

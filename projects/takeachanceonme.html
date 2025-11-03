@@ -1,0 +1,277 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TakeAChanceOnMe - Michael Lee Fluharty</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .fixed-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../IMG_7907.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -1;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .project-hero {
+            text-align: center;
+            padding: 3rem 2rem;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 12px;
+            margin: 2rem 0;
+            color: white;
+        }
+
+        .project-hero h1 {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .project-hero .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: rgba(102, 126, 234, 0.8);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            margin: 0.5rem;
+        }
+
+        .project-section {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            color: white;
+        }
+
+        .project-section h2 {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .project-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-item {
+            background-color: rgba(102, 126, 234, 0.2);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-item h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: rgba(102, 126, 234, 0.9);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .cta-button:hover {
+            background-color: rgba(102, 126, 234, 1);
+            transform: translateY(-2px);
+        }
+
+        .cta-button.secondary {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .tech-tag {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .rating {
+            font-size: 2rem;
+            color: #FFD700;
+            margin: 1rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .project-hero h1 {
+                font-size: 2rem;
+            }
+
+            .project-hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            main {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fixed-background"></div>
+    <div class="content-wrapper">
+        {% include _header.html %}
+        {% include _nav.html %}
+
+        <main>
+            <div class="project-hero">
+                <h1>TakeAChanceOnMe</h1>
+                <p class="tagline">Random number generator for all your Apple devices</p>
+                <div>
+                    <span class="badge">Live on App Store</span>
+                    <span class="badge">iOS</span>
+                    <span class="badge">iPadOS</span>
+                    <span class="badge">macOS</span>
+                    <span class="badge">visionOS</span>
+                </div>
+                <div class="rating">★★★★★ 5.0</div>
+                <p style="opacity: 0.8;">Based on 5 ratings</p>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="https://apps.apple.com/app/id6753626820" target="_blank" class="cta-button">
+                    Download on App Store
+                </a>
+            </div>
+
+            <div class="project-section">
+                <h2>About</h2>
+                <p>TakeAChanceOnMe is a simple, elegant random number generator that works across all your Apple devices. Generate random numbers from 1 to 999,999,999 with a single tap.</p>
+                <p>Built with privacy in mind - zero data collection, completely local operation, and a clean interface that follows Apple's design guidelines.</p>
+            </div>
+
+            <div class="project-section">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h3>Multi-Platform</h3>
+                        <p>Works on iPhone, iPad, Mac, and Apple Vision Pro</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Wide Range</h3>
+                        <p>Generate numbers from 1 to 999,999,999</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Clean Interface</h3>
+                        <p>Simple, focused design following Apple guidelines</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Zero Data Collection</h3>
+                        <p>Completely private, all processing happens locally</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Fast & Responsive</h3>
+                        <p>Instant number generation with smooth animations</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Universal App</h3>
+                        <p>One purchase works across all your devices</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h2>Technical Details</h2>
+                <div class="tech-stack">
+                    <span class="tech-tag">Swift</span>
+                    <span class="tech-tag">SwiftUI</span>
+                    <span class="tech-tag">iOS 17.0+</span>
+                    <span class="tech-tag">macOS 14.0+</span>
+                    <span class="tech-tag">visionOS 1.0+</span>
+                </div>
+                <p><strong>Category:</strong> Entertainment</p>
+                <p><strong>Price:</strong> Free</p>
+                <p><strong>Size:</strong> 1.1 MB</p>
+                <p><strong>Version:</strong> 1.0.2</p>
+                <p><strong>Released:</strong> October 13, 2025</p>
+            </div>
+
+            <div class="project-section">
+                <h2>Support & Resources</h2>
+                <div class="cta-buttons" style="justify-content: flex-start;">
+                    <a href="https://fluhartyml.github.io/takeachanceonme-privacy/" target="_blank" class="cta-button secondary">Privacy Policy</a>
+                </div>
+            </div>
+        </main>
+
+        {% include _footer.html %}
+    </div>
+</body>
+</html>
