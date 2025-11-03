@@ -11,25 +11,18 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            animation: none !important;
-            transition: none !important;
         }
 
-        html {
+        html, body {
             margin: 0;
             padding: 0;
             height: 100%;
-            background: transparent;
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
             color: #333;
-            background: transparent;
         }
 
         .fixed-background {
@@ -48,14 +41,12 @@
         .content-wrapper {
             position: relative;
             z-index: 1;
-            background: transparent;
         }
 
         main {
             max-width: 900px;
             margin: 0 auto;
             padding: 2rem;
-            background: transparent;
         }
 
         h1 {
@@ -96,28 +87,13 @@
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
 
+        .timeline-item ul {
+            margin-left: 2rem;
+            margin-top: 0.5rem;
+        }
+
         .timeline-item ul li {
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-        }
-
-        .back-to-top {
-            text-align: center;
-            margin: 3rem 0 2rem;
-        }
-
-        .back-to-top button {
-            background-color: rgba(102, 126, 234, 0.8);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        .back-to-top button:hover {
-            background-color: rgba(102, 126, 234, 1);
         }
 
         @media (max-width: 768px) {
@@ -146,11 +122,11 @@
                 <p><strong>Philosophy:</strong> Building apps because I can, not because I have to.</p>
                 <p>Retired from Cummins Allison with financial security, now pursuing app development as creative expression rather than necessity. Leveraging AI-powered development tools to build better apps faster, combining human creativity with modern AI capabilities.</p>
                 <p><strong>Recent Releases:</strong></p>
-                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                <ul>
                     <li><strong>Tally Matrix Clock</strong> - tvOS matrix-style time display</li>
                     <li><strong>TakeAChanceOnMe</strong> (October 13, 2025) - Universal random number generator with 5-star rating</li>
                 </ul>
-                <p style="margin-top: 1rem;"><strong>Current Focus:</strong> Active development on SnapKeeper (iOS document scanner with AI organization) and exploring new app concepts across the Apple ecosystem.</p>
+                <p><strong>Current Focus:</strong> Active development on SnapKeeper (iOS document scanner with AI organization) and exploring new app concepts across the Apple ecosystem.</p>
             </div>
 
             <div class="timeline-item">
@@ -205,13 +181,9 @@
                 <p>Operated and maintained ship's internal communication systems, alarm/warning systems, gyrocompass navigation, and electronic systems. Developed expertise in systems-level troubleshooting, technical documentation, electronics fundamentals, and self-directed learning.</p>
                 <p><strong>Key Skills Developed:</strong> Systems thinking, leadership, troubleshooting methodology, adaptability under pressure</p>
             </div>
-
-            <div class="back-to-top">
-                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑ Back to Top</button>
-            </div>
         </main>
 
-        <!-- {% include _footer.html %} -->
+        {% include _footer.html %}
     </div>
 </body>
 </html>
