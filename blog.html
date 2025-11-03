@@ -13,21 +13,34 @@
             box-sizing: border-box;
         }
 
-        html {
+        html, body {
+            margin: 0;
+            padding: 0;
             height: 100%;
-            background-image: url('IMG_7907.jpeg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
             color: #333;
-            min-height: 100vh;
-            background: transparent;
+        }
+
+        .fixed-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('IMG_7907.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -1;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
         }
 
         main {
@@ -81,13 +94,16 @@
     </style>
 </head>
 <body>
-    {% include _header.html %}
-    {% include _nav.html %}
+    <div class="fixed-background"></div>
+    <div class="content-wrapper">
+        {% include _header.html %}
+        {% include _nav.html %}
 
-    <main>
-        <h1>Blog & Updates</h1>
-    </main>
+        <main>
+            <h1>Blog & Updates</h1>
+        </main>
 
-    {% include _footer.html %}
+        {% include _footer.html %}
+    </div>
 </body>
 </html>
