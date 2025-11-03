@@ -57,6 +57,15 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
+        .section-header {
+            font-size: 2rem;
+            color: #667eea;
+            margin: 3rem 0 1.5rem 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            border-bottom: 2px solid rgba(102, 126, 234, 0.5);
+            padding-bottom: 0.5rem;
+        }
+
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -153,6 +162,7 @@
         <main>
             <h1>Projects & Apps</h1>
 
+            <h2 class="section-header">App Store Apps</h2>
             <div class="projects-grid">
                 <a href="projects/tally-matrix-clock.html" class="project-card">
                     <h3>Tally Matrix Clock</h3>
@@ -176,6 +186,35 @@
                     <p>Random number generator for all your Apple devices. Generate random numbers from 1 to 999,999,999 with a single tap.</p>
                     <p><strong>⭐⭐⭐⭐⭐</strong> 5.0 rating • Zero data collection • Universal app</p>
                 </a>
+            </div>
+
+            <h2 class="section-header">Under Development</h2>
+            <div class="projects-grid">
+                <div class="project-card" style="cursor: default;">
+                    <h3>SnapKeeper</h3>
+                    <div class="badges">
+                        <span class="badge">In Development</span>
+                        <span class="badge">iOS</span>
+                    </div>
+                    <p>Document scanner with AI-powered organization. Capture, scan, and manage documents with intelligent categorization.</p>
+                    <p><strong>Status:</strong> Active development</p>
+                </div>
+            </div>
+
+            <h2 class="section-header">Self Distribution</h2>
+            <div class="projects-grid">
+                <div class="project-card" style="cursor: default; opacity: 0.7;">
+                    <h3>Coming Soon</h3>
+                    <p>Projects available through TestFlight, GitHub releases, or direct distribution will appear here.</p>
+                </div>
+            </div>
+
+            <h2 class="section-header">Archived</h2>
+            <div class="projects-grid">
+                <div class="project-card" style="cursor: default; opacity: 0.7;">
+                    <h3>Coming Soon</h3>
+                    <p>Older projects no longer actively maintained but worth showcasing will appear here.</p>
+                </div>
             </div>
         </main>
 
