@@ -209,11 +209,18 @@ footer {
     margin-top: 4rem;
 }
 
-.signature-logo {
+footer a[aria-label="Return to home"] {
+    text-decoration: none;
+    display: block;
+    width: fit-content;
     margin: 0 auto 1rem;
+}
+
+.signature-logo {
     display: block;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
     transition: transform 0.3s ease;
+    cursor: pointer;
 }
 
 .signature-logo:hover {
@@ -233,44 +240,43 @@ footer {
         backdrop-filter: none;
     }
 
-    /* Mobile navigation - compact and non-sticky */
+    /* Mobile navigation - 2-3 rows evenly distributed */
     nav {
         position: relative;
-        padding: 0.5rem 1rem;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 0.5rem;
+        padding: 0.75rem 0.5rem;
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: center;
     }
 
     .logo {
         font-size: 1.5rem;
-        width: auto;
-        text-align: left;
+        width: 100%;
+        text-align: center;
     }
 
     .nav-links {
-        flex-direction: row;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         gap: 0.5rem;
-        width: auto;
-        justify-content: center;
-        flex: 1;
+        width: 100%;
+        max-width: 400px;
     }
 
     nav a {
-        display: inline-block;
+        display: block;
         text-align: center;
-        padding: 0.5rem 0.75rem;
-        font-size: 0.9rem;
-        background-color: rgba(0, 0, 0, 0.5);
-        border-radius: 6px;
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 8px;
         white-space: nowrap;
     }
 
     #theme-toggle {
-        position: relative;
-        top: auto;
-        right: auto;
+        position: absolute;
+        top: 0.75rem;
+        right: 0.75rem;
     }
 
     nav ul {
