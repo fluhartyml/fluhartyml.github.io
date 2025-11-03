@@ -11,12 +11,23 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            animation: none !important;
+            transition: none !important;
+            transform: none !important;
         }
 
-        html, body {
+        html {
             margin: 0;
             padding: 0;
             height: 100%;
+            scroll-behavior: auto;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
         }
 
         body {
@@ -81,19 +92,10 @@
             cursor: pointer;
             text-decoration: none;
             display: block;
-            transition: transform 0.3s ease, background-color 0.3s ease;
         }
 
         .project-card:hover {
             background-color: rgba(0, 0, 0, 0.8);
-            transform: translateY(-5px) rotate(1deg);
-            animation: wiggle 0.5s ease;
-        }
-
-        @keyframes wiggle {
-            0%, 100% { transform: translateY(-5px) rotate(0deg); }
-            25% { transform: translateY(-5px) rotate(-1deg); }
-            75% { transform: translateY(-5px) rotate(1deg); }
         }
 
         .project-card h3 {
@@ -152,12 +154,10 @@
             font-weight: 600;
             border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         .back-to-top button:hover {
             background-color: rgba(102, 126, 234, 1);
-            transform: translateY(-2px);
         }
 
         @media (max-width: 768px) {
