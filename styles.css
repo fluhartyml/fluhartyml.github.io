@@ -209,6 +209,17 @@ footer {
     margin-top: 4rem;
 }
 
+.signature-logo {
+    margin: 0 auto 1rem;
+    display: block;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    transition: transform 0.3s ease;
+}
+
+.signature-logo:hover {
+    transform: scale(1.1);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     /* Stronger frosted glass reduction on mobile */
