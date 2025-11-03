@@ -1,165 +1,90 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timeline - Michael Lee Fluharty</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-image: url('IMG_7907.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #667eea;
+            text-align: center;
+            margin: 2rem 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .timeline-item {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            color: white;
+            border-left: 5px solid #667eea;
+        }
+
+        .timeline-item h2 {
+            font-size: 1.8rem;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item .year {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #aaa;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-item p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            main {
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="credentials.html">Credentials</a>
-                <a href="projects.html">Projects</a>
-                <a href="blog.html">Blog</a>
-                <a href="timeline.html" class="active">Timeline</a>
-                <a href="contact.html">Contact</a>
-            </div>
-        </nav>
-    </header>
+    {% include _header.html %}
+    {% include _nav.html %}
 
-    <main class="timeline-page">
-        <section class="hero-section">
-            <h1>Career Timeline</h1>
-            <p class="subtitle">From electronics technician to app developer</p>
-        </section>
-
-        <section class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-marker">2025</div>
-                <div class="timeline-content">
-                    <h3>App Store Publishing Era</h3>
-                    <p class="timeline-role">Independent App Developer</p>
-                    <ul>
-                        <li>Published <strong>Tally Matrix Clock</strong> (tvOS) and <strong>TakeAChanceOnMe</strong> (multi-platform) to App Store</li>
-                        <li>Achieved MVP status for <strong>wWw NGPortal</strong> - self-hosted web server with DDNS integration</li>
-                        <li>Developing <strong>SnapKeeper</strong> document scanner and <strong>The Nailed It! Button</strong> celebration app</li>
-                        <li>Building NightGard System ecosystem for self-hosted web services</li>
-                        <li>33 active GitHub repositories showcasing open development process</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-marker">2009-2024</div>
-                <div class="timeline-content">
-                    <h3>Apple Developer Journey</h3>
-                    <p class="timeline-role">Hobbyist App Developer</p>
-                    <ul>
-                        <li>Registered as Apple Developer in 2009</li>
-                        <li>Learned Swift, SwiftUI, and Apple development ecosystem</li>
-                        <li>Experimented with iOS, macOS, tvOS, and visionOS platforms</li>
-                        <li>Built personal tools and utilities for self-use</li>
-                        <li>Transitioned from hobbyist to publishing developer</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-marker">2004-2024</div>
-                <div class="timeline-content">
-                    <h3>Computer Electronics Repair Technician</h3>
-                    <p class="timeline-role">Professional Technician (Retired)</p>
-                    <ul>
-                        <li>Diagnosed and repaired computer hardware and electronic systems</li>
-                        <li>Specialized in component-level troubleshooting</li>
-                        <li>Developed strong problem-solving and analytical skills</li>
-                        <li>Bridge between hardware and software understanding</li>
-                        <li>Retired to pursue full-time app development</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-marker">2001-2004</div>
-                <div class="timeline-content">
-                    <h3>ITT Technical Institute</h3>
-                    <p class="timeline-role">Student & Freelance Web Developer</p>
-                    <ul>
-                        <li>Earned Associate of Science degree in Computer and Electronics Engineering Technology</li>
-                        <li>Graduated September 5, 2004 from National City, California campus</li>
-                        <li>Built <strong>Pele Productions</strong> website as school project (2002)</li>
-                        <li>Developed <strong>Zipty Racing</strong> motorsports website for client (2002)</li>
-                        <li>Foundation in both hardware and software engineering principles</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-marker">2001</div>
-                <div class="timeline-content">
-                    <h3>Early Web Development</h3>
-                    <p class="timeline-role">Learning & Experimentation</p>
-                    <ul>
-                        <li>First web projects using HTML, CSS, and JavaScript</li>
-                        <li>Zipty Racing e-commerce site (archived)</li>
-                        <li>Discovered passion for building functional tools</li>
-                        <li>Self-taught web technologies alongside formal education</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section class="philosophy">
-            <h2>Development Philosophy</h2>
-            <div class="philosophy-grid">
-                <div class="philosophy-card">
-                    <h3>🛠️ Practical Tools</h3>
-                    <p>Build apps that solve real problems I've personally encountered. No theoretical exercises—only tools I actually use.</p>
-                </div>
-                <div class="philosophy-card">
-                    <h3>🔓 Open Development</h3>
-                    <p>All projects developed openly on GitHub. Transparency in process, permissive licensing, and community collaboration.</p>
-                </div>
-                <div class="philosophy-card">
-                    <h3>🎯 Quality Over Quantity</h3>
-                    <p>Focus on building fewer, better apps rather than chasing trends. Each project gets the attention it deserves.</p>
-                </div>
-                <div class="philosophy-card">
-                    <h3>🧪 Continuous Learning</h3>
-                    <p>Every project is an opportunity to learn new technologies and improve existing skills. Growth through creation.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="current-focus">
-            <h2>Current Focus (2025)</h2>
-            <div class="focus-areas">
-                <div class="focus-card">
-                    <h3>App Store Growth</h3>
-                    <p>Expanding portfolio of published apps across iOS, macOS, and tvOS platforms. Currently preparing SnapKeeper and The Nailed It! Button for submission.</p>
-                </div>
-                <div class="focus-card">
-                    <h3>NightGard Ecosystem</h3>
-                    <p>Building comprehensive suite of self-hosted web service tools for macOS. Empowering individual developers to control their own infrastructure.</p>
-                </div>
-                <div class="focus-card">
-                    <h3>Swift Mastery</h3>
-                    <p>Deep diving into Swift 6, SwiftUI, and modern Apple frameworks. Staying current with latest development practices and patterns.</p>
-                </div>
-            </div>
-        </section>
+    <main>
+        <h1>Career Timeline</h1>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <a href="index.html" aria-label="Return to home">
-            <svg class="signature-logo" width="60" height="60" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="50,90 10,20 90,20" fill="#667eea" opacity="0.9"/>
-                <text x="50" y="60" font-family="Georgia, serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">F</text>
-            </svg>
-            </a>
-            <p>&copy; 2025 Michael Lee Fluharty. All rights reserved.</p>
-            <div class="social-links">
-                <a href="https://github.com/fluhartyml" target="_blank">GitHub</a>
-                <a href="https://x.com/fluhartyml" target="_blank">X</a>
-                <a href="https://linkedin.com/in/fluhartyml" target="_blank">LinkedIn</a>
-            </div>
-        </div>
-    </footer>
-
-    <script src="scripts.js"></script>
+    {% include _footer.html %}
 </body>
 </html>

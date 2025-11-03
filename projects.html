@@ -1,198 +1,108 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Michael Lee Fluharty</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-image: url('IMG_7907.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #667eea;
+            text-align: center;
+            margin: 2rem 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .project-card {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 12px;
+            color: white;
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .project-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            background-color: rgba(102, 126, 234, 0.2);
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+
+        .project-link:hover {
+            background-color: rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            main {
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="credentials.html">Credentials</a>
-                <a href="projects.html" class="active">Projects</a>
-                <a href="blog.html">Blog</a>
-                <a href="timeline.html">Timeline</a>
-                <a href="contact.html">Contact</a>
-            </div>
-        </nav>
-    </header>
+    {% include _header.html %}
+    {% include _nav.html %}
 
-    <main class="projects-page">
-        <section class="hero-section">
-            <h1>Projects & Apps</h1>
-            <p class="subtitle">Building practical tools in the Apple ecosystem</p>
-        </section>
-
-        <section class="featured-projects">
-            <h2>Published Apps</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>Tally Matrix Clock</h3>
-                    <p class="project-type">tvOS • Entertainment</p>
-                    <p>Matrix-style clock display using illuminated colored squares. A unique visual timepiece for Apple TV that combines retro aesthetics with modern design.</p>
-                    <div class="project-meta">
-                        <span class="badge">Live on App Store</span>
-                        <span class="tech-tag">Swift</span>
-                        <span class="tech-tag">tvOS</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://apps.apple.com/app/id6754099799" target="_blank" class="project-link">App Store →</a>
-                        <a href="https://github.com/fluhartyml/TallyMatrices" target="_blank" class="project-link">GitHub →</a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <h3>TakeAChanceOnMe</h3>
-                    <p class="project-type">iOS, iPadOS, macOS, visionOS • Entertainment</p>
-                    <p>Random number generator (1 to 999,999,999). Multi-platform utility app with a clean interface and zero data collection. Version 1.0.2, rated 5.0 stars.</p>
-                    <div class="project-meta">
-                        <span class="badge">Live on App Store</span>
-                        <span class="tech-tag">Swift</span>
-                        <span class="tech-tag">SwiftUI</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://apps.apple.com/app/id6753626820" target="_blank" class="project-link">App Store →</a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <h3>SnapKeeper</h3>
-                    <p class="project-type">iOS • Productivity</p>
-                    <p>Document scanner app using VisionKit for high-quality PDF generation. Features document detection, multi-page scanning, and instant sharing capabilities.</p>
-                    <div class="project-meta">
-                        <span class="badge status-development">In Development</span>
-                        <span class="tech-tag">Swift</span>
-                        <span class="tech-tag">VisionKit</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/fluhartyml/SnapKeeper" target="_blank" class="project-link">GitHub →</a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <h3>The Nailed It! Button</h3>
-                    <p class="project-type">iOS • Entertainment</p>
-                    <p>Celebration app featuring a large red button with "NAILED IT!" audio playback, tally counter, and streak tracking. Industrial design with hazard stripes and haptic feedback.</p>
-                    <div class="project-meta">
-                        <span class="badge status-development">In Development</span>
-                        <span class="tech-tag">Swift</span>
-                        <span class="tech-tag">SwiftUI</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="nightgard-projects">
-            <h2>NightGard System</h2>
-            <p class="section-intro">Self-hosted web services and network management tools for macOS</p>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>wWw NGPortal</h3>
-                    <p class="project-type">macOS • Server</p>
-                    <p>Un-sandboxed macOS web server with integrated DDNS updater support. Features local intranet server, static file serving, and DuckDNS integration for self-hosted web services.</p>
-                    <div class="project-meta">
-                        <span class="badge status-active">MVP Achieved</span>
-                        <span class="tech-tag">Swift</span>
-                        <span class="tech-tag">Vapor</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/fluhartyml/wWw-NGPortal" target="_blank" class="project-link">GitHub →</a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <h3>NGWebPortal</h3>
-                    <p class="project-type">macOS • Server</p>
-                    <p>macOS application for hosting personal blogs and portfolios locally. Part of the NightGard ecosystem for self-hosted content management.</p>
-                    <div class="project-meta">
-                        <span class="badge status-development">In Development</span>
-                        <span class="tech-tag">Swift</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="other-projects">
-            <h2>Other Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>SVG-Paint</h3>
-                    <p class="project-type">macOS • Graphics</p>
-                    <p>SVG editing and creation tool for macOS. Vector graphics application built with Swift.</p>
-                    <div class="project-meta">
-                        <span class="tech-tag">Swift</span>
-                        <span class="tech-tag">macOS</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/fluhartyml/SVG-Paint" target="_blank" class="project-link">GitHub →</a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <h3>InkwellJournal</h3>
-                    <p class="project-type">iOS • Productivity</p>
-                    <p>Personal journal app for iOS. Simple, focused journaling experience with privacy-first design.</p>
-                    <div class="project-meta">
-                        <span class="tech-tag">Swift</span>
-                        <span class="tech-tag">iOS</span>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <h3>InkwellParallelWorkflowTimer</h3>
-                    <p class="project-type">iOS • Productivity</p>
-                    <p>Productivity timer app for managing multiple workflows simultaneously. Designed for parallel task management.</p>
-                    <div class="project-meta">
-                        <span class="tech-tag">Swift</span>
-                        <span class="tech-tag">iOS</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="open-source">
-            <h2>Open Source Contributions</h2>
-            <p class="section-intro">All projects are developed openly on GitHub with permissive licensing</p>
-            <div class="github-stats">
-                <div class="stat-card">
-                    <h3>33</h3>
-                    <p>Repositories</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Swift</h3>
-                    <p>Primary Language</p>
-                </div>
-                <div class="stat-card">
-                    <h3>2009</h3>
-                    <p>Developer Since</p>
-                </div>
-            </div>
-            <div class="cta-section">
-                <a href="https://github.com/fluhartyml" target="_blank" class="cta-button">View All Projects on GitHub →</a>
-            </div>
-        </section>
+    <main>
+        <h1>Projects & Apps</h1>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <a href="index.html" aria-label="Return to home">
-            <svg class="signature-logo" width="60" height="60" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="50,90 10,20 90,20" fill="#667eea" opacity="0.9"/>
-                <text x="50" y="60" font-family="Georgia, serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">F</text>
-            </svg>
-            </a>
-            <p>&copy; 2025 Michael Lee Fluharty. All rights reserved.</p>
-            <div class="social-links">
-                <a href="https://github.com/fluhartyml" target="_blank">GitHub</a>
-                <a href="https://x.com/fluhartyml" target="_blank">X</a>
-                <a href="https://linkedin.com/in/fluhartyml" target="_blank">LinkedIn</a>
-            </div>
-        </div>
-    </footer>
-
-    <script src="scripts.js"></script>
+    {% include _footer.html %}
 </body>
 </html>
