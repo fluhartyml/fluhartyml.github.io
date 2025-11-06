@@ -1,0 +1,289 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnionBlog Complete - Multi-Layered Portfolio Blog System - Michael Lee Fluharty</title>
+    <link rel="icon" type="image/png" href="../../favicon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .fixed-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%
+            height: 100vh;
+            min-height: 100vh;
+            background-image: url('../../IMG_7907.jpeg');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            z-index: -1;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: rgba(102, 126, 234, 0.3);
+        }
+
+        article {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 12px;
+            color: white;
+        }
+
+        article h1 {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .meta {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        article h2 {
+            font-size: 1.8rem;
+            color: #667eea;
+            margin: 2rem 0 1rem 0;
+        }
+
+        article h3 {
+            font-size: 1.4rem;
+            color: #8899ff;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        article p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+
+        article ul, article ol {
+            margin: 1rem 0 1rem 2rem;
+            color: #ddd;
+        }
+
+        article li {
+            margin-bottom: 0.5rem;
+            line-height: 1.8;
+        }
+
+        article code {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #8899ff;
+        }
+
+        article blockquote {
+            border-left: 4px solid #667eea;
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: #aaa;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            article h1 {
+                font-size: 2rem;
+            }
+
+            article h2 {
+                font-size: 1.5rem;
+            }
+
+            main {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fixed-background"></div>
+    <div class="content-wrapper">
+        {% include _header.html %}
+        {% include _nav.html %}
+
+        <main>
+            <a href="../../blog-claude.html" class="back-link">← Claude Sessions</a>
+
+            <article>
+                <h1>OnionBlog Complete - Multi-Layered Portfolio Blog System</h1>
+                <div class="meta">November 5, 2025 • 4 hour session</div>
+
+                <p>Tonight we completed the OnionBlog infrastructure - a multi-layered blog publishing system that treats Obsidian as the source of truth and Claude as the publishing engine. The result is what we're now calling "CLI Claude CMS" or "ClaudePress" - a simple but powerful workflow for converting markdown notes into a beautiful portfolio blog.</p>
+
+                <h2>The Problem</h2>
+
+                <p>We started the session attempting to configure the Obsidian Templater plugin for auto-generating blog post templates. The community plugin UI was difficult to use, showing every markdown file in the vault instead of just the template files. Even after directly editing the plugin's JSON configuration file, the user decided to abandon the approach entirely with the observation: "community plugins rarely work."</p>
+
+                <h2>The Solution: CLI Claude CMS</h2>
+
+                <p>Instead of fighting with plugins, we established a simple workflow:</p>
+
+                <ul>
+                    <li>User writes content in Obsidian (any markdown format)</li>
+                    <li>User tells Claude to publish</li>
+                    <li>Claude converts markdown to HTML, copies media, and updates indexes</li>
+                    <li>Git push deploys to GitHub Pages in 1-2 minutes</li>
+                </ul>
+
+                <p>User's feedback: "this is awesome! the obsidian source of truth is the perfect interface to the cli claude blog engine"</p>
+
+                <h2>OnionBlog Architecture</h2>
+
+                <p>The blog system has multiple layers, like an onion:</p>
+
+                <h3>Layer 1: Main Blog Directory</h3>
+                <p>A hub page (<code>blog.html</code>) with 4 clickable section cards providing navigation to independent blog categories.</p>
+
+                <h3>Layer 2: Blog Section Indexes</h3>
+                <ul>
+                    <li><strong>Announcements</strong> - Software releases & updates</li>
+                    <li><strong>Support</strong> - FAQs & help documentation</li>
+                    <li><strong>Claude Sessions</strong> - Development logs & transcripts</li>
+                    <li><strong>Personal</strong> - Life, photos & journal</li>
+                </ul>
+
+                <h3>Layer 3: Individual Posts</h3>
+                <p>Each section contains individual blog post pages in the <code>posts/</code> directory structure, maintaining complete independence between sections.</p>
+
+                <h2>Photo Gallery System</h2>
+
+                <p>We built a full-screen carousel gallery system with these features:</p>
+
+                <ul>
+                    <li>Gallery card component showing preview grid of 4 recent photos</li>
+                    <li>Tap to open full-screen carousel viewer</li>
+                    <li>Support for images, GIFs, and videos</li>
+                    <li>Videos auto-play muted, tap to restart with sound</li>
+                    <li>Swipe navigation (mobile) and keyboard arrows (desktop)</li>
+                    <li>Position counter showing current slide</li>
+                </ul>
+
+                <h2>UX Refinements</h2>
+
+                <p>Several improvements based on user feedback:</p>
+
+                <ul>
+                    <li>Made entire blog preview cards clickable (removed "Read more" links)</li>
+                    <li>Changed navigation text to "← Blog Directory" for clarity</li>
+                    <li>Added optimized 32x32 PNG favicon to all 22 pages</li>
+                    <li>Consistent dark overlay styling across all blog pages</li>
+                </ul>
+
+                <h2>Self-Documenting Files</h2>
+
+                <p>Established naming convention: <code>YYYY MMM DD [Title][Section/Subsection].md</code></p>
+
+                <p>This ensures files remain traceable even if moved or if folder structure changes. The breadcrumb system makes the "onion expandable" for future subsections.</p>
+
+                <h2>Technical Implementation</h2>
+
+                <h3>Video Carousel</h3>
+                <p>The carousel uses touch event listeners for swipe detection and handles video playback states across slide transitions:</p>
+
+                <ul>
+                    <li>Pauses all videos when switching slides</li>
+                    <li>Auto-plays current video muted</li>
+                    <li>Click/tap handler restarts video from beginning with sound</li>
+                    <li>Keyboard navigation with arrow keys and Escape to close</li>
+                </ul>
+
+                <h3>Favicon Optimization</h3>
+                <p>Used macOS <code>sips</code> command to resize and properly convert the avatar background image to an optimized 32x32 PNG (4.8KB). Applied to all pages in the portfolio.</p>
+
+                <h3>GitHub Pages Deployment</h3>
+                <p>Discovered that changes take 1-2 minutes to appear after pushing to the repository. Browser caching requires hard refresh (Option + Cmd + R in Safari) to see favicon changes.</p>
+
+                <h2>Rollback Point</h2>
+
+                <p>Created git tag: <code>rollback-2025-11-05-onionblog-complete</code></p>
+
+                <h2>Next Steps</h2>
+
+                <ul>
+                    <li>Timeline page updates (scheduled for tomorrow)</li>
+                    <li>Investigate GIF animation display (user suspects it's just 4 copies of same GIF, probably not broken)</li>
+                    <li>Consider adding gallery systems to other blog sections</li>
+                </ul>
+
+                <h2>Lessons Learned</h2>
+
+                <p>Sometimes the simplest solution is the best. Instead of wrestling with complex plugins and configurations, we established a clean workflow that leverages each tool's strengths:</p>
+
+                <ul>
+                    <li><strong>Obsidian</strong> - Beautiful markdown editor with cross-device sync</li>
+                    <li><strong>Claude</strong> - Content transformation and publishing automation</li>
+                    <li><strong>GitHub Pages</strong> - Fast, free static site hosting</li>
+                </ul>
+
+                <p>The result is "ClaudePress" - a blog CMS that feels magical to use.</p>
+            </article>
+        </main>
+
+        {% include _footer.html %}
+    </div>
+</body>
+</html>
