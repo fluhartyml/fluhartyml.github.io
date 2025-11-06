@@ -97,6 +97,8 @@
             gap: 2rem;
             opacity: 0.7;
             transition: all 0.3s ease;
+            text-decoration: none;
+            cursor: pointer;
         }
 
         .post-preview:hover {
@@ -180,7 +182,7 @@
         {% include _nav.html %}
 
         <main>
-            <a href="blog.html" class="back-link">← Back to Blog</a>
+            <a href="blog.html" class="back-link">← Blog Directory</a>
 
             <div class="page-header">
                 <h1>Claude Sessions</h1>
@@ -188,7 +190,7 @@
             </div>
 
             <!-- Development Session Summary -->
-            <article class="post-preview">
+            <a href="posts/claude-sessions/development-session-summary.html" class="post-preview">
                 <div class="post-thumbnail">
                     <img src="media/blog/PlaceHolder.GIF" alt="Development Session Summary">
                 </div>
@@ -196,12 +198,11 @@
                     <h2>Development Session Summary</h2>
                     <div class="meta">November 5, 2025 • 3 hours</div>
                     <p class="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <a href="posts/claude-sessions/development-session-summary.html" class="read-more">Read more →</a>
                 </div>
-            </article>
+            </a>
 
             <!-- Project Architecture Notes -->
-            <article class="post-preview">
+            <a href="posts/claude-sessions/project-architecture-notes.html" class="post-preview">
                 <div class="post-thumbnail">
                     <img src="media/blog/PlaceHolder.GIF" alt="Project Architecture Notes">
                 </div>
@@ -209,12 +210,11 @@
                     <h2>Project Architecture Notes</h2>
                     <div class="meta">November 5, 2025 • 2.5 hours</div>
                     <p class="intro">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
-                    <a href="posts/claude-sessions/project-architecture-notes.html" class="read-more">Read more →</a>
                 </div>
-            </article>
+            </a>
 
             <!-- Bug Fix Documentation -->
-            <article class="post-preview">
+            <a href="posts/claude-sessions/bug-fix-documentation.html" class="post-preview">
                 <div class="post-thumbnail">
                     <img src="media/blog/PlaceHolder.GIF" alt="Bug Fix Documentation">
                 </div>
@@ -222,9 +222,8 @@
                     <h2>Bug Fix Documentation</h2>
                     <div class="meta">November 5, 2025 • 1 hour</div>
                     <p class="intro">Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
-                    <a href="posts/claude-sessions/bug-fix-documentation.html" class="read-more">Read more →</a>
                 </div>
-            </article>
+            </a>
         </main>
 
         {% include _footer.html %}

@@ -97,6 +97,8 @@
             gap: 2rem;
             opacity: 0.7;
             transition: all 0.3s ease;
+            text-decoration: none;
+            cursor: pointer;
         }
 
         .post-preview:hover {
@@ -180,7 +182,7 @@
         {% include _nav.html %}
 
         <main>
-            <a href="blog.html" class="back-link">← Back to Blog</a>
+            <a href="blog.html" class="back-link">← Blog Directory</a>
 
             <div class="page-header">
                 <h1>Support</h1>
@@ -188,7 +190,7 @@
             </div>
 
             <!-- Getting Started Guide -->
-            <article class="post-preview">
+            <a href="posts/support/getting-started-guide.html" class="post-preview">
                 <div class="post-thumbnail">
                     <img src="media/blog/PlaceHolder.GIF" alt="Getting Started Guide">
                 </div>
@@ -196,12 +198,11 @@
                     <h2>Getting Started Guide</h2>
                     <div class="meta">November 5, 2025</div>
                     <p class="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-                    <a href="posts/support/getting-started-guide.html" class="read-more">Read more →</a>
                 </div>
-            </article>
+            </a>
 
             <!-- Frequently Asked Questions -->
-            <article class="post-preview">
+            <a href="posts/support/frequently-asked-questions.html" class="post-preview">
                 <div class="post-thumbnail">
                     <img src="media/blog/PlaceHolder.GIF" alt="Frequently Asked Questions">
                 </div>
@@ -209,12 +210,11 @@
                     <h2>Frequently Asked Questions</h2>
                     <div class="meta">November 5, 2025</div>
                     <p class="intro">Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
-                    <a href="posts/support/frequently-asked-questions.html" class="read-more">Read more →</a>
                 </div>
-            </article>
+            </a>
 
             <!-- Common Issues Solved -->
-            <article class="post-preview">
+            <a href="posts/support/common-issues-solved.html" class="post-preview">
                 <div class="post-thumbnail">
                     <img src="media/blog/PlaceHolder.GIF" alt="Common Issues Solved">
                 </div>
@@ -222,9 +222,8 @@
                     <h2>Common Issues Solved</h2>
                     <div class="meta">November 5, 2025</div>
                     <p class="intro">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-                    <a href="posts/support/common-issues-solved.html" class="read-more">Read more →</a>
                 </div>
-            </article>
+            </a>
         </main>
 
         {% include _footer.html %}
