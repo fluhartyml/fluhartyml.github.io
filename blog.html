@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Michael Lee Fluharty</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <style>
         * {
             margin: 0;
@@ -86,6 +87,44 @@
             margin-bottom: 1rem;
         }
 
+        .blog-tabs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .tab-link {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+        }
+
+        .tab-link:hover {
+            opacity: 1;
+            transform: translateY(-5px);
+            background-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .tab-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .tab-description {
+            font-size: 0.95rem;
+            color: #ccc;
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -105,6 +144,25 @@
 
         <main>
             <h1>Blog & Updates</h1>
+
+            <div class="blog-tabs">
+                <a href="blog-announcements.html" class="tab-link">
+                    <div class="tab-title">Announcements</div>
+                    <div class="tab-description">Software releases & updates</div>
+                </a>
+                <a href="blog-support.html" class="tab-link">
+                    <div class="tab-title">Support</div>
+                    <div class="tab-description">FAQs & help docs</div>
+                </a>
+                <a href="blog-claude.html" class="tab-link">
+                    <div class="tab-title">Claude Sessions</div>
+                    <div class="tab-description">Development logs & transcripts</div>
+                </a>
+                <a href="blog-personal.html" class="tab-link">
+                    <div class="tab-title">Personal</div>
+                    <div class="tab-description">Life, photos & journal</div>
+                </a>
+            </div>
         </main>
 
         {% include _footer.html %}

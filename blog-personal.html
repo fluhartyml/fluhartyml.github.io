@@ -1,0 +1,233 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal - Michael Lee Fluharty</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .fixed-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            min-height: 100vh;
+            background-image: url('IMG_7907.jpeg');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            z-index: -1;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin: 2rem 0 3rem 0;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: #667eea;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header .subtitle {
+            font-size: 1.1rem;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .post-preview {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            display: flex;
+            gap: 2rem;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .post-preview:hover {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+
+        .post-thumbnail {
+            flex-shrink: 0;
+            width: 200px;
+            height: 150px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .post-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .post-content {
+            flex: 1;
+            color: white;
+        }
+
+        .post-content h2 {
+            font-size: 1.8rem;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-content .meta {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .post-content .intro {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+
+        .read-more {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #8899ff;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .post-preview {
+                flex-direction: column;
+            }
+
+            .post-thumbnail {
+                width: 100%;
+                height: 200px;
+            }
+
+            main {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fixed-background"></div>
+    <div class="content-wrapper">
+        {% include _header.html %}
+        {% include _nav.html %}
+
+        <main>
+            <a href="blog.html" class="back-link">← Back to Blog</a>
+
+            <div class="page-header">
+                <h1>Personal</h1>
+                <p class="subtitle">Life, photos & journal</p>
+            </div>
+
+            <!-- Day at the Park -->
+            <article class="post-preview">
+                <div class="post-thumbnail">
+                    <img src="media/blog/PlaceHolder.GIF" alt="Day at the Park">
+                </div>
+                <div class="post-content">
+                    <h2>Day at the Park</h2>
+                    <div class="meta">November 5, 2025</div>
+                    <p class="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <a href="posts/personal/day-at-the-park.html" class="read-more">Read more →</a>
+                </div>
+            </article>
+
+            <!-- Random Thoughts -->
+            <article class="post-preview">
+                <div class="post-thumbnail">
+                    <img src="media/blog/PlaceHolder.GIF" alt="Random Thoughts">
+                </div>
+                <div class="post-content">
+                    <h2>Random Thoughts</h2>
+                    <div class="meta">November 5, 2025</div>
+                    <p class="intro">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+                    <a href="posts/personal/random-thoughts.html" class="read-more">Read more →</a>
+                </div>
+            </article>
+
+            <!-- Weekend Adventures -->
+            <article class="post-preview">
+                <div class="post-thumbnail">
+                    <img src="media/blog/PlaceHolder.GIF" alt="Weekend Adventures">
+                </div>
+                <div class="post-content">
+                    <h2>Weekend Adventures</h2>
+                    <div class="meta">November 5, 2025</div>
+                    <p class="intro">Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+                    <a href="posts/personal/weekend-adventures.html" class="read-more">Read more →</a>
+                </div>
+            </article>
+        </main>
+
+        {% include _footer.html %}
+    </div>
+</body>
+</html>

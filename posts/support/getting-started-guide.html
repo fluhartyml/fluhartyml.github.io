@@ -1,0 +1,178 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started Guide - Michael Lee Fluharty</title>
+    <link rel="icon" type="image/png" href="../../favicon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .fixed-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            min-height: 100vh;
+            background-image: url('../../IMG_7907.jpeg');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            z-index: -1;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: rgba(102, 126, 234, 0.3);
+        }
+
+        article {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 3rem;
+            border-radius: 12px;
+            color: white;
+            opacity: 0.9;
+        }
+
+        article h1 {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .meta {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-image {
+            width: 100%;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        article h2 {
+            font-size: 1.8rem;
+            color: #667eea;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        article p {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #ddd;
+        }
+
+        article ol {
+            margin: 1rem 0 1.5rem 2rem;
+            color: #ddd;
+        }
+
+        article li {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            article {
+                padding: 2rem;
+            }
+
+            article h1 {
+                font-size: 2rem;
+            }
+
+            article h2 {
+                font-size: 1.5rem;
+            }
+
+            main {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fixed-background"></div>
+    <div class="content-wrapper">
+        {% include _header.html %}
+        {% include _nav.html %}
+
+        <main>
+            <a href="../../blog-support.html" class="back-link">← Back to Support</a>
+
+            <article>
+                <h1>Getting Started Guide</h1>
+                <div class="meta">November 5, 2025</div>
+
+                <img src="../../media/blog/PlaceHolder.GIF" alt="Hero Image" class="hero-image">
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+
+                <h2>Installation</h2>
+
+                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+
+                <ol>
+                    <li>Step one lorem ipsum</li>
+                    <li>Step two consectetur adipiscing</li>
+                    <li>Step three sed do eiusmod</li>
+                </ol>
+
+                <h2>Configuration</h2>
+
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
+            </article>
+        </main>
+
+        {% include _footer.html %}
+    </div>
+</body>
+</html>
