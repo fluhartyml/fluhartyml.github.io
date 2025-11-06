@@ -155,6 +155,60 @@
             color: #8899ff;
         }
 
+        .gallery-card {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            cursor: pointer;
+            display: block;
+        }
+
+        .gallery-card:hover {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+
+        .gallery-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .gallery-icon {
+            font-size: 2.5rem;
+        }
+
+        .gallery-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .gallery-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .gallery-preview img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .gallery-count {
+            text-align: center;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
         @media (max-width: 768px) {
             .page-header h1 {
                 font-size: 2rem;
@@ -188,6 +242,21 @@
                 <h1>Personal</h1>
                 <p class="subtitle">Life, photos & journal</p>
             </div>
+
+            <!-- Photo Gallery Card -->
+            <a href="blog-personal-gallery.html" class="gallery-card">
+                <div class="gallery-header">
+                    <div class="gallery-icon">📷</div>
+                    <div class="gallery-title">Photo Gallery</div>
+                </div>
+                <div class="gallery-preview">
+                    <img src="media/blog/PlaceHolder.GIF" alt="Gallery preview">
+                    <img src="media/blog/PlaceHolder.GIF" alt="Gallery preview">
+                    <img src="media/blog/PlaceHolder.GIF" alt="Gallery preview">
+                    <img src="media/blog/PlaceHolder.GIF" alt="Gallery preview">
+                </div>
+                <div class="gallery-count">Tap to view all photos & videos →</div>
+            </a>
 
             <!-- Day at the Park -->
             <a href="posts/personal/day-at-the-park.html" class="post-preview">
