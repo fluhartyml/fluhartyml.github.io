@@ -146,6 +146,28 @@
             background-color: rgba(102, 126, 234, 0.4);
         }
 
+        .project-links {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .wiki-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            background-color: rgba(102, 126, 234, 0.3);
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .wiki-link:hover {
+            background-color: rgba(102, 126, 234, 0.5);
+        }
+
         .back-to-top {
             text-align: center;
             margin: 3rem 0 2rem;
@@ -192,7 +214,7 @@
 
             <h2 class="section-header">App Store Apps</h2>
             <div class="projects-grid">
-                <a href="projects/tally-matrix-clock.html" class="project-card">
+                <div class="project-card">
                     <h3>Tally Matrix Clock</h3>
                     <div class="badges">
                         <span class="badge">Live on App Store</span>
@@ -200,9 +222,13 @@
                     </div>
                     <p>Matrix-style time display for Apple TV. Time is displayed through illuminated colored squares in a matrix format, where the number of lit squares equals each digit's value.</p>
                     <p><strong>Features:</strong> Multiple color schemes, dynamic patterns, 12/24-hour formats, privacy-first design</p>
-                </a>
+                    <div class="project-links">
+                        <a href="projects/tally-matrix-clock.html" class="project-link">Learn More</a>
+                        <a href="https://github.com/fluhartyml/Tally-Matrix-Clock/wiki" target="_blank" class="wiki-link">📚 Documentation</a>
+                    </div>
+                </div>
 
-                <a href="projects/takeachanceonme.html" class="project-card">
+                <div class="project-card">
                     <h3>TakeAChanceOnMe</h3>
                     <div class="badges">
                         <span class="badge">Live on App Store</span>
@@ -213,7 +239,11 @@
                     </div>
                     <p>Random number generator for all your Apple devices. Generate random numbers from 1 to 999,999,999 with a single tap.</p>
                     <p><strong>⭐⭐⭐⭐⭐</strong> 5.0 rating • Zero data collection • Universal app</p>
-                </a>
+                    <div class="project-links">
+                        <a href="projects/takeachanceonme.html" class="project-link">Learn More</a>
+                        <a href="https://github.com/fluhartyml/TakeAChanceOnMeV1.0.2/wiki" target="_blank" class="wiki-link">📚 Documentation</a>
+                    </div>
+                </div>
             </div>
 
             <h2 class="section-header">Self Distribution</h2>
@@ -237,11 +267,272 @@
                 </div>
             </div>
 
+            <h2 class="section-header">🌐 NightGard Ecosystem</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Diamond Notes Vault</h3>
+                    <div class="badges">
+                        <span class="badge">iOS</span>
+                        <span class="badge">Active Development</span>
+                    </div>
+                    <p>Obsidian-style vault structure meets Apple Notes editing. File-system-first note-taking with markdown persistence and rich text editing.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/fluhartyml/DiamondNotesVault" target="_blank" class="project-link">GitHub</a>
+                        <a href="https://github.com/fluhartyml/DiamondNotesVault/wiki" target="_blank" class="wiki-link">📚 Documentation</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>NightGard FileSystem</h3>
+                    <div class="badges">
+                        <span class="badge">Swift Package</span>
+                        <span class="badge">iOS/macOS</span>
+                    </div>
+                    <p>File system management module for note-taking apps with markdown and image support, JSON indexing, and security-scoped access.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/fluhartyml/NightGardFileSystem" target="_blank" class="project-link">GitHub</a>
+                        <a href="https://github.com/fluhartyml/NightGardFileSystem/wiki" target="_blank" class="wiki-link">📚 Documentation</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>NightGard Editor</h3>
+                    <div class="badges">
+                        <span class="badge">Swift Package</span>
+                        <span class="badge">iOS/macOS</span>
+                    </div>
+                    <p>Rich text editor module with Apple Notes-style formatting toolbar, image support, and auto-save functionality.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/fluhartyml/NightGardEditor" target="_blank" class="project-link">GitHub</a>
+                        <a href="https://github.com/fluhartyml/NightGardEditor/wiki" target="_blank" class="wiki-link">📚 Documentation</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>wWw NGPortal</h3>
+                    <div class="badges">
+                        <span class="badge">macOS</span>
+                        <span class="badge">Web Server</span>
+                    </div>
+                    <p>Production NightGard web server with DDNS integration. Host your portfolio, blog, and OnionBlog content with dynamic DNS support.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/fluhartyml/wWw-NGPortal" target="_blank" class="project-link">GitHub</a>
+                        <a href="https://github.com/fluhartyml/wWw-NGPortal/wiki" target="_blank" class="wiki-link">📚 Documentation</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>NightGard</h3>
+                    <div class="badges">
+                        <span class="badge">BBS-Inspired</span>
+                        <span class="badge">Self-Hosted</span>
+                    </div>
+                    <p>Bringing classic BBS charm to modern self-hosted web services. Multi-module ecosystem for blogs, portfolios, and personal web presence.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/fluhartyml/NightGard" target="_blank" class="project-link">GitHub</a>
+                        <a href="https://github.com/fluhartyml/NightGard/wiki" target="_blank" class="wiki-link">📚 Documentation</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>WWW Portal</h3>
+                    <div class="badges">
+                        <span class="badge">macOS</span>
+                        <span class="badge">Sandboxed</span>
+                    </div>
+                    <p>Sandboxed version of NightGard web portal for App Store distribution. Local web server for hosting personal content.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/fluhartyml/WWW-Portal" target="_blank" class="project-link">GitHub</a>
+                        <a href="https://github.com/fluhartyml/WWW-Portal/wiki" target="_blank" class="wiki-link">📚 Documentation</a>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-header">📱 iOS/macOS Applications</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>GIT IssueTracker Light</h3>
+                    <div class="badges">
+                        <span class="badge">macOS</span>
+                        <span class="badge">GitHub Integration</span>
+                    </div>
+                    <p>Native macOS app for managing GitHub issues with GraphQL/REST API support, SwiftUI Charts, and AI-powered development workflow.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/fluhartyml/GIT-IssueTracker-Light" target="_blank" class="project-link">GitHub</a>
+                        <a href="https://github.com/fluhartyml/GIT-IssueTracker-Light/wiki" target="_blank" class="wiki-link">📚 Documentation</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>SVG Paint</h3>
+                    <div class="badges">
+                        <span class="badge">macOS</span>
+                        <span class="badge">Graphics</span>
+                    </div>
+                    <p>SVG drawing and editing application for macOS. Create and edit scalable vector graphics with intuitive tools.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/fluhartyml/SVG-Paint" target="_blank" class="project-link">GitHub</a>
+                        <a href="https://github.com/fluhartyml/SVG-Paint/wiki" target="_blank" class="wiki-link">📚 Documentation</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>SevenEight</h3>
+                    <div class="badges">
+                        <span class="badge">iOS</span>
+                        <span class="badge">tvOS</span>
+                    </div>
+                    <p>Seven-segment clock with weather for iOS and tvOS. Retro digital display meets modern weather integration.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/fluhartyml/SevenEight" target="_blank" class="project-link">GitHub</a>
+                        <a href="https://github.com/fluhartyml/SevenEight/wiki" target="_blank" class="wiki-link">📚 Documentation</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>The Nailed it! Button</h3>
+                    <div class="badges">
+                        <span class="badge">iOS</span>
+                        <span class="badge">Fun</span>
+                    </div>
+                    <p>Industrial celebration button app with robotic sound effects. Celebrate your wins with satisfying industrial-design button press.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/fluhartyml/The-Nailed-it-Button" target="_blank" class="project-link">GitHub</a>
+                        <a href="https://github.com/fluhartyml/The-Nailed-it-Button/wiki" target="_blank" class="wiki-link">📚 Documentation</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>SnazzyScan</h3>
+                    <div class="badges">
+                        <span class="badge">iOS</span>
+                        <span class="badge">Document Scanner</span>
+                    </div>
+                    <p>Document scanning application for iOS with intelligent recognition and organization features.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/fluhartyml/SnazzyScan" target="_blank" class="project-link">GitHub</a>
+                        <a href="https://github.com/fluhartyml/SnazzyScan/wiki" target="_blank" class="wiki-link">📚 Documentation</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Swift Scan</h3>
+                    <div class="badges">
+                        <span class="badge">iOS</span>
+                        <span class="badge">Document Scanner</span>
+                    </div>
+                    <p>Swift-based document scanning with advanced capture and processing capabilities.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/fluhartyml/Swift-Scan" target="_blank" class="project-link">GitHub</a>
+                        <a href="https://github.com/fluhartyml/Swift-Scan/wiki" target="_blank" class="wiki-link">📚 Documentation</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Inkwell Projects</h3>
+                    <div class="badges">
+                        <span class="badge">iOS</span>
+                        <span class="badge">Productivity</span>
+                    </div>
+                    <p>Suite of productivity apps including InkwellJournal, InkwellTimestampTracker, InkwellParallelWorkflowTimer, and InkwellBinary.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/fluhartyml?tab=repositories&q=inkwell" target="_blank" class="project-link">View All</a>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-header">🌐 Web Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>fluhartyml.github.io</h3>
+                    <div class="badges">
+                        <span class="badge">Portfolio</span>
+                        <span class="badge">OnionBlog</span>
+                    </div>
+                    <p>Personal portfolio with OnionBlog 4-layer blogging system. Obsidian + Claude publishing workflow with Jekyll includes architecture.</p>
+                    <div class="project-links">
+                        <a href="https://fluhartyml.github.io" target="_blank" class="project-link">Visit Site</a>
+                        <a href="https://github.com/fluhartyml/fluhartyml.github.io/wiki" target="_blank" class="wiki-link">📚 Documentation</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>4Paws4Patriots Volunteer 2016</h3>
+                    <div class="badges">
+                        <span class="badge">Archived</span>
+                        <span class="badge">Nonprofit</span>
+                    </div>
+                    <p>Volunteer website redesign for 4 Paws 4 Patriots nonprofit organization (circa 2016). Legacy project archived for historical reference.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/fluhartyml/4Paws4Patriots-Volunteer-2016" target="_blank" class="project-link">GitHub</a>
+                        <a href="https://github.com/fluhartyml/4Paws4Patriots-Volunteer-2016/wiki" target="_blank" class="wiki-link">📚 Documentation</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>ZipTy Racing Archive</h3>
+                    <div class="badges">
+                        <span class="badge">Archived</span>
+                        <span class="badge">E-Commerce</span>
+                    </div>
+                    <p>E-commerce website for Zip-Ty Racing (2001). Historical archive of early web development work.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/fluhartyml/ZipTy-Racing-Archive-or-ZipTy-Racing-2001" target="_blank" class="project-link">GitHub</a>
+                        <a href="https://github.com/fluhartyml/ZipTy-Racing-Archive-or-ZipTy-Racing-2001/wiki" target="_blank" class="wiki-link">📚 Documentation</a>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-header">💾 BBS Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Renegade BBS</h3>
+                    <div class="badges">
+                        <span class="badge">Pascal</span>
+                        <span class="badge">Classic BBS</span>
+                    </div>
+                    <p>Classic Bulletin Board System software. Preserving BBS history and exploring retro computing concepts.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/fluhartyml/RenegadeBBS" target="_blank" class="project-link">GitHub</a>
+                        <a href="https://github.com/fluhartyml/RenegadeBBS/wiki" target="_blank" class="wiki-link">📚 Documentation</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Telegard & Fidonet</h3>
+                    <div class="badges">
+                        <span class="badge">BBS</span>
+                        <span class="badge">Network</span>
+                    </div>
+                    <p>Telegard BBS software with Fidonet setup documentation. Classic message network integration and configuration.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/fluhartyml/Telegard-Fidonet-Setup" target="_blank" class="project-link">GitHub</a>
+                        <a href="https://github.com/fluhartyml/Telegard-Fidonet-Setup/wiki" target="_blank" class="wiki-link">📚 Documentation</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Docker BBS Renegade</h3>
+                    <div class="badges">
+                        <span class="badge">Docker</span>
+                        <span class="badge">BBS</span>
+                    </div>
+                    <p>Dockerized Renegade BBS for modern deployment. Classic BBS software containerized for easy hosting.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/fluhartyml/docker-bbs-renegade" target="_blank" class="project-link">GitHub</a>
+                        <a href="https://github.com/fluhartyml/docker-bbs-renegade/wiki" target="_blank" class="wiki-link">📚 Documentation</a>
+                    </div>
+                </div>
+            </div>
+
             <h2 class="section-header">Archived</h2>
             <div class="projects-grid">
                 <div class="project-card" style="cursor: default;">
-                    <h3>Coming Soon</h3>
-                    <p>Projects not currently distributed or under active development will appear here.</p>
+                    <h3>More Projects on GitHub</h3>
+                    <p>Visit my GitHub profile to see all 40+ repositories including development tools, utilities, and experimental projects.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/fluhartyml?tab=repositories" target="_blank" class="project-link">View All Repositories</a>
+                    </div>
                 </div>
             </div>
 
