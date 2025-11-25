@@ -62,95 +62,48 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .contact-info, .contact-form {
+        .contact-card {
             background-color: rgba(0, 0, 0, 0.7);
             padding: 2rem;
             border-radius: 12px;
             color: white;
+            max-width: 600px;
+            margin: 2rem auto;
         }
 
-        .contact-info h2, .contact-form h2 {
+        .contact-card h2 {
             color: #667eea;
             margin-top: 0;
             margin-bottom: 1.5rem;
         }
 
-        .contact-info p {
+        .contact-card p {
             margin: 1rem 0;
             line-height: 1.8;
         }
 
-        .contact-info a {
+        .contact-card a {
             color: #667eea;
             text-decoration: none;
         }
 
-        .contact-info a:hover {
+        .contact-card a:hover {
             text-decoration: underline;
         }
 
-        .contact-form form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .contact-form label {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            display: block;
-        }
-
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid rgba(102, 126, 234, 0.5);
-            border-radius: 6px;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-family: inherit;
-            font-size: 1rem;
-        }
-
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            background-color: rgba(255, 255, 255, 0.15);
-        }
-
-        .contact-form input::placeholder,
-        .contact-form textarea::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .contact-form textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .contact-form button {
+        .email-link {
+            display: inline-block;
             background-color: #667eea;
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            font-size: 1rem;
-            font-weight: 600;
+            color: white !important;
+            padding: 0.75rem 1.5rem;
             border-radius: 6px;
-            cursor: pointer;
-            margin-top: 0.5rem;
+            font-weight: 600;
+            margin-top: 1rem;
         }
 
-        .contact-form button:hover {
+        .email-link:hover {
             background-color: #5a6fd6;
+            text-decoration: none !important;
         }
 
         @media (max-width: 768px) {
@@ -162,9 +115,6 @@
                 padding: 1rem;
             }
 
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
@@ -177,40 +127,12 @@
         <main>
             <h1>Contact</h1>
 
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h2>Get In Touch</h2>
-                    <p><strong>Email:</strong><br>
-                    <a href="mailto:michael@fluharty.com">michael@fluharty.com</a></p>
-                    <p><strong>Response Time:</strong><br>
-                    I typically respond within 24-48 hours.</p>
-                    <p><strong>App Support:</strong><br>
-                    For app-specific issues, please use the support links on each app's page or submit an issue on GitHub.</p>
-                </div>
-
-                <div class="contact-form">
-                    <h2>Send a Message</h2>
-                    <form action="https://formspree.io/f/xwpjwyey" method="POST">
-                        <div>
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" placeholder="Your name" required>
-                        </div>
-                        <div>
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="your@email.com" required>
-                        </div>
-                        <div>
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" placeholder="What's this about?" required>
-                        </div>
-                        <div>
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" placeholder="Your message..." required></textarea>
-                        </div>
-                        <input type="text" name="_gotcha" style="display:none">
-                        <button type="submit">Send Message</button>
-                    </form>
-                </div>
+            <div class="contact-card">
+                <h2>Get In Touch</h2>
+                <p>Have a question, feedback, or just want to say hello? Feel free to reach out.</p>
+                <p><strong>Response Time:</strong> I typically respond within 24-48 hours.</p>
+                <p><strong>App Support:</strong> For app-specific issues, please use the support links on each app's page or submit an issue on GitHub.</p>
+                <a href="mailto:michael@fluharty.com" class="email-link">michael@fluharty.com</a>
             </div>
         </main>
 
