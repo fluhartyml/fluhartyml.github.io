@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tally Matrix Clock v2.0 Preview</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #000;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        /* Glyph Rain Canvas */
+        #glyphRainCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            display: none;
+        }
+
+        /* Demo Banner */
+        .demo-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(52, 199, 89, 0.9);
+            color: white;
+            text-align: center;
+            padding: 8px 16px;
+            font-size: 13px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        .demo-banner a {
+            color: white;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        /* Disclaimer */
+        .disclaimer {
+            position: fixed;
+            top: 36px;
+            left: 0;
+            right: 0;
+            background: rgba(255, 149, 0, 0.85);
+            color: white;
+            text-align: center;
+            padding: 6px 16px;
+            font-size: 11px;
+            z-index: 999;
+        }
+
+        /* Clock Container */
+        .clock-container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            padding: 60px 0 20px 0;
+            z-index: 10;
+            position: relative;
+        }
+
+        .colon-gap { width: 80px; }
+
+        /* Matrix Grids */
+        .matrix { display: grid; gap: 12px; }
+        .matrix-1x3 { grid-template-columns: 1fr; grid-template-rows: repeat(3, 1fr); }
+        .matrix-3x3 { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); }
+
+        /* Individual Squares */
+        .square {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            transition: background-color 0.5s ease-in-out;
+        }
+        .square.unlit { background-color: rgb(20, 20, 20); }
+        .square.lit { opacity: 1; }
+
+        /* Date Display */
+        .date-display {
+            font-size: 28px;
+            font-weight: 200;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 10px;
+            z-index: 10;
+            position: relative;
+            letter-spacing: 2px;
+        }
+
+        /* Base-10 Display */
+        .base10-display {
+            font-size: 60px;
+            font-weight: 100;
+            color: rgba(255, 255, 255, 0.6);
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 4px;
+            margin-top: 10px;
+            font-family: 'SF Mono', 'Menlo', monospace;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* Weather Display */
+        .weather-display {
+            font-size: 22px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.45);
+            margin-top: 8px;
+            z-index: 10;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .weather-icon { font-size: 28px; }
+
+        /* PM Label */
+        .pm-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.3);
+            text-align: center;
+            margin-top: 4px;
+            height: 18px;
+        }
+
+        /* Settings Overlay */
+        .settings-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 500;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            overflow-y: auto;
+            padding: 40px 20px;
+        }
+        .settings-overlay.visible { display: flex; }
+
+        .settings-title { font-size: 48px; font-weight: 200; margin-bottom: 10px; }
+
+        .settings-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .settings-label {
+            font-size: 22px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .settings-options { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+        .settings-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .settings-btn:hover { background: rgba(255, 255, 255, 0.2); }
+        .settings-btn.active { background: rgba(0, 122, 255, 0.6); border-color: rgba(0, 122, 255, 0.8); }
+
+        .toggle-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .toggle-btn.on { background: rgba(52, 199, 89, 0.6); border-color: rgba(52, 199, 89, 0.8); }
+
+        .close-btn {
+            margin-top: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: none;
+            padding: 14px 44px;
+            border-radius: 12px;
+            font-size: 24px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .close-btn:hover { background: rgba(255, 255, 255, 0.25); }
+
+        /* Settings Gear */
+        .settings-gear {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            font-size: 32px;
+            cursor: pointer;
+            opacity: 0.3;
+            transition: opacity 0.3s;
+            z-index: 100;
+        }
+        .settings-gear:hover { opacity: 0.8; }
+
+        /* Version badge */
+        .version-badge {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            background: rgba(52, 199, 89, 0.3);
+            border: 1px solid rgba(52, 199, 89, 0.5);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 100;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .square { width: 50px; height: 50px; }
+            .clock-container { gap: 20px; }
+            .colon-gap { width: 40px; }
+            .base10-display { font-size: 36px; }
+            .date-display { font-size: 20px; }
+        }
+        @media (max-width: 600px) {
+            .square { width: 35px; height: 35px; border-radius: 6px; }
+            .clock-container { gap: 12px; }
+            .colon-gap { width: 24px; }
+            .base10-display { font-size: 28px; }
+            .matrix { gap: 8px; }
+            .date-display { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="demo-banner">
+        v2.0 Preview — Tally Matrix Clock for Apple TV
+        <a href="https://apps.apple.com/app/id6754099799" target="_blank">Download Current Version</a>
+    </div>
+
+    <div class="disclaimer">
+        Features shown represent planned development. Final release may differ in appearance and functionality. No guarantees expressed or implied.
+    </div>
+
+    <div class="version-badge">v2.0 PREVIEW</div>
+
+    <!-- Glyph Rain Canvas -->
+    <canvas id="glyphRainCanvas"></canvas>
+
+    <div class="clock-container" id="clockContainer">
+        <div>
+            <div class="matrix matrix-1x3" id="matrix0"></div>
+            <div class="pm-label" id="pmLabel"></div>
+        </div>
+        <div style="width: 40px;"></div>
+        <div class="matrix matrix-3x3" id="matrix1"></div>
+        <div class="colon-gap"></div>
+        <div class="matrix matrix-3x3" id="matrix2"></div>
+        <div style="width: 40px;"></div>
+        <div class="matrix matrix-3x3" id="matrix3"></div>
+    </div>
+
+    <div class="base10-display" id="base10Display"></div>
+    <div class="date-display" id="dateDisplay"></div>
+    <div class="weather-display" id="weatherDisplay">
+        <span class="weather-icon">☀️</span>
+        <span>72°F — Clear Skies</span>
+    </div>
+
+    <div class="settings-gear" id="settingsGear" title="Settings">⚙️</div>
+
+    <!-- Settings Overlay -->
+    <div class="settings-overlay" id="settingsOverlay">
+        <div class="settings-title">Settings</div>
+
+        <div class="settings-section">
+            <div class="settings-label">Color Scheme</div>
+            <div class="settings-options" id="colorSchemeOptions">
+                <button class="settings-btn active" data-scheme="randomRGB">Random RGB</button>
+                <button class="settings-btn" data-scheme="matrixColors">Matrix Colors</button>
+                <button class="settings-btn" data-scheme="singleColor">Single Color</button>
+                <button class="settings-btn" data-scheme="allGreen">All Green</button>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <div class="settings-label">Pattern Change Interval</div>
+            <div class="settings-options" id="intervalOptions">
+                <button class="settings-btn active" data-interval="5">5s</button>
+                <button class="settings-btn" data-interval="15">15s</button>
+                <button class="settings-btn" data-interval="30">30s</button>
+                <button class="settings-btn" data-interval="60">60s</button>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <div class="settings-label">Display</div>
+            <div class="settings-options">
+                <button class="toggle-btn on" id="base10Toggle">Base-10</button>
+                <button class="toggle-btn" id="use24HourToggle">24-Hour</button>
+                <button class="toggle-btn on" id="dateToggle">Date</button>
+                <button class="toggle-btn on" id="weatherToggle">Weather</button>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <div class="settings-label">Effects</div>
+            <div class="settings-options">
+                <button class="toggle-btn" id="glyphRainToggle">Glyph Rain</button>
+            </div>
+        </div>
+
+        <button class="close-btn" id="closeSettings">Close</button>
+
+        <div style="margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; color: rgba(255, 255, 255, 0.5);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="rgba(255,255,255,0.5)"/>
+                <path d="M9 8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5S11.33 10 10.5 10 9 9.33 9 8.5zm3 0c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5zM8 14h8c0 2.21-1.79 4-4 4s-4-1.79-4-4z" fill="rgba(255,255,255,0.5)"/>
+            </svg>
+            Engineered with Claude by Anthropic
+        </div>
+    </div>
+
+    <script>
+        // =============================================
+        // Tally Matrix Clock v2.0 PREVIEW
+        // Features shown are planned - final may differ
+        // =============================================
+
+        // Settings
+        let colorScheme = 'randomRGB';
+        let patternInterval = 5;
+        let showBase10 = true;
+        let use24Hour = false;
+        let showDate = true;
+        let showWeather = true;
+        let glyphRainEnabled = false;
+
+        // State
+        let lastDigits = [-1, -1, -1, -1];
+        let lastPatternChange = Date.now();
+        let patterns = [[], [], [], []];
+        let colors = [[], [], [], []];
+        const baseColors = ['#FF3B30', '#34C759', '#007AFF'];
+
+        // Glyph Rain
+        const canvas = document.getElementById('glyphRainCanvas');
+        const ctx = canvas.getContext('2d');
+        let rainColumns = [];
+        let rainAnimFrame = null;
+
+        const glyphChars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEF';
+
+        function initRain() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const colWidth = 20;
+            const numCols = Math.floor(canvas.width / colWidth);
+            rainColumns = [];
+            for (let i = 0; i < numCols; i++) {
+                rainColumns.push({
+                    x: i * colWidth,
+                    y: Math.random() * canvas.height,
+                    speed: 2 + Math.random() * 4,
+                    chars: [],
+                    length: 8 + Math.floor(Math.random() * 20)
+                });
+            }
+        }
+
+        function drawRain() {
+            if (!glyphRainEnabled) {
+                canvas.style.display = 'none';
+                if (rainAnimFrame) cancelAnimationFrame(rainAnimFrame);
+                rainAnimFrame = null;
+                return;
+            }
+
+            canvas.style.display = 'block';
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            for (let col of rainColumns) {
+                // Draw trailing characters (darker)
+                for (let j = 0; j < col.length; j++) {
+                    const charY = col.y - j * 20;
+                    if (charY < 0 || charY > canvas.height) continue;
+
+                    const brightness = 1 - (j / col.length);
+                    const alpha = brightness * 0.8;
+
+                    if (j === 0) {
+                        // Head of the column - bright white-green
+                        ctx.fillStyle = `rgba(180, 255, 180, ${alpha})`;
+                        ctx.font = 'bold 16px monospace';
+                    } else {
+                        // Trail - green with fading
+                        ctx.fillStyle = `rgba(0, ${Math.floor(180 * brightness)}, 0, ${alpha})`;
+                        ctx.font = '14px monospace';
+                    }
+
+                    const char = glyphChars[Math.floor(Math.random() * glyphChars.length)];
+                    ctx.fillText(char, col.x, charY);
+                }
+
+                // Move column down
+                col.y += col.speed;
+
+                // Reset when off screen
+                if (col.y - col.length * 20 > canvas.height) {
+                    col.y = -Math.random() * 100;
+                    col.speed = 2 + Math.random() * 4;
+                    col.length = 8 + Math.floor(Math.random() * 20);
+                }
+            }
+
+            rainAnimFrame = requestAnimationFrame(drawRain);
+        }
+
+        window.addEventListener('resize', () => {
+            if (glyphRainEnabled) initRain();
+        });
+
+        // Initialize matrices
+        function initMatrices() {
+            const m0 = document.getElementById('matrix0');
+            m0.innerHTML = '';
+            for (let i = 0; i < 3; i++) {
+                const sq = document.createElement('div');
+                sq.className = 'square unlit';
+                sq.id = `m0s${i}`;
+                m0.appendChild(sq);
+            }
+            for (let m = 1; m <= 3; m++) {
+                const el = document.getElementById(`matrix${m}`);
+                el.innerHTML = '';
+                for (let i = 0; i < 9; i++) {
+                    const sq = document.createElement('div');
+                    sq.className = 'square unlit';
+                    sq.id = `m${m}s${i}`;
+                    el.appendChild(sq);
+                }
+            }
+        }
+
+        function generatePattern(count, total) {
+            const indices = Array.from({ length: total }, (_, i) => i);
+            for (let i = indices.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [indices[i], indices[j]] = [indices[j], indices[i]];
+            }
+            return indices.slice(0, count);
+        }
+
+        function generateColors(matrixIndex, total) {
+            const cols = [];
+            if (colorScheme === 'allGreen') {
+                for (let i = 0; i < total; i++) cols.push('#00FF41');
+            } else if (colorScheme === 'randomRGB') {
+                for (let i = 0; i < total; i++) cols.push(baseColors[Math.floor(Math.random() * baseColors.length)]);
+            } else if (colorScheme === 'matrixColors') {
+                const color = baseColors[Math.floor(Math.random() * baseColors.length)];
+                for (let i = 0; i < total; i++) cols.push(color);
+            } else {
+                const color = baseColors[Math.floor(Math.random() * baseColors.length)];
+                for (let i = 0; i < total; i++) cols.push(color);
+            }
+            return cols;
+        }
+
+        let globalSingleColor = baseColors[0];
+
+        function updatePatterns() {
+            const now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            const isPM = hours >= 12;
+
+            if (!use24Hour) {
+                hours = hours % 12;
+                if (hours === 0) hours = 12;
+            }
+
+            const digits = [
+                Math.floor(hours / 10),
+                hours % 10,
+                Math.floor(minutes / 10),
+                minutes % 10
+            ];
+
+            const totals = [3, 9, 9, 9];
+            const digitsChanged = digits.some((d, i) => d !== lastDigits[i]);
+            const elapsed = (Date.now() - lastPatternChange) / 1000;
+
+            if (digitsChanged || elapsed >= patternInterval) {
+                if (colorScheme === 'singleColor') {
+                    globalSingleColor = baseColors[Math.floor(Math.random() * baseColors.length)];
+                }
+
+                for (let m = 0; m < 4; m++) {
+                    let count = digits[m];
+                    if (m === 0 && !use24Hour) {
+                        patterns[m] = generatePattern(count, 2);
+                    } else {
+                        patterns[m] = generatePattern(count, totals[m]);
+                    }
+
+                    if (colorScheme === 'singleColor') {
+                        colors[m] = Array(totals[m]).fill(globalSingleColor);
+                    } else {
+                        colors[m] = generateColors(m, totals[m]);
+                    }
+                }
+
+                lastDigits = [...digits];
+                lastPatternChange = Date.now();
+            }
+
+            // Render Matrix 0
+            for (let i = 0; i < 3; i++) {
+                const sq = document.getElementById(`m0s${i}`);
+                if (!use24Hour && i === 2) {
+                    if (isPM) {
+                        sq.className = 'square lit';
+                        sq.style.backgroundColor = colors[0][i] || (colorScheme === 'allGreen' ? '#00FF41' : baseColors[0]);
+                    } else {
+                        sq.className = 'square unlit';
+                        sq.style.backgroundColor = '';
+                    }
+                } else {
+                    if (patterns[0].includes(i)) {
+                        sq.className = 'square lit';
+                        sq.style.backgroundColor = colors[0][i] || (colorScheme === 'allGreen' ? '#00FF41' : baseColors[0]);
+                    } else {
+                        sq.className = 'square unlit';
+                        sq.style.backgroundColor = '';
+                    }
+                }
+            }
+
+            // PM Label
+            const pmLabel = document.getElementById('pmLabel');
+            if (!use24Hour) {
+                pmLabel.textContent = isPM ? 'PM' : 'AM';
+                pmLabel.style.color = isPM ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.15)';
+            } else {
+                pmLabel.textContent = '';
+            }
+
+            // Render Matrices 1-3
+            for (let m = 1; m <= 3; m++) {
+                for (let i = 0; i < 9; i++) {
+                    const sq = document.getElementById(`m${m}s${i}`);
+                    if (patterns[m].includes(i)) {
+                        sq.className = 'square lit';
+                        sq.style.backgroundColor = colors[m][i] || (colorScheme === 'allGreen' ? '#00FF41' : baseColors[0]);
+                    } else {
+                        sq.className = 'square unlit';
+                        sq.style.backgroundColor = '';
+                    }
+                }
+            }
+
+            // Base-10 display
+            const base10 = document.getElementById('base10Display');
+            if (showBase10) {
+                const now2 = new Date();
+                let h = now2.getHours();
+                const min = String(now2.getMinutes()).padStart(2, '0');
+                if (use24Hour) {
+                    base10.textContent = `${String(h).padStart(2, '0')}:${min}`;
+                } else {
+                    const ampm = h >= 12 ? 'PM' : 'AM';
+                    h = h % 12;
+                    if (h === 0) h = 12;
+                    base10.textContent = `${h}:${min} ${ampm}`;
+                }
+                base10.style.display = '';
+            } else {
+                base10.style.display = 'none';
+            }
+
+            // Date display
+            const dateEl = document.getElementById('dateDisplay');
+            if (showDate) {
+                const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                dateEl.textContent = new Date().toLocaleDateString('en-US', opts);
+                dateEl.style.display = '';
+            } else {
+                dateEl.style.display = 'none';
+            }
+
+            // Weather display
+            const weatherEl = document.getElementById('weatherDisplay');
+            weatherEl.style.display = showWeather ? 'flex' : 'none';
+
+            // All green mode affects text colors too
+            if (colorScheme === 'allGreen') {
+                base10.style.color = 'rgba(0, 255, 65, 0.6)';
+                dateEl.style.color = 'rgba(0, 255, 65, 0.4)';
+                document.querySelector('.weather-display span:last-child').style.color = 'rgba(0, 255, 65, 0.4)';
+            } else {
+                base10.style.color = 'rgba(255, 255, 255, 0.6)';
+                dateEl.style.color = 'rgba(255, 255, 255, 0.5)';
+                document.querySelector('.weather-display span:last-child').style.color = 'rgba(255, 255, 255, 0.45)';
+            }
+        }
+
+        // Settings
+        function setupSettings() {
+            document.getElementById('settingsGear').addEventListener('click', () => {
+                document.getElementById('settingsOverlay').classList.add('visible');
+            });
+
+            document.getElementById('closeSettings').addEventListener('click', () => {
+                document.getElementById('settingsOverlay').classList.remove('visible');
+                lastDigits = [-1, -1, -1, -1];
+                lastPatternChange = 0;
+                updatePatterns();
+            });
+
+            document.querySelectorAll('#colorSchemeOptions .settings-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('#colorSchemeOptions .settings-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    colorScheme = btn.dataset.scheme;
+                    lastDigits = [-1, -1, -1, -1];
+                    lastPatternChange = 0;
+                });
+            });
+
+            document.querySelectorAll('#intervalOptions .settings-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('#intervalOptions .settings-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    patternInterval = parseInt(btn.dataset.interval);
+                    lastPatternChange = Date.now();
+                });
+            });
+
+            document.getElementById('base10Toggle').addEventListener('click', function() {
+                showBase10 = !showBase10;
+                this.classList.toggle('on');
+            });
+
+            document.getElementById('use24HourToggle').addEventListener('click', function() {
+                use24Hour = !use24Hour;
+                this.classList.toggle('on');
+                lastDigits = [-1, -1, -1, -1];
+                lastPatternChange = 0;
+            });
+
+            document.getElementById('dateToggle').addEventListener('click', function() {
+                showDate = !showDate;
+                this.classList.toggle('on');
+            });
+
+            document.getElementById('weatherToggle').addEventListener('click', function() {
+                showWeather = !showWeather;
+                this.classList.toggle('on');
+            });
+
+            document.getElementById('glyphRainToggle').addEventListener('click', function() {
+                glyphRainEnabled = !glyphRainEnabled;
+                this.classList.toggle('on');
+                if (glyphRainEnabled) {
+                    initRain();
+                    drawRain();
+                } else {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    canvas.style.display = 'none';
+                }
+            });
+        }
+
+        // Simulated weather (demo only)
+        const weatherConditions = [
+            { icon: '☀️', text: '72°F — Clear Skies' },
+            { icon: '⛅', text: '68°F — Partly Cloudy' },
+            { icon: '🌧️', text: '55°F — Light Rain' },
+            { icon: '❄️', text: '28°F — Snow Flurries' },
+            { icon: '🌤️', text: '75°F — Mostly Sunny' },
+        ];
+        // Pick a random weather for the demo
+        const demoWeather = weatherConditions[Math.floor(Math.random() * weatherConditions.length)];
+        document.querySelector('.weather-icon').textContent = demoWeather.icon;
+        document.querySelector('.weather-display span:last-child').textContent = demoWeather.text;
+
+        // Initialize
+        initMatrices();
+        setupSettings();
+        updatePatterns();
+        setInterval(updatePatterns, 500);
+    </script>
+</body>
+</html>

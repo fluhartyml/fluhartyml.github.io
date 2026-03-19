@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Snap & Scan Keeper - Interactive Demo</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+            background: #f2f2f7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+        }
+
+        /* Demo Banner */
+        .demo-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 122, 255, 0.9);
+            color: white;
+            text-align: center;
+            padding: 8px 16px;
+            font-size: 14px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        .demo-banner a {
+            color: white;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        /* Nav Bar */
+        .nav-bar {
+            background: rgba(242, 242, 247, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 52px 20px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 0.5px solid rgba(0,0,0,0.1);
+        }
+
+        .nav-title {
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .nav-btn {
+            font-size: 22px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+        .nav-btn:hover { opacity: 1; }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 30px;
+            gap: 30px;
+        }
+
+        /* App Icon */
+        .app-icon {
+            font-size: 80px;
+            color: #007AFF;
+        }
+
+        .app-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .app-subtitle {
+            font-size: 16px;
+            color: #8e8e93;
+            margin-top: -20px;
+        }
+
+        /* Action Buttons */
+        .action-btn {
+            width: 100%;
+            max-width: 340px;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.15s;
+        }
+
+        .action-btn:active { transform: scale(0.97); }
+
+        .scan-btn {
+            background: #007AFF;
+            color: white;
+        }
+        .scan-btn:hover { background: #0066DD; }
+
+        .share-btn {
+            background: #34C759;
+            color: white;
+        }
+        .share-btn:hover { background: #2AAF4E; }
+        .share-btn.hidden { display: none; }
+
+        /* Status Text */
+        .status-text {
+            font-size: 13px;
+            color: #8e8e93;
+            text-align: center;
+        }
+
+        /* Scanner Overlay */
+        .scanner-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #000;
+            z-index: 2000;
+            flex-direction: column;
+        }
+        .scanner-overlay.visible { display: flex; }
+
+        .scanner-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 50px 20px 16px;
+            background: rgba(0,0,0,0.8);
+        }
+
+        .scanner-cancel {
+            color: #007AFF;
+            font-size: 17px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .scanner-title-text {
+            color: white;
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .scanner-save {
+            color: #007AFF;
+            font-size: 17px;
+            font-weight: 600;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .scanner-save:disabled { color: rgba(0,122,255,0.3); }
+
+        .scanner-viewfinder {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Fake viewfinder */
+        .viewfinder-frame {
+            width: 85%;
+            max-width: 380px;
+            aspect-ratio: 8.5 / 11;
+            border: 3px solid rgba(0, 122, 255, 0.8);
+            border-radius: 8px;
+            position: relative;
+            background: rgba(0, 122, 255, 0.05);
+        }
+
+        .viewfinder-corner {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-color: #007AFF;
+            border-style: solid;
+            border-width: 0;
+        }
+        .viewfinder-corner.tl { top: -3px; left: -3px; border-top-width: 4px; border-left-width: 4px; border-radius: 4px 0 0 0; }
+        .viewfinder-corner.tr { top: -3px; right: -3px; border-top-width: 4px; border-right-width: 4px; border-radius: 0 4px 0 0; }
+        .viewfinder-corner.bl { bottom: -3px; left: -3px; border-bottom-width: 4px; border-left-width: 4px; border-radius: 0 0 0 4px; }
+        .viewfinder-corner.br { bottom: -3px; right: -3px; border-bottom-width: 4px; border-right-width: 4px; border-radius: 0 0 4px 0; }
+
+        .viewfinder-text {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 15px;
+        }
+
+        /* Scan line animation */
+        .scan-line {
+            position: absolute;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #007AFF, transparent);
+            animation: scanMove 2.5s ease-in-out infinite;
+        }
+
+        @keyframes scanMove {
+            0% { top: 10%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 85%; opacity: 0; }
+        }
+
+        .scanner-footer {
+            background: rgba(0,0,0,0.8);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .shutter-btn {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            border: 4px solid white;
+            background: transparent;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.15s;
+        }
+
+        .shutter-btn::after {
+            content: '';
+            position: absolute;
+            top: 4px; left: 4px; right: 4px; bottom: 4px;
+            border-radius: 50%;
+            background: white;
+            transition: all 0.15s;
+        }
+
+        .shutter-btn:active::after {
+            background: #ccc;
+        }
+
+        .page-count {
+            color: white;
+            font-size: 15px;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        /* Scanned Pages Thumbnails */
+        .scanned-thumbs {
+            display: flex;
+            gap: 8px;
+            padding: 12px 20px;
+            background: rgba(0,0,0,0.6);
+            overflow-x: auto;
+        }
+        .scanned-thumbs.hidden { display: none; }
+
+        .thumb {
+            width: 50px;
+            height: 65px;
+            background: white;
+            border-radius: 4px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #999;
+            position: relative;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+
+        .thumb .page-num {
+            position: absolute;
+            bottom: 2px;
+            right: 4px;
+            font-size: 9px;
+            color: #666;
+        }
+
+        /* Fake document lines */
+        .doc-lines {
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            padding: 8px 0;
+        }
+
+        .doc-line {
+            height: 2px;
+            background: #ddd;
+            border-radius: 1px;
+        }
+        .doc-line.short { width: 60%; }
+
+        /* Settings Sheet */
+        .settings-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 3000;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        .settings-overlay.visible { display: flex; }
+
+        .settings-sheet {
+            background: #f2f2f7;
+            border-radius: 16px 16px 0 0;
+            width: 100%;
+            max-width: 500px;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 0 0 40px;
+        }
+
+        .settings-handle {
+            width: 36px;
+            height: 5px;
+            background: #c7c7cc;
+            border-radius: 3px;
+            margin: 10px auto 6px;
+        }
+
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px 16px;
+        }
+
+        .settings-header-title {
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .settings-done {
+            color: #007AFF;
+            font-size: 17px;
+            font-weight: 600;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .settings-group {
+            background: white;
+            margin: 0 16px 24px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .settings-group-title {
+            font-size: 13px;
+            color: #8e8e93;
+            text-transform: uppercase;
+            padding: 8px 16px 6px;
+            margin: 0 16px;
+        }
+
+        .settings-row {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px 16px;
+            border-bottom: 0.5px solid rgba(0,0,0,0.1);
+            cursor: pointer;
+            gap: 12px;
+            transition: background 0.1s;
+        }
+        .settings-row:last-child { border-bottom: none; }
+        .settings-row:active { background: rgba(0,0,0,0.05); }
+
+        .settings-check {
+            width: 22px;
+            height: 22px;
+            color: #007AFF;
+            font-size: 18px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .settings-row-content {
+            flex: 1;
+        }
+
+        .settings-row-title {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .settings-row-desc {
+            font-size: 13px;
+            color: #8e8e93;
+            margin-top: 2px;
+        }
+
+        .settings-info {
+            font-size: 13px;
+            color: #8e8e93;
+            padding: 4px 16px 0;
+            margin: 0 16px;
+        }
+
+        /* Share Sheet Fake */
+        .share-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 4000;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        .share-overlay.visible { display: flex; }
+
+        .share-sheet {
+            background: #f2f2f7;
+            border-radius: 16px 16px 0 0;
+            width: 100%;
+            max-width: 500px;
+            padding: 20px 20px 40px;
+        }
+
+        .share-handle {
+            width: 36px;
+            height: 5px;
+            background: #c7c7cc;
+            border-radius: 3px;
+            margin: 0 auto 16px;
+        }
+
+        .share-preview {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: white;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 16px;
+        }
+
+        .share-preview-icon {
+            width: 50px;
+            height: 60px;
+            background: #FF3B30;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .share-preview-name {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .share-preview-size {
+            font-size: 13px;
+            color: #8e8e93;
+        }
+
+        .share-icons {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding: 8px 0;
+        }
+
+        .share-icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            min-width: 64px;
+        }
+
+        .share-icon-circle {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .share-icon-label {
+            font-size: 11px;
+            color: #333;
+            text-align: center;
+        }
+
+        .share-cancel {
+            width: 100%;
+            padding: 14px;
+            background: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #007AFF;
+            cursor: pointer;
+            margin-top: 8px;
+            font-family: inherit;
+        }
+
+        /* Success Alert */
+        .alert-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 5000;
+            align-items: center;
+            justify-content: center;
+        }
+        .alert-overlay.visible { display: flex; }
+
+        .alert-box {
+            background: white;
+            border-radius: 14px;
+            width: 270px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .alert-body {
+            padding: 20px 16px 16px;
+        }
+
+        .alert-title {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .alert-message {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .alert-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: none;
+            border: none;
+            border-top: 0.5px solid rgba(0,0,0,0.15);
+            color: #007AFF;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* Easter Egg */
+        .easter-egg-text {
+            font-size: 12px;
+            color: rgba(0,0,0,0.15);
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="demo-banner">
+        Interactive Demo — Snap & Scan Keeper for iPhone
+        <a href="https://apps.apple.com/app/id6755695364" target="_blank">Download on the App Store</a>
+    </div>
+
+    <!-- Nav Bar -->
+    <div class="nav-bar">
+        <div></div>
+        <div class="nav-title">Snap & Scan Keeper</div>
+        <button class="nav-btn" id="settingsBtn" title="Settings">⚙️</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="app-icon">📄</div>
+        <div class="app-name">Snap & Scan Keeper</div>
+        <div class="app-subtitle">Document Scanner</div>
+
+        <button class="action-btn scan-btn" id="scanBtn">
+            📷 Scan Document
+        </button>
+
+        <button class="action-btn share-btn hidden" id="shareBtn">
+            📤 Share Last Scan
+        </button>
+
+        <div class="status-text" id="statusText">Save format: Share Only (Don't Save)</div>
+
+        <div class="easter-egg-text">Engineered with Claude by Anthropic</div>
+    </div>
+
+    <!-- Scanner Overlay -->
+    <div class="scanner-overlay" id="scannerOverlay">
+        <div class="scanner-header">
+            <button class="scanner-cancel" id="scannerCancel">Cancel</button>
+            <span class="scanner-title-text">Scan Document</span>
+            <button class="scanner-save" id="scannerSave" disabled>Save</button>
+        </div>
+
+        <div class="scanned-thumbs hidden" id="scannedThumbs"></div>
+
+        <div class="scanner-viewfinder">
+            <div class="viewfinder-frame">
+                <div class="viewfinder-corner tl"></div>
+                <div class="viewfinder-corner tr"></div>
+                <div class="viewfinder-corner bl"></div>
+                <div class="viewfinder-corner br"></div>
+                <div class="scan-line"></div>
+            </div>
+            <div class="viewfinder-text">Position document in frame</div>
+        </div>
+
+        <div class="scanner-footer">
+            <div class="page-count" id="pageCount"></div>
+            <button class="shutter-btn" id="shutterBtn" title="Capture"></button>
+            <div class="page-count"></div>
+        </div>
+    </div>
+
+    <!-- Settings Sheet -->
+    <div class="settings-overlay" id="settingsOverlay">
+        <div class="settings-sheet">
+            <div class="settings-handle"></div>
+            <div class="settings-header">
+                <div></div>
+                <div class="settings-header-title">Settings</div>
+                <button class="settings-done" id="settingsDone">Done</button>
+            </div>
+
+            <div class="settings-group-title">Save Format</div>
+            <div class="settings-group" id="formatOptions">
+                <div class="settings-row" data-format="shareOnly">
+                    <div class="settings-check">✓</div>
+                    <div class="settings-row-content">
+                        <div class="settings-row-title">Share Only (Don't Save)</div>
+                        <div class="settings-row-desc">Creates PDF for sharing only — nothing saved to Photos</div>
+                    </div>
+                </div>
+                <div class="settings-row" data-format="pdfOnly">
+                    <div class="settings-check"></div>
+                    <div class="settings-row-content">
+                        <div class="settings-row-title">PDF Only</div>
+                        <div class="settings-row-desc">Saves combined PDF to Snap&ScanKeeper PDFs album</div>
+                    </div>
+                </div>
+                <div class="settings-row" data-format="both">
+                    <div class="settings-check"></div>
+                    <div class="settings-row-content">
+                        <div class="settings-row-title">Individual Pages + PDF</div>
+                        <div class="settings-row-desc">Saves page images AND combined PDF</div>
+                    </div>
+                </div>
+                <div class="settings-row" data-format="pagesOnly">
+                    <div class="settings-check"></div>
+                    <div class="settings-row-content">
+                        <div class="settings-row-title">Individual Pages Only</div>
+                        <div class="settings-row-desc">Saves only individual page images</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-info">PDFs are saved to "Snap&ScanKeeper PDFs" album. Images are saved to "Snap&ScanKeeper Images" album in your Photos library.</div>
+        </div>
+    </div>
+
+    <!-- Share Sheet -->
+    <div class="share-overlay" id="shareOverlay">
+        <div class="share-sheet">
+            <div class="share-handle"></div>
+            <div class="share-preview">
+                <div class="share-preview-icon">PDF</div>
+                <div>
+                    <div class="share-preview-name" id="sharePdfName">SnapScanKeeper-2025-03-18.pdf</div>
+                    <div class="share-preview-size">2 pages — 1.2 MB</div>
+                </div>
+            </div>
+            <div class="share-icons">
+                <div class="share-icon-item">
+                    <div class="share-icon-circle" style="background:#007AFF;">✉️</div>
+                    <div class="share-icon-label">Messages</div>
+                </div>
+                <div class="share-icon-item">
+                    <div class="share-icon-circle" style="background:#1DA1F2;">📧</div>
+                    <div class="share-icon-label">Mail</div>
+                </div>
+                <div class="share-icon-item">
+                    <div class="share-icon-circle" style="background:#FF9500;">📋</div>
+                    <div class="share-icon-label">Notes</div>
+                </div>
+                <div class="share-icon-item">
+                    <div class="share-icon-circle" style="background:#34C759;">💾</div>
+                    <div class="share-icon-label">Save to Files</div>
+                </div>
+                <div class="share-icon-item">
+                    <div class="share-icon-circle" style="background:#AF52DE;">📎</div>
+                    <div class="share-icon-label">Copy</div>
+                </div>
+            </div>
+            <button class="share-cancel" id="shareCancel">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Success Alert -->
+    <div class="alert-overlay" id="alertOverlay">
+        <div class="alert-box">
+            <div class="alert-body">
+                <div class="alert-title" id="alertTitle">Scan Complete</div>
+                <div class="alert-message" id="alertMessage">Your document has been scanned and shared.</div>
+            </div>
+            <button class="alert-btn" id="alertOk">OK</button>
+        </div>
+    </div>
+
+    <script>
+        // =============================================
+        // Snap & Scan Keeper - Interactive Demo/Mockup
+        // Shows app UI flow with simulated scanning
+        // App Store: https://apps.apple.com/app/id6755695364
+        // =============================================
+
+        let saveFormat = 'shareOnly';
+        let scannedPages = 0;
+        let hasLastScan = false;
+
+        const formatLabels = {
+            shareOnly: 'Share Only (Don\'t Save)',
+            pdfOnly: 'PDF Only',
+            both: 'Individual Pages + PDF',
+            pagesOnly: 'Individual Pages Only'
+        };
+
+        // === SCAN BUTTON ===
+        document.getElementById('scanBtn').addEventListener('click', () => {
+            scannedPages = 0;
+            document.getElementById('scannedThumbs').innerHTML = '';
+            document.getElementById('scannedThumbs').classList.add('hidden');
+            document.getElementById('pageCount').textContent = '';
+            document.getElementById('scannerSave').disabled = true;
+            document.getElementById('scannerOverlay').classList.add('visible');
+        });
+
+        // === SHUTTER BUTTON (Fake capture) ===
+        document.getElementById('shutterBtn').addEventListener('click', () => {
+            scannedPages++;
+
+            // Add thumbnail
+            const thumbs = document.getElementById('scannedThumbs');
+            thumbs.classList.remove('hidden');
+
+            const thumb = document.createElement('div');
+            thumb.className = 'thumb';
+
+            const lines = document.createElement('div');
+            lines.className = 'doc-lines';
+            for (let i = 0; i < 5; i++) {
+                const line = document.createElement('div');
+                line.className = 'doc-line' + (i === 4 ? ' short' : '');
+                lines.appendChild(line);
+            }
+            thumb.appendChild(lines);
+
+            const num = document.createElement('div');
+            num.className = 'page-num';
+            num.textContent = scannedPages;
+            thumb.appendChild(num);
+
+            thumbs.appendChild(thumb);
+
+            // Update count
+            document.getElementById('pageCount').textContent = `${scannedPages} page${scannedPages > 1 ? 's' : ''}`;
+            document.getElementById('scannerSave').disabled = false;
+
+            // Flash effect
+            document.querySelector('.scanner-viewfinder').style.background = 'rgba(255,255,255,0.3)';
+            setTimeout(() => {
+                document.querySelector('.scanner-viewfinder').style.background = '';
+            }, 150);
+        });
+
+        // === SAVE SCAN ===
+        document.getElementById('scannerSave').addEventListener('click', () => {
+            document.getElementById('scannerOverlay').classList.remove('visible');
+            hasLastScan = true;
+
+            // Update PDF name with current date
+            const now = new Date();
+            const dateStr = now.toISOString().slice(0,10);
+            document.getElementById('sharePdfName').textContent = `SnapScanKeeper-${dateStr}.pdf`;
+
+            if (saveFormat === 'shareOnly') {
+                // Auto-open share sheet
+                document.getElementById('shareOverlay').classList.add('visible');
+            } else {
+                // Show success alert
+                const messages = {
+                    pdfOnly: `${scannedPages}-page PDF saved to Snap&ScanKeeper PDFs album.`,
+                    both: `${scannedPages} page image${scannedPages > 1 ? 's' : ''} and PDF saved.`,
+                    pagesOnly: `${scannedPages} page image${scannedPages > 1 ? 's' : ''} saved to Snap&ScanKeeper Images album.`
+                };
+                document.getElementById('alertTitle').textContent = 'Scan Saved!';
+                document.getElementById('alertMessage').textContent = messages[saveFormat];
+                document.getElementById('alertOverlay').classList.add('visible');
+            }
+
+            // Show share button
+            document.getElementById('shareBtn').classList.remove('hidden');
+        });
+
+        // === CANCEL SCAN ===
+        document.getElementById('scannerCancel').addEventListener('click', () => {
+            document.getElementById('scannerOverlay').classList.remove('visible');
+        });
+
+        // === SHARE BUTTON ===
+        document.getElementById('shareBtn').addEventListener('click', () => {
+            document.getElementById('shareOverlay').classList.add('visible');
+        });
+
+        // === SHARE CANCEL ===
+        document.getElementById('shareCancel').addEventListener('click', () => {
+            document.getElementById('shareOverlay').classList.remove('visible');
+        });
+
+        // === ALERT OK ===
+        document.getElementById('alertOk').addEventListener('click', () => {
+            document.getElementById('alertOverlay').classList.remove('visible');
+        });
+
+        // === SETTINGS ===
+        document.getElementById('settingsBtn').addEventListener('click', () => {
+            document.getElementById('settingsOverlay').classList.add('visible');
+        });
+
+        document.getElementById('settingsDone').addEventListener('click', () => {
+            document.getElementById('settingsOverlay').classList.remove('visible');
+        });
+
+        document.querySelectorAll('#formatOptions .settings-row').forEach(row => {
+            row.addEventListener('click', () => {
+                saveFormat = row.dataset.format;
+                document.querySelectorAll('#formatOptions .settings-check').forEach(c => c.textContent = '');
+                row.querySelector('.settings-check').textContent = '✓';
+                document.getElementById('statusText').textContent = `Save format: ${formatLabels[saveFormat]}`;
+            });
+        });
+
+        // Click outside settings to close
+        document.getElementById('settingsOverlay').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('settingsOverlay')) {
+                document.getElementById('settingsOverlay').classList.remove('visible');
+            }
+        });
+
+        // Click outside share to close
+        document.getElementById('shareOverlay').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('shareOverlay')) {
+                document.getElementById('shareOverlay').classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>
