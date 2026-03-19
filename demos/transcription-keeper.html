@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Transcription Keeper - Interactive Demo</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+            background: #f2f2f7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+        }
+
+        /* Demo Banner */
+        .demo-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 122, 255, 0.9);
+            color: white;
+            text-align: center;
+            padding: 8px 16px;
+            font-size: 14px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        .demo-banner a {
+            color: white;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        /* Nav Bar */
+        .nav-bar {
+            background: rgba(242, 242, 247, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 52px 20px 12px;
+            text-align: center;
+            border-bottom: 0.5px solid rgba(0,0,0,0.1);
+        }
+        .nav-title {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+            gap: 24px;
+            max-width: 500px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* App Icon */
+        .app-icon-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        /* Status Indicator */
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #007AFF;
+        }
+
+        .status-dot.recording { background: #FF3B30; animation: pulse 1s infinite; }
+        .status-dot.listening { background: #FF9500; }
+        .status-dot.transcribing { background: #007AFF; animation: pulse 1.5s infinite; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.85); }
+        }
+
+        .status-text { color: #007AFF; }
+        .status-text.recording { color: #FF3B30; }
+        .status-text.listening { color: #FF9500; }
+
+        /* Audio Level Meter */
+        .audio-meter-container {
+            width: 100%;
+            padding: 0 10px;
+        }
+
+        .audio-meter {
+            width: 100%;
+            height: 24px;
+            background: #e5e5ea;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .audio-meter-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.05s linear, background-color 0.1s;
+            width: 5%;
+            background: #34C759;
+        }
+
+        .threshold-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: white;
+            left: 15%;
+            z-index: 2;
+            box-shadow: 0 0 3px rgba(0,0,0,0.3);
+        }
+
+        .threshold-slider-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .threshold-slider-row span {
+            font-size: 14px;
+            color: #8e8e93;
+        }
+
+        .threshold-slider {
+            flex: 1;
+            accent-color: #FF9500;
+            height: 4px;
+        }
+
+        .threshold-label {
+            font-size: 12px;
+            color: #8e8e93;
+            text-align: center;
+            margin-top: 4px;
+        }
+
+        /* Duration Display */
+        .duration-display {
+            text-align: center;
+        }
+
+        .duration-primary {
+            font-size: 48px;
+            font-weight: 300;
+            font-family: 'SF Mono', 'Menlo', monospace;
+            font-variant-numeric: tabular-nums;
+            color: #000;
+        }
+
+        .duration-secondary {
+            font-size: 14px;
+            color: #8e8e93;
+            font-family: 'SF Mono', 'Menlo', monospace;
+        }
+
+        /* Record Button */
+        .record-btn-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .record-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            background: rgba(255, 59, 48, 0.25);
+            transition: all 0.2s;
+        }
+
+        .record-btn::after {
+            content: '';
+            position: absolute;
+            width: 56px;
+            height: 56px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #FF3B30;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+
+        .record-btn.recording {
+            background: rgba(255, 59, 48, 0.4);
+        }
+
+        .record-btn.recording::after {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+        }
+
+        .record-btn:active { transform: scale(0.95); }
+
+        .help-text {
+            font-size: 13px;
+            color: #8e8e93;
+            text-align: center;
+        }
+
+        /* Results Section */
+        .results-section {
+            display: none;
+            width: 100%;
+            gap: 16px;
+            flex-direction: column;
+        }
+
+        .results-section.visible {
+            display: flex;
+        }
+
+        .results-heading {
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .transcription-box {
+            background: rgba(0,0,0,0.05);
+            border-radius: 12px;
+            padding: 16px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .results-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .result-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.15s;
+        }
+
+        .result-btn:active { transform: scale(0.97); }
+
+        .share-text-btn { background: #007AFF; color: white; }
+        .share-audio-btn { background: #34C759; color: white; }
+
+        .new-recording-btn {
+            padding: 12px;
+            background: none;
+            border: 1.5px solid #007AFF;
+            border-radius: 10px;
+            color: #007AFF;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            width: 100%;
+        }
+
+        /* Transcribing overlay */
+        .transcribing-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(242,242,247,0.95);
+            z-index: 500;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+        .transcribing-overlay.visible { display: flex; }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #e5e5ea;
+            border-top-color: #007AFF;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .transcribing-text {
+            font-size: 17px;
+            color: #007AFF;
+            font-weight: 500;
+        }
+
+        /* Easter egg */
+        .easter-egg {
+            font-size: 12px;
+            color: rgba(0,0,0,0.15);
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="demo-banner">
+        Interactive Demo — Transcription Keeper for iPhone
+        <a href="https://apps.apple.com/app/id6755852684" target="_blank">Download on the App Store</a>
+    </div>
+
+    <div class="nav-bar">
+        <div class="nav-title">Transcription Keeper</div>
+    </div>
+
+    <div class="main-content">
+        <!-- App Icon -->
+        <div class="app-icon-img">🎙️</div>
+
+        <!-- Status -->
+        <div class="status-indicator" id="statusIndicator">
+            <div class="status-dot listening" id="statusDot"></div>
+            <span class="status-text listening" id="statusLabel">Listening...</span>
+        </div>
+
+        <!-- Audio Level Meter -->
+        <div class="audio-meter-container">
+            <div class="audio-meter">
+                <div class="audio-meter-fill" id="audioMeterFill"></div>
+                <div class="threshold-line" id="thresholdLine"></div>
+            </div>
+            <div class="threshold-slider-row">
+                <span>🔈</span>
+                <input type="range" class="threshold-slider" id="thresholdSlider" min="5" max="80" value="15">
+                <span>🔊</span>
+            </div>
+            <div class="threshold-label" id="thresholdLabel">Sensitivity Threshold: 15%</div>
+        </div>
+
+        <!-- Duration -->
+        <div class="duration-display">
+            <div class="duration-primary" id="durationPrimary">00:00.0</div>
+            <div class="duration-secondary" id="durationSecondary">Session: 00:00.0</div>
+        </div>
+
+        <!-- Record Button -->
+        <div class="record-btn-container">
+            <button class="record-btn" id="recordBtn" title="Record"></button>
+        </div>
+
+        <div class="help-text" id="helpText">Tap to start recording</div>
+
+        <!-- Results (hidden until recording complete) -->
+        <div class="results-section" id="resultsSection">
+            <div class="results-heading">Transcription</div>
+            <div class="transcription-box" id="transcriptionBox"></div>
+
+            <div class="results-buttons">
+                <button class="result-btn share-text-btn" id="shareTextBtn">📄 Share Text</button>
+                <button class="result-btn share-audio-btn" id="shareAudioBtn">🔊 Share Audio</button>
+            </div>
+
+            <button class="new-recording-btn" id="newRecordingBtn">🎙️ New Recording</button>
+        </div>
+
+        <div class="easter-egg">Engineered with Claude by Anthropic</div>
+    </div>
+
+    <!-- Transcribing Overlay -->
+    <div class="transcribing-overlay" id="transcribingOverlay">
+        <div class="spinner"></div>
+        <div class="transcribing-text" id="transcribingStatus">Preparing transcription...</div>
+    </div>
+
+    <script>
+        // =============================================
+        // Transcription Keeper - Interactive Demo
+        // Sample UI walkthrough with simulated recording
+        // App Store: https://apps.apple.com/app/id6755852684
+        // =============================================
+
+        let isRecording = false;
+        let recordingTime = 0;
+        let sessionTime = 0;
+        let recordInterval = null;
+        let meterInterval = null;
+        let threshold = 15;
+
+        const sampleTranscriptions = [
+            "Hello, this is a sample transcription from the Transcription Keeper app. The smart threshold recording feature automatically captures speech while skipping silence, making your recordings cleaner and more efficient. You can share the transcribed text or the audio file directly from the app.",
+            "Transcription Keeper uses intelligent voice activity detection to record only when you're speaking. The sensitivity threshold can be adjusted to match your environment. Whether you're in a quiet room or a busy office, the app adapts to capture what matters.",
+            "This demonstration shows how Transcription Keeper turns your voice into text with just one tap. The app monitors audio levels in real-time and only records when speech is detected above your chosen threshold. After recording, you can share the text or audio instantly."
+        ];
+
+        // Format time as MM:SS.d
+        function formatTime(ms) {
+            const totalSec = ms / 1000;
+            const min = Math.floor(totalSec / 60);
+            const sec = Math.floor(totalSec % 60);
+            const tenth = Math.floor((totalSec % 1) * 10);
+            return `${String(min).padStart(2,'0')}:${String(sec).padStart(2,'0')}.${tenth}`;
+        }
+
+        // Threshold slider
+        const slider = document.getElementById('thresholdSlider');
+        slider.addEventListener('input', () => {
+            threshold = parseInt(slider.value);
+            document.getElementById('thresholdLabel').textContent = `Sensitivity Threshold: ${threshold}%`;
+            document.getElementById('thresholdLine').style.left = `${threshold}%`;
+        });
+
+        // Simulate audio meter
+        function startMeter() {
+            meterInterval = setInterval(() => {
+                const fill = document.getElementById('audioMeterFill');
+                let level;
+
+                if (isRecording) {
+                    // Simulate speech-like audio levels
+                    level = 15 + Math.random() * 65;
+                } else {
+                    // Simulate ambient noise
+                    level = 2 + Math.random() * 12;
+                }
+
+                fill.style.width = `${level}%`;
+                fill.style.backgroundColor = level > threshold ? '#FF3B30' : '#34C759';
+            }, 50);
+        }
+
+        // Record button
+        document.getElementById('recordBtn').addEventListener('click', () => {
+            if (!isRecording) {
+                startRecording();
+            } else {
+                stopRecording();
+            }
+        });
+
+        function startRecording() {
+            isRecording = true;
+            recordingTime = 0;
+            sessionTime = 0;
+
+            // Update UI
+            document.getElementById('recordBtn').classList.add('recording');
+            document.getElementById('statusDot').className = 'status-dot recording';
+            document.getElementById('statusLabel').className = 'status-text recording';
+            document.getElementById('statusLabel').textContent = 'Recording';
+            document.getElementById('helpText').textContent = 'Tap to stop recording';
+            document.getElementById('resultsSection').classList.remove('visible');
+
+            // Start timers
+            recordInterval = setInterval(() => {
+                recordingTime += 100;
+                sessionTime += 100;
+                document.getElementById('durationPrimary').textContent = formatTime(recordingTime);
+                document.getElementById('durationSecondary').textContent = `Session: ${formatTime(sessionTime)}`;
+            }, 100);
+        }
+
+        function stopRecording() {
+            isRecording = false;
+            clearInterval(recordInterval);
+
+            // Update UI
+            document.getElementById('recordBtn').classList.remove('recording');
+            document.getElementById('statusDot').className = 'status-dot transcribing';
+            document.getElementById('statusLabel').className = 'status-text';
+            document.getElementById('statusLabel').textContent = 'Transcribing...';
+            document.getElementById('helpText').textContent = '';
+
+            // Show transcribing overlay
+            const overlay = document.getElementById('transcribingOverlay');
+            overlay.classList.add('visible');
+            document.getElementById('transcribingStatus').textContent = 'Preparing transcription...';
+
+            setTimeout(() => {
+                document.getElementById('transcribingStatus').textContent = 'Transcribing...';
+            }, 800);
+
+            setTimeout(() => {
+                document.getElementById('transcribingStatus').textContent = 'Transcription complete';
+            }, 2000);
+
+            setTimeout(() => {
+                overlay.classList.remove('visible');
+                showResults();
+            }, 2500);
+        }
+
+        function showResults() {
+            // Pick random sample transcription
+            const text = sampleTranscriptions[Math.floor(Math.random() * sampleTranscriptions.length)];
+            document.getElementById('transcriptionBox').textContent = text;
+
+            document.getElementById('statusDot').className = 'status-dot';
+            document.getElementById('statusLabel').className = 'status-text';
+            document.getElementById('statusLabel').textContent = 'Complete';
+            document.getElementById('helpText').textContent = '';
+
+            document.getElementById('resultsSection').classList.add('visible');
+        }
+
+        // Share buttons (demo - show alert)
+        document.getElementById('shareTextBtn').addEventListener('click', () => {
+            alert('In the real app, this opens the iOS share sheet with your transcribed text.');
+        });
+
+        document.getElementById('shareAudioBtn').addEventListener('click', () => {
+            alert('In the real app, this opens the iOS share sheet with your audio recording.');
+        });
+
+        // New recording
+        document.getElementById('newRecordingBtn').addEventListener('click', () => {
+            document.getElementById('resultsSection').classList.remove('visible');
+            document.getElementById('durationPrimary').textContent = '00:00.0';
+            document.getElementById('durationSecondary').textContent = 'Session: 00:00.0';
+            document.getElementById('statusDot').className = 'status-dot listening';
+            document.getElementById('statusLabel').className = 'status-text listening';
+            document.getElementById('statusLabel').textContent = 'Listening...';
+            document.getElementById('helpText').textContent = 'Tap to start recording';
+        });
+
+        // Start ambient meter simulation
+        startMeter();
+    </script>
+</body>
+</html>
