@@ -1,0 +1,365 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryoTunes Player - Michael Lee Fluharty</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .fixed-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../IMG_7907.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -1;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .project-hero {
+            text-align: center;
+            padding: 3rem 2rem;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 12px;
+            margin: 2rem 0;
+            color: white;
+        }
+
+        .project-hero h1 {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .project-hero .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .project-hero .app-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 22px;
+            margin-bottom: 1.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: rgba(102, 126, 234, 0.8);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            margin: 0.5rem;
+        }
+
+        .project-section {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            color: white;
+        }
+
+        .project-section h2 {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .project-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-item {
+            background-color: rgba(102, 126, 234, 0.2);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-item h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .screenshots {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .screenshots img {
+            height: 400px;
+            border-radius: 12px;
+            border: 2px solid rgba(102, 126, 234, 0.4);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: rgba(102, 126, 234, 0.9);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .cta-button.secondary {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .tech-tag {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .station-list {
+            columns: 2;
+            column-gap: 2rem;
+            margin: 1rem 0;
+        }
+
+        .station-list li {
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+
+        .back-button {
+            text-align: center;
+            margin: 3rem 0 2rem;
+        }
+
+        .back-button a {
+            display: inline-block;
+            background-color: rgba(102, 126, 234, 0.8);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .project-hero h1 {
+                font-size: 2rem;
+            }
+
+            .project-hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            .station-list {
+                columns: 1;
+            }
+
+            .screenshots img {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fixed-background"></div>
+    <div class="content-wrapper">
+        {% include _header.html %}
+        {% include _nav.html %}
+
+        <main>
+            <div class="project-hero">
+                <img src="cryotunes-icon.png" alt="CryoTunes Player" class="app-icon">
+                <h1>CryoTunes Player</h1>
+                <p class="tagline">Retro 90s music player powered by Apple Music</p>
+                <span class="badge">Live on App Store</span>
+                <span class="badge">iOS</span>
+                <span class="badge">iPadOS</span>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="https://github.com/fluhartyml/CryoTunesPlayer" target="_blank" class="cta-button secondary">
+                    View on GitHub
+                </a>
+                <a href="https://github.com/fluhartyml/CryoTunesPlayer/wiki" target="_blank" class="cta-button secondary">
+                    Documentation
+                </a>
+            </div>
+
+            <div class="screenshots">
+                <img src="cryotunes-screenshot1.png" alt="CryoTunes playing Thunderstorms">
+                <img src="cryotunes-screenshot2.png" alt="CryoTunes with sleep timer">
+                <img src="cryotunes-screenshot3.png" alt="CryoTunes settings">
+            </div>
+
+            <div class="project-section">
+                <h2>About</h2>
+                <p>CryoTunes Player brings the golden age of digital music to your iPhone and iPad. Inspired by Winamp, Napster, and LimeWire, CryoTunes delivers a beautifully retro listening experience with an ice blue monospaced LCD aesthetic.</p>
+                <p>Pick a station and listen. No playlists to manage, no accounts to create. Just music. Over 80 streaming stations spanning Popular Hits from 1958 to 2025, nature sounds for sleep, focus frequencies for work, and genre stations for every mood.</p>
+                <p><em>Engineered with Claude by Anthropic.</em></p>
+            </div>
+
+            <div class="project-section">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h3>80+ Stations</h3>
+                        <p>Music, Popular Hits by decade, Nature Sounds, and Focus stations</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Decade Picker</h3>
+                        <p>Three-level navigation: Category, Decade, Year (1958-2025)</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>LCD Weather Ticker</h3>
+                        <p>Silver retro ticker with time, date, and local weather</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Sleep Timer</h3>
+                        <p>30 minutes, 1 hour, 2 hours, or 4 hours with countdown</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>AirPlay 2</h3>
+                        <p>Stream to any compatible speaker or Apple TV</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Lock Screen & StandBy</h3>
+                        <p>Full Now Playing controls on lock screen and charging stand</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h2>Stations</h2>
+                <h3 style="color: #667eea; margin-bottom: 0.5rem;">Music</h3>
+                <ul class="station-list">
+                    <li>Ambient</li>
+                    <li>Chill</li>
+                    <li>Jazz</li>
+                    <li>Country</li>
+                    <li>Electronic</li>
+                    <li>New in Pop</li>
+                    <li>Rock Station</li>
+                    <li>R&B Now</li>
+                    <li>Hits in Spatial Audio</li>
+                    <li>Big Band & Swing</li>
+                    <li>Early Jazz & Swing</li>
+                    <li>Jazz Age</li>
+                    <li>Ragtime & Classics</li>
+                </ul>
+                <h3 style="color: #667eea; margin: 1rem 0 0.5rem;">Popular Hits</h3>
+                <p>Top 100 USA plus every year from 1958 to 2025, organized by decade.</p>
+                <h3 style="color: #667eea; margin: 1rem 0 0.5rem;">Nature Sounds</h3>
+                <ul class="station-list">
+                    <li>Infinite Rain</li>
+                    <li>Forest Sounds</li>
+                    <li>Babbling Brook</li>
+                    <li>Thunderstorms</li>
+                    <li>Ocean Waves & Thunder</li>
+                    <li>Waterfall and Rain</li>
+                    <li>Tibetan Monks Chanting Om</li>
+                    <li>Tibetan Singing Bowls</li>
+                    <li>Singing Bowls 4 Hours</li>
+                    <li>Rain Sounds for Sleep</li>
+                </ul>
+                <h3 style="color: #667eea; margin: 1rem 0 0.5rem;">Focus</h3>
+                <ul class="station-list">
+                    <li>Pure Focus</li>
+                    <li>Focus Frequency</li>
+                    <li>432 Hz Calm Breathing</li>
+                    <li>432 Hz Positive Shift</li>
+                    <li>432 Hz Light Work</li>
+                </ul>
+            </div>
+
+            <div class="project-section">
+                <h2>Technical Details</h2>
+                <div class="tech-stack">
+                    <span class="tech-tag">Swift 6</span>
+                    <span class="tech-tag">SwiftUI</span>
+                    <span class="tech-tag">MusicKit</span>
+                    <span class="tech-tag">WeatherKit</span>
+                    <span class="tech-tag">iOS 17+</span>
+                </div>
+                <p><strong>Requirements:</strong> iPhone or iPad with Apple Music subscription</p>
+                <p><strong>Category:</strong> Music</p>
+                <p><strong>Price:</strong> Free</p>
+                <p><strong>License:</strong> GPL v3</p>
+            </div>
+
+            <div class="back-button">
+                <a href="../projects.html">&larr; Back to Projects</a>
+            </div>
+        </main>
+
+        {% include _footer.html %}
+    </div>
+</body>
+</html>
