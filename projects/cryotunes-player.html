@@ -256,13 +256,257 @@
                 </a>
             </div>
 
-            <div class="project-section" style="text-align: center;">
-                <h2>App Preview</h2>
-                <video autoplay loop muted playsinline style="height: 500px; border-radius: 12px; border: 2px solid rgba(102, 126, 234, 0.4);">
-                    <source src="cryotunes-preview.mp4" type="video/mp4">
-                    <img src="cryotunes-preview.gif" alt="CryoTunes Player Preview" style="height: 500px; border-radius: 12px;">
-                </video>
+            <!-- CryoTunes Player HTML Mockup -->
+            <div style="display: flex; justify-content: center; margin: 2rem 0;">
+                <div class="cryo-player">
+                    <!-- LCD Ticker -->
+                    <div class="cryo-ticker" id="cryoTicker">
+                        <span id="tickerText">08:35 &middot; Wed Apr 01 &middot; Surfside Beach 73&deg;F</span>
+                    </div>
+
+                    <!-- Title Bar -->
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: 0.5rem 0;">
+                        <div>
+                            <div style="font-size: 1.4rem; font-weight: 700; color: #c8d8e8;">CryoTunes</div>
+                            <div style="font-size: 0.8rem; color: #5a7a9a;">Player</div>
+                        </div>
+                        <button class="cryo-btn-icon" id="settingsBtn" title="Settings">&#9881;</button>
+                    </div>
+
+                    <!-- Hero Video (Album Art area) -->
+                    <div class="cryo-hero">
+                        <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
+                            <source src="cryotunes-preview.mp4" type="video/mp4">
+                            <img src="cryotunes-preview.gif" alt="CryoTunes Player Preview" style="width: 100%; border-radius: 10px;">
+                        </video>
+                    </div>
+
+                    <!-- Track Info -->
+                    <div style="text-align: center; padding: 0.8rem 0 0.2rem;">
+                        <div class="cryo-track" id="trackName">App Preview</div>
+                        <div class="cryo-artist" id="artistName">CryoTunes Player v2.2</div>
+                    </div>
+
+                    <!-- Sleep Timer -->
+                    <div style="text-align: center; padding: 0.3rem 0;">
+                        <span class="cryo-timer" id="sleepTimer" style="display: none;">&#9789; --:--</span>
+                    </div>
+
+                    <!-- Transport Controls -->
+                    <div class="cryo-transport">
+                        <button class="cryo-btn" id="prevBtn" title="Previous">&#9194;</button>
+                        <button class="cryo-btn cryo-btn-play" id="playBtn" title="Play/Pause">&#9208;</button>
+                        <button class="cryo-btn" id="nextBtn" title="Next">&#9193;</button>
+                        <button class="cryo-btn cryo-btn-stop" id="stopBtn" title="Stop">&#9209;</button>
+                    </div>
+
+                    <!-- Station Label -->
+                    <div style="text-align: center; padding: 0.6rem 0 0.2rem;">
+                        <div class="cryo-station" id="stationName">Relaxing, Sleepy Thunderstorms</div>
+                        <div style="font-size: 0.7rem; color: #4a6a8a; letter-spacing: 0.5px;">NATURE SOUNDS</div>
+                    </div>
+
+                    <!-- App Store Link -->
+                    <div style="text-align: center; padding: 1rem 0 0.5rem;">
+                        <a href="https://apps.apple.com/app/id6761222456" target="_blank" style="display: inline-block;">
+                            <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" style="height: 40px;">
+                        </a>
+                    </div>
+                </div>
             </div>
+
+            <style>
+                .cryo-player {
+                    width: 340px;
+                    background: linear-gradient(180deg, #0a1628 0%, #0d1f3c 40%, #091422 100%);
+                    border-radius: 20px;
+                    padding: 1rem 1.2rem;
+                    border: 1px solid rgba(100, 140, 180, 0.15);
+                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(100, 150, 200, 0.08);
+                    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+                    color: #c8d8e8;
+                }
+
+                .cryo-ticker {
+                    background: linear-gradient(180deg, #2a3a4a 0%, #1a2a3a 100%);
+                    border-radius: 6px;
+                    padding: 0.35rem 0.6rem;
+                    font-family: 'SF Mono', 'Menlo', 'Courier New', monospace;
+                    font-size: 0.75rem;
+                    color: #8ab4d4;
+                    text-align: center;
+                    letter-spacing: 0.5px;
+                    border: 1px solid rgba(100, 140, 180, 0.1);
+                    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+                    overflow: hidden;
+                    white-space: nowrap;
+                }
+
+                .cryo-btn-icon {
+                    background: none;
+                    border: none;
+                    color: #5a8ab4;
+                    font-size: 1.3rem;
+                    cursor: pointer;
+                    padding: 0.2rem;
+                    transition: color 0.2s;
+                }
+                .cryo-btn-icon:hover { color: #8ac4e8; }
+
+                .cryo-hero {
+                    width: 100%;
+                    aspect-ratio: 1 / 1;
+                    border-radius: 10px;
+                    overflow: hidden;
+                    border: 1px solid rgba(100, 140, 180, 0.12);
+                    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+                    margin: 0.4rem 0;
+                }
+
+                .cryo-track {
+                    font-size: 1.05rem;
+                    font-weight: 600;
+                    color: #d0e0f0;
+                }
+
+                .cryo-artist {
+                    font-size: 0.85rem;
+                    color: #6a8aaa;
+                    margin-top: 0.15rem;
+                }
+
+                .cryo-timer {
+                    font-size: 0.8rem;
+                    color: #6a8aaa;
+                }
+
+                .cryo-transport {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 0.8rem;
+                    padding: 0.5rem 0;
+                }
+
+                .cryo-btn {
+                    width: 52px;
+                    height: 52px;
+                    border-radius: 10px;
+                    border: 1px solid rgba(100, 140, 180, 0.2);
+                    background: linear-gradient(180deg, #1a2a3e 0%, #0e1c30 100%);
+                    color: #7aa0c0;
+                    font-size: 1.3rem;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.15s;
+                    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+                }
+                .cryo-btn:hover {
+                    background: linear-gradient(180deg, #243a52 0%, #162a42 100%);
+                    color: #a0c8e8;
+                    border-color: rgba(100, 160, 220, 0.35);
+                }
+                .cryo-btn:active {
+                    transform: scale(0.94);
+                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+                }
+
+                .cryo-btn-play {
+                    width: 58px;
+                    height: 58px;
+                    background: linear-gradient(180deg, #1e3048 0%, #142438 100%);
+                    border-color: rgba(100, 160, 200, 0.25);
+                    font-size: 1.5rem;
+                }
+
+                .cryo-btn-stop {
+                    background: linear-gradient(180deg, #1a2838 0%, #101e2e 100%);
+                    color: #5a7a9a;
+                }
+
+                .cryo-station {
+                    font-size: 0.85rem;
+                    font-weight: 500;
+                    color: #8ab0d0;
+                }
+
+                @media (max-width: 400px) {
+                    .cryo-player { width: 300px; padding: 0.8rem 1rem; }
+                    .cryo-btn { width: 46px; height: 46px; font-size: 1.1rem; }
+                    .cryo-btn-play { width: 52px; height: 52px; font-size: 1.3rem; }
+                }
+            </style>
+
+            <script>
+                // Ticker animation
+                const stations = [
+                    'Relaxing, Sleepy Thunderstorms',
+                    'Ambient', 'Chill', 'Jazz', 'Country',
+                    'New in Pop', 'Rock Station', 'R&B Now',
+                    'Big Band & Swing', 'Jazz Age', 'Ragtime & Classics',
+                    'Infinite Rain', 'Forest Sounds', 'Babbling Brook',
+                    'Ocean Waves & Thunder', 'Pure Focus', '432 Hz Calm Breathing'
+                ];
+                const categories = [
+                    'NATURE SOUNDS', 'MUSIC', 'MUSIC', 'MUSIC', 'MUSIC',
+                    'MUSIC', 'MUSIC', 'MUSIC',
+                    'MUSIC', 'MUSIC', 'MUSIC',
+                    'NATURE SOUNDS', 'NATURE SOUNDS', 'NATURE SOUNDS',
+                    'NATURE SOUNDS', 'FOCUS', 'FOCUS'
+                ];
+                let currentStation = 0;
+                let isPlaying = false;
+
+                const playBtn = document.getElementById('playBtn');
+                const stationEl = document.getElementById('stationName');
+                const categoryEl = stationEl.nextElementSibling;
+                const trackEl = document.getElementById('trackName');
+                const timerEl = document.getElementById('sleepTimer');
+
+                playBtn.addEventListener('click', function() {
+                    isPlaying = !isPlaying;
+                    this.innerHTML = isPlaying ? '&#9646;&#9646;' : '&#9208;';
+                    if (isPlaying) trackEl.textContent = 'Now Playing';
+                });
+
+                document.getElementById('stopBtn').addEventListener('click', function() {
+                    isPlaying = false;
+                    playBtn.innerHTML = '&#9208;';
+                    trackEl.textContent = 'App Preview';
+                });
+
+                document.getElementById('nextBtn').addEventListener('click', function() {
+                    currentStation = (currentStation + 1) % stations.length;
+                    stationEl.textContent = stations[currentStation];
+                    categoryEl.textContent = categories[currentStation];
+                });
+
+                document.getElementById('prevBtn').addEventListener('click', function() {
+                    currentStation = (currentStation - 1 + stations.length) % stations.length;
+                    stationEl.textContent = stations[currentStation];
+                    categoryEl.textContent = categories[currentStation];
+                });
+
+                document.getElementById('settingsBtn').addEventListener('click', function() {
+                    timerEl.style.display = timerEl.style.display === 'none' ? 'inline' : 'none';
+                    timerEl.textContent = '\u263D 58:10';
+                });
+
+                // Live clock in ticker
+                function updateTicker() {
+                    const now = new Date();
+                    const h = String(now.getHours()).padStart(2, '0');
+                    const m = String(now.getMinutes()).padStart(2, '0');
+                    const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+                    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                    document.getElementById('tickerText').textContent =
+                        h + ':' + m + ' \u00B7 ' + days[now.getDay()] + ' ' + months[now.getMonth()] + ' ' +
+                        String(now.getDate()).padStart(2, '0') + ' \u00B7 Surfside Beach';
+                }
+                setInterval(updateTicker, 10000);
+            </script>
 
             <div class="screenshots">
                 <img src="cryotunes-screenshot1.png" alt="CryoTunes playing Thunderstorms">
