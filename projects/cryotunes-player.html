@@ -295,7 +295,7 @@
                     <!-- Transport Controls -->
                     <div class="cryo-transport">
                         <button class="cryo-btn" id="prevBtn" title="Previous">&#9194;</button>
-                        <button class="cryo-btn cryo-btn-play" id="playBtn" title="Play/Pause">&#9208;</button>
+                        <button class="cryo-btn cryo-btn-play" id="playBtn" title="Play/Pause">&#9654;</button>
                         <button class="cryo-btn" id="nextBtn" title="Next">&#9193;</button>
                         <button class="cryo-btn cryo-btn-stop" id="stopBtn" title="Stop">&#9209;</button>
                     </div>
@@ -467,13 +467,13 @@
 
                 playBtn.addEventListener('click', function() {
                     isPlaying = !isPlaying;
-                    this.innerHTML = isPlaying ? '&#9646;&#9646;' : '&#9208;';
+                    this.innerHTML = isPlaying ? '&#9646;&#9646;' : '&#9654;';
                     if (isPlaying) trackEl.textContent = 'Now Playing';
                 });
 
                 document.getElementById('stopBtn').addEventListener('click', function() {
                     isPlaying = false;
-                    playBtn.innerHTML = '&#9208;';
+                    playBtn.innerHTML = '&#9654;';
                     trackEl.textContent = 'App Preview';
                 });
 
