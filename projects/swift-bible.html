@@ -1,0 +1,407 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude's X26 Swift6 Bible - Michael Lee Fluharty</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .fixed-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../IMG_7907.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -1;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .project-hero {
+            text-align: center;
+            padding: 3rem 2rem;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 12px;
+            margin: 2rem 0;
+            color: white;
+        }
+
+        .project-hero h1 {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .project-hero .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .project-hero .cover-image {
+            max-width: 300px;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: rgba(102, 126, 234, 0.8);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            margin: 0.5rem;
+        }
+
+        .project-section {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            color: white;
+        }
+
+        .project-section h2 {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .project-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-item {
+            background-color: rgba(102, 126, 234, 0.2);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-item h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .companion-apps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .app-card {
+            background-color: rgba(102, 126, 234, 0.15);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .app-card h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .app-card .app-status {
+            font-size: 0.85rem;
+            color: #4ecdc4;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-list {
+            columns: 2;
+            column-gap: 2rem;
+            margin: 1rem 0;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.4rem;
+            font-size: 1rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: rgba(102, 126, 234, 0.9);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .cta-button.secondary {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .tech-tag {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .back-button {
+            text-align: center;
+            margin: 3rem 0 2rem;
+        }
+
+        .back-button a {
+            display: inline-block;
+            background-color: rgba(102, 126, 234, 0.8);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .project-hero h1 {
+                font-size: 2rem;
+            }
+
+            .project-hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            .project-hero .cover-image {
+                max-width: 220px;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            .toc-list {
+                columns: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fixed-background"></div>
+    <div class="content-wrapper">
+        {% include _header.html %}
+        {% include _nav.html %}
+
+        <main>
+            <div class="project-hero">
+                <img src="swift-bible-cover.jpg" alt="Claude's X26 Swift6 Bible" class="cover-image">
+                <h1>Claude's X26 Swift6 Bible</h1>
+                <p class="tagline">Learn iOS development by building real App Store apps</p>
+                <span class="badge">Book</span>
+                <span class="badge">Swift 6</span>
+                <span class="badge">Xcode 26</span>
+                <span class="badge">Free</span>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="https://github.com/fluhartyml/Claudes-Xcode-26-Swift-Bible" target="_blank" class="cta-button">
+                    View on GitHub
+                </a>
+                <a href="https://github.com/fluhartyml/Claudes-Xcode-26-Swift-Bible/wiki" target="_blank" class="cta-button secondary">
+                    Documentation
+                </a>
+            </div>
+
+            <div class="project-section">
+                <h2>About</h2>
+                <p>Claude's X26 Swift6 Bible teaches iOS, iPadOS, macOS, and tvOS development through real apps that ship to the App Store. No hypothetical exercises. Every example is a working app you can download, run, and study.</p>
+                <p>The book covers SwiftUI, SwiftData, MusicKit, WeatherKit, WidgetKit, App Groups, App Store submission, and the full lifecycle from empty Xcode project to published app. Each chapter builds on the last, and every companion app includes an Under the Hood tab where you can browse and copy the source code directly from your phone.</p>
+                <p>Written by Dr. Wahl (Michael Lee Fluharty) and Claude A. (Anthropic).</p>
+            </div>
+
+            <div class="project-section">
+                <h2>What You'll Learn</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h3>SwiftUI</h3>
+                        <p>Views, navigation, text input, alerts, sheets, TabView, NavigationSplitView</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>SwiftData</h3>
+                        <p>Data persistence, @Model, @Query, ModelContainer, App Group shared stores</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>WidgetKit</h3>
+                        <p>Home screen widgets with timeline providers and shared data</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>App Store Submission</h3>
+                        <p>Archive, validate, upload, App Store Connect, handling rejections</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>UIKit Bridging</h3>
+                        <p>UIViewRepresentable, WKWebView, UIImagePickerController, MFMailComposeViewController</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Git & GitHub</h3>
+                        <p>Version control, remote repos, branching, collaboration</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h2>Table of Contents</h2>
+                <h3 style="color: #667eea; margin-bottom: 0.5rem;">Part I: Introduction</h3>
+                <ul class="toc-list">
+                    <li>Chapter 1: Introducing Swift & Xcode</li>
+                    <li>Chapter 2: Introducing SwiftUI Views</li>
+                    <li>Chapter 3: Introducing Scenes & Windows</li>
+                </ul>
+                <h3 style="color: #667eea; margin: 1rem 0 0.5rem;">Part II: The User Interface</h3>
+                <ul class="toc-list">
+                    <li>Chapter 4: UI Components</li>
+                    <li>Chapter 5: Lists & Grids</li>
+                    <li>Chapter 6: Images & SF Symbols</li>
+                    <li>Chapter 7: Navigation</li>
+                    <li>Chapter 8: Sheets & Alerts</li>
+                    <li>Chapter 9: Text Input</li>
+                    <li>Chapter 10: Pickers & Toggles</li>
+                    <li>Chapter 11: FileManager & Documents</li>
+                    <li>Chapter 12: Communication</li>
+                </ul>
+                <h3 style="color: #667eea; margin: 1rem 0 0.5rem;">Part III: The Application</h3>
+                <ul class="toc-list">
+                    <li>Chapter 13: Multi-Window Apps</li>
+                    <li>Chapter 14: Clipboard & Drag-Drop</li>
+                    <li>Chapter 15: Data Persistence</li>
+                    <li>Chapter 16: Extensions</li>
+                    <li>Chapter 17: Charts</li>
+                </ul>
+                <h3 style="color: #667eea; margin: 1rem 0 0.5rem;">Part IV: Advanced Techniques</h3>
+                <ul class="toc-list">
+                    <li>Chapter 18: Error Handling</li>
+                    <li>Chapter 19: Custom Views</li>
+                    <li>Chapter 20: Performance Optimization</li>
+                </ul>
+                <h3 style="color: #667eea; margin: 1rem 0 0.5rem;">Part V: The Modern Toolchain</h3>
+                <ul class="toc-list">
+                    <li>Chapter 21: Git & GitHub</li>
+                    <li>Chapter 22: AI Chatbot Integration</li>
+                </ul>
+            </div>
+
+            <div class="project-section">
+                <h2>Companion Apps</h2>
+                <p>Every companion app ships to the App Store with the same template: the core feature, Under the Hood source code browser with one-tap copy, and Contact Developer feedback form.</p>
+                <div class="companion-apps">
+                    <div class="app-card">
+                        <h3>QuickNote by Claude</h3>
+                        <p class="app-status">Live on App Store</p>
+                        <p>Notes with photo attachments, camera capture, and a home screen widget. Teaches SwiftData, App Groups, WidgetKit, and PhotosPicker.</p>
+                        <a href="https://apps.apple.com/app/quicknote-by-claude/id6761924849" target="_blank" style="color: #667eea;">App Store</a>
+                    </div>
+                    <div class="app-card">
+                        <h3>Wraply</h3>
+                        <p class="app-status">In Development</p>
+                        <p>Web browser with bookmarks, share sheet, and kiosk mode. Teaches WKWebView, UIViewRepresentable, SwiftData persistence, and SF Symbols.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h2>Real App Store Apps as Examples</h2>
+                <p>The book references real, published apps throughout its chapters:</p>
+                <div class="companion-apps">
+                    <div class="app-card">
+                        <h3>CryoTunes Player</h3>
+                        <p class="app-status">Live on App Store</p>
+                        <p>Retro music player with 80+ stations. MusicKit, WeatherKit, shared Swift packages.</p>
+                    </div>
+                    <div class="app-card">
+                        <h3>Tally Matrix Clock</h3>
+                        <p class="app-status">Live on App Store</p>
+                        <p>tvOS digital clock. Scene lifecycle, focus system, Apple TV development.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h2>Technical Details</h2>
+                <div class="tech-stack">
+                    <span class="tech-tag">Swift 6</span>
+                    <span class="tech-tag">SwiftUI</span>
+                    <span class="tech-tag">SwiftData</span>
+                    <span class="tech-tag">Xcode 26</span>
+                    <span class="tech-tag">WidgetKit</span>
+                    <span class="tech-tag">MusicKit</span>
+                    <span class="tech-tag">WeatherKit</span>
+                    <span class="tech-tag">WebKit</span>
+                </div>
+                <p><strong>Authors:</strong> Dr. Wahl (Michael Lee Fluharty, AS CEEET) & Claude A. (Anthropic)</p>
+                <p><strong>Price:</strong> Free</p>
+                <p><strong>License:</strong> GPL v3 — Share and share alike with attribution required</p>
+            </div>
+
+            <div class="back-button">
+                <a href="../projects.html">&larr; Back to Projects</a>
+            </div>
+        </main>
+
+        {% include _footer.html %}
+    </div>
+</body>
+</html>
