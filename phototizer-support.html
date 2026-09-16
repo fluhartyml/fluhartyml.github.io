@@ -16,6 +16,10 @@
         .primary-link:hover { background-color: #0077ed; }
         .secondary-link { display: inline-block; color: #0071e3; padding: 0.85rem 1.4rem; border: 1px solid #0071e3; border-radius: 8px; text-decoration: none; font-size: 1.05rem; margin: 1rem 0.5rem 1rem 0; font-weight: 500; }
         .secondary-link:hover { background-color: #f0f9ff; }
+        .hero { display: block; width: 160px; height: 160px; border-radius: 22.5%; box-shadow: 0 4px 14px rgba(0,0,0,0.18); margin: 0 0 1.5rem 0; }
+        figure { margin: 1.5rem 0; text-align: center; }
+        figure img { max-width: 100%; width: 300px; border-radius: 18px; box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
+        figcaption { color: #86868b; font-size: 0.95rem; margin-top: 0.5rem; }
         .footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #e0e0e0; font-size: 0.9rem; color: #86868b; }
         .footer a { color: #0071e3; text-decoration: none; }
         .footer a:hover { text-decoration: underline; }
@@ -24,6 +28,7 @@
 <body>
 <div class="container">
 
+<img class="hero" src="media/phototizer/phototizer-icon.png" alt="Phototizer app icon">
 <h1>Phototizer</h1>
 <p class="subtitle">Scan prints straight to your camera roll. For iPhone and iPad.</p>
 
@@ -32,14 +37,41 @@
 <h2>How it works</h2>
 <ul>
     <li><strong>Scan Photos</strong> opens the camera. Frame a print and capture it; the edges are found for you.</li>
+    <li><strong>Keep</strong> the capture, or <strong>Retake</strong> it. Drag a corner if the edge needs adjusting.</li>
     <li><strong>Shoot as many as you like</strong> in one pass. Each capture is its own page.</li>
     <li><strong>Tap Save</strong> in the scanner and each one is added to your camera roll. The screen tells you how many were saved.</li>
     <li><strong>Scan More</strong> starts the next stack.</li>
 </ul>
 
+<figure>
+    <img src="media/phototizer/phototizer-001.jpg" alt="Phototizer's main screen with the Scan Photos button">
+    <figcaption>One button. Point at a print and start.</figcaption>
+</figure>
+<figure>
+    <img src="media/phototizer/phototizer-003.jpg" alt="The scanner framing a photograph on a table">
+    <figcaption>Frame a print. The scanner finds its edges.</figcaption>
+</figure>
+<figure>
+    <img src="media/phototizer/phototizer-004.jpg" alt="A captured print with corner handles and Retake and Keep buttons">
+    <figcaption>Keep it, retake it, or drag a corner to adjust.</figcaption>
+</figure>
+<figure>
+    <img src="media/phototizer/phototizer-007.jpg" alt="The saved, straightened photograph">
+    <figcaption>The result: the print, straightened and cropped, in your camera roll.</figcaption>
+</figure>
+
 <h2>Permissions</h2>
 <p><strong>Camera</strong> is used to scan. <strong>Photos</strong> is asked for add-only access: Phototizer can put photographs into your library and can never read, browse or change what is already there. If you declined it, the app shows an <strong>Open Settings</strong> button so you can turn it on.</p>
 <p>No location is added to the saved photographs, and nothing leaves your device.</p>
+
+<figure>
+    <img src="media/phototizer/phototizer-002.jpg" alt="The camera permission prompt">
+    <figcaption>Camera access: how each print is photographed. Nothing is stored inside the app.</figcaption>
+</figure>
+<figure>
+    <img src="media/phototizer/phototizer-005.jpg" alt="The add-only photo library permission prompt">
+    <figcaption>Add-only Photos access: your photo library is never read.</figcaption>
+</figure>
 
 <h2>Documentation</h2>
 <p>
