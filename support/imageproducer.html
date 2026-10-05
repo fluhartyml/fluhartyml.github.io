@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - Image Producer</title>
+    <!-- ONE DOCUMENT, TWO PLACES. This page is the support page AND the shop manual — his
+         ruling, 2026-10-04: "make the chiltons and support page exact copies of each other",
+         merging everything both had ("dont remove, why remove, merge and add"). The copy at
+         CLI Claude.Apartment/Workshop/Image-Producer-Manual/ is byte-identical to this file.
+         Edit HERE, then copy it there; never edit the two separately.
+         Support section standard (2026-09-28): fluharty.me/support/{app}.html. Not listed in
+         support/index.html, which lists only apps live on the App Store. -->
+    <style>
+        :root { color-scheme: light dark; }
+        html { font-size: 18px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; line-height: 1.6; color: #333; max-width: 960px; margin: 0 auto; padding: 2rem; background-color: #f5f5f7; }
+        .container { background-color: white; padding: 3rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { color: #1d1d1f; font-size: 2.4rem; margin-bottom: 0.5rem; }
+        h2 { color: #1d1d1f; font-size: 1.6rem; margin-top: 2.5rem; margin-bottom: 0.75rem; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3rem; }
+        h3 { color: #1d1d1f; font-size: 1.25rem; margin-top: 1.8rem; margin-bottom: 0.4rem; }
+        p, li { margin: 0.5rem 0; }
+        ol, ul { padding-left: 1.6rem; }
+        .subtitle { color: #6e6e73; font-size: 1.15rem; margin-bottom: 1.5rem; }
+        .secondary-link { display: inline-block; color: #0071e3; padding: 0.85rem 1.4rem; border: 1px solid #0071e3; border-radius: 8px; text-decoration: none; font-size: 1.05rem; margin: 1rem 0.5rem 1rem 0; font-weight: 500; }
+        .secondary-link:hover { background-color: #f0f9ff; }
+        .banner { display: block; width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.18); margin: 0 0 1.5rem 0; }
+        figure { margin: 1.5rem 0; text-align: center; }
+        figure img { max-width: 100%; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
+        figcaption { color: #6e6e73; font-size: 1rem; margin-top: 0.5rem; }
+        .callouts { position: relative; display: inline-block; max-width: 100%; }
+        .callouts img { display: block; width: 100%; }
+        .badge { position: absolute; transform: translate(-50%, -50%); width: 1.75em; height: 1.75em; border-radius: 50%;
+                 display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: clamp(13px, 2.2vw, 20px);
+                 color: #fff; background: radial-gradient(circle at 35% 30%, #4da3ff, #0071e3 55%, #00479a);
+                 border: 2px solid #fff; box-shadow: 0 3px 6px rgba(0,0,0,.45), inset 0 2px 2px rgba(255,255,255,.55), inset 0 -2px 3px rgba(0,0,0,.35);
+                 text-shadow: 0 -1px 0 rgba(0,0,0,.45), 0 1px 0 rgba(255,255,255,.25); }
+        ol.keyed { list-style: none; padding-left: 0; counter-reset: k; }
+        ol.keyed li { counter-increment: k; position: relative; padding-left: 2.6em; margin: 0.7rem 0; }
+        ol.keyed li::before { content: counter(k); position: absolute; left: 0; top: 0.05em; width: 1.8em; height: 1.8em; border-radius: 50%;
+                 display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95em; color: #fff;
+                 background: radial-gradient(circle at 35% 30%, #4da3ff, #0071e3 55%, #00479a); border: 2px solid #fff;
+                 box-shadow: 0 2px 4px rgba(0,0,0,.4), inset 0 2px 2px rgba(255,255,255,.55), inset 0 -2px 3px rgba(0,0,0,.35); }
+        .note { background: #f0f9ff; border-left: 4px solid #0071e3; padding: 0.7rem 1rem; margin: 1rem 0; border-radius: 4px; }
+        .tip { background: #e6f7ef; border-left: 4px solid #0a6b45; padding: 0.7rem 1rem; margin: 1rem 0; border-radius: 4px; }
+        .caution { background: #fff4e5; border-left: 4px solid #c46a00; padding: 0.7rem 1rem; margin: 1rem 0; border-radius: 4px; }
+        .result { font-style: italic; }
+        table { border-collapse: collapse; width: 100%; margin: 0.8rem 0 1.2rem 0; font-size: 1rem; }
+        th, td { border: 1px solid #e0e0e0; padding: 0.45rem 0.6rem; text-align: left; vertical-align: top; }
+        th { background: #f5f5f7; color: #1d1d1f; }
+        code { background: #f2f2f4; padding: 0.05em 0.3em; border-radius: 3px; }
+        .toc a { color: #0071e3; text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+        .fixed { display: inline-block; font-size: 0.85rem; font-weight: 600; padding: 0 0.45em; border-radius: 3px; background: #e8f2fc; color: #0b5cad; margin-right: 0.3em; }
+        .footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #e0e0e0; font-size: 1rem; color: #6e6e73; }
+        .footer a { color: #0071e3; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        /* Follows the viewer's light or dark mode — his rule, 2026-10-03. */
+        @media (prefers-color-scheme: dark) {
+            body { background-color: #000; color: #e5e5ea; }
+            .container { background-color: #1c1c1e; box-shadow: none; }
+            h1, h2, h3, th { color: #f5f5f7; }
+            h2, th, td, .footer { border-color: #3a3a3c; }
+            th { background: #2c2c2e; }
+            .subtitle, figcaption, .footer { color: #a1a1a6; }
+            .note { background: #0a2540; }
+            .tip { background: #0b2e22; }
+            .caution { background: #3a2500; }
+            code { background: #2c2c2e; }
+            .fixed { background: #0a2540; color: #8cc4ff; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<img class="banner" src="../media/imageproducer/imageproducer-banner-2.png" alt="Image Producer — now with Image Playground">
+<h1>Image Producer</h1>
+<p class="subtitle">A layered image editor for Mac and iPad. Draw, cut out, key out a color, add a glow, generate with Image Playground, and make stop-motion animation.</p>
+
+<p>
+    <a class="secondary-link" href="https://github.com/fluhartyml/Image-Producer">GitHub Repository</a>
+    <a class="secondary-link" href="index.html">All Support Pages</a>
+</p>
+
+<p class="toc"><strong>On this page:</strong>
+<a href="#start">Getting started</a> ·
+<a href="#window">The window</a> ·
+<a href="#files">Saving and going back</a> ·
+<a href="#layers">Layers</a> ·
+<a href="#tools">The tools</a> ·
+<a href="#examples">Projects to try</a> ·
+<a href="#export">Exporting</a> ·
+<a href="#trouble">Troubleshooting</a> ·
+<a href="#bulletins">Service bulletins</a> ·
+<a href="#help">Need help?</a></p>
+
+<h2 id="start">Getting started</h2>
+<ol>
+    <li><strong>New Image</strong> makes a new picture and saves it to iCloud Drive with a number for a name, like ImageProducer0024. On the iPad, Image Producer asks for a name and a size first. On the Mac, press ⌘N.</li>
+    <li><strong>New from Import…</strong> starts a new picture from a photo or a PDF. The photo or PDF itself is never changed. On the Mac, press ⇧⌘N.</li>
+    <li>Image Producer saves your work by itself a moment after you stop.</li>
+</ol>
+<div class="note"><strong>One rule runs the whole app:</strong> a tool works on the layer selected in the Layers list. Select the layer first, then use the tool. Each tool’s panel names the layer the tool will change.</div>
+<div class="note"><strong>There is no ⌘Z.</strong> Most tools put their result on a new layer and hide the original underneath it. To go back, delete the new layer and turn the original back on. The History tab can also take you back to any earlier step.</div>
+
+<h2 id="window">The window</h2>
+<!-- BOTH PLATFORMS, SAME NUMBERS — his ruling, 2026-10-04: "it should show both an ipad
+     AND a Mac screenshot". Badge positions are percentages of each screenshot. -->
+<figure>
+    <div class="callouts">
+        <img src="../media/imageproducer/imageproducer-stack-step5.jpg" alt="The Image Producer window on iPad, with numbered parts">
+        <span class="badge" style="left:25%;top:13%">1</span>
+        <span class="badge" style="left:34%;top:88%">2</span>
+        <span class="badge" style="left:64%;top:8.5%">3</span>
+        <span class="badge" style="left:80%;top:10.7%">4</span>
+        <span class="badge" style="left:30%;top:96.4%">5</span>
+        <span class="badge" style="left:44%;top:75%">6</span>
+        <span class="badge" style="left:9.5%;top:72%">7</span>
+        <span class="badge" style="left:84%;top:5.2%">8</span>
+    </div>
+    <figcaption>iPad. The numbers match the list below.</figcaption>
+</figure>
+<div class="note">The tool panel and Layers share the right half. Tapping or clicking one widens it.</div>
+<ol class="keyed">
+    <li><strong>Canvas</strong> — the left half of the window.</li>
+    <li><strong>Tool box</strong> — two rows of tools under the canvas. The chosen tool is tinted; on the Mac, hover one to see its name.</li>
+    <li><strong>Tool panel</strong> — the settings for the chosen tool. The top of the panel names the tool and the selected layer.</li>
+    <li><strong>Layers / History</strong> — a two-way switch at the top of the right column.</li>
+    <li><strong>Status line</strong> — the thin line along the bottom. After every action the status line says what just happened.</li>
+    <li><strong>Zoom controls</strong> — full-screen canvas, fit width, zoom in, the zoom level (tap or click to return to 100%), zoom out.</li>
+    <li><strong>Floating preview</strong> — a small copy of your picture at real size, whatever the zoom. Drag the preview to any corner.</li>
+    <li><strong>Window toolbar</strong> (top right): Export, Share, Save to Desktop (Mac), and About Image Producer.</li>
+</ol>
+<figure>
+    <div class="callouts">
+        <img src="../media/imageproducer/imageproducer-window-mac.jpg" alt="The Image Producer window on Mac, with numbered parts">
+        <span class="badge" style="left:25%;top:8%">1</span>
+        <span class="badge" style="left:27%;top:92%">2</span>
+        <span class="badge" style="left:64%;top:7%">3</span>
+        <span class="badge" style="left:78.5%;top:6.7%">4</span>
+        <span class="badge" style="left:24%;top:98.5%">5</span>
+        <span class="badge" style="left:45.8%;top:80.5%">6</span>
+        <span class="badge" style="left:8%;top:7%">7</span>
+        <span class="badge" style="left:86.5%;top:3.5%">8</span>
+    </div>
+    <figcaption>Mac. The same parts, numbered the same way.</figcaption>
+</figure>
+
+
+<h2 id="files">Saving and going back</h2>
+<ul>
+    <li>Image Producer saves on its own. The status line says “Autosaving…” and then “Autosaved”.</li>
+    <li>On the Mac, ⌘S also saves and marks the spot, so <strong>File ▸ Revert to Last Save…</strong> can return there.</li>
+    <li>Opening a picture marks that spot too, so <strong>File ▸ Revert to Open…</strong> can return there.</li>
+</ul>
+<div class="caution">Revert to Open and Revert to Last Save throw away everything after that spot, including History. Both spots are forgotten when you quit.</div>
+<h3>History</h3>
+<ul>
+    <li>Open the <strong>History</strong> tab and tap or click a step to look at it. Looking changes nothing.</li>
+    <li>To go back to that step for good, press <strong>Keep this step</strong> at the top of History. The newer steps are deleted, and Image Producer asks first.</li>
+    <li>Long-press (iPad) or right-click (Mac) a step for <strong>Restore from This Step</strong> or <strong>Delete This Step</strong>.</li>
+    <li>The <strong>⋯</strong> menu has <strong>Optimize History</strong>, which makes the file smaller and keeps every step, and <strong>Purge History…</strong>, which keeps the picture and erases the steps.</li>
+</ul>
+<div class="tip">If History grows past 250 MB, Image Producer warns you. Try Optimize History first.</div>
+
+<h2 id="layers">Layers</h2>
+<ul>
+    <li>Each layer has a checkbox, a name and an eye. The checkbox is for merging and linking, not for selecting. A green eye means the layer shows; a red crossed-out eye means the layer is hidden.</li>
+    <li>Tap or click a layer’s name to select the layer. Drag to change the order. On the iPad, drag by the handle at the right.</li>
+    <li><strong>+</strong> adds a new layer above the selected one.</li>
+    <li>Long-press (iPad) or right-click (Mac) a layer for <strong>Rename</strong>, <strong>Duplicate</strong> and <strong>Delete</strong>.</li>
+    <li><strong>Merge:</strong> check two or more layers and press Merge. The layers become one picture on a new layer, and the originals are kept, hidden.</li>
+    <li><strong>Link:</strong> check two or more layers and press Link. Moving or resizing one linked layer moves them all, and each layer stays editable.</li>
+</ul>
+<div class="note">Light and Dark are the bottom two layers. They become the light and dark versions when you export an Icon Set.</div>
+
+<h2 id="tools">The tools</h2>
+<p>Every picture opens on the Canvas tool. Tap or click <strong>ⓘ</strong> in a panel for more about that setting.</p>
+
+<h3>Canvas</h3>
+<p>The picture’s name, size, print settings and exports.</p>
+<figure>
+    <img src="../media/imageproducer/imageproducer-canvas-inspector.jpg" alt="The Canvas panel">
+    <figcaption>The Canvas panel: project name, size and resolution, print setup, and export.</figcaption>
+</figure>
+<ul>
+    <li><strong>Project name</strong> renames the file. Type the new name and press Return.</li>
+    <li><strong>Resolution:</strong> for printing, set the resolution first — 300 is standard for print.</li>
+    <li><strong>Size:</strong> type the width and height, or choose from <strong>Canvas size presets</strong>. The presets are grouped by job: App Store Connect, Wallpapers, Social, Apple TV, Web ads, Paper, Posters, Signs &amp; flyers, Event &amp; stationery, Cards &amp; envelopes, and Photo. Each preset shows its size and whether it is horizontal, vertical or square.</li>
+    <li><strong>Size rule</strong> decides what happens when you change the width or height:
+        <ul>
+            <li><em>Exact</em> — type any width and height.</li>
+            <li><em>Fixed ratio</em> — the shape stays the same; change one side and the other follows.</li>
+            <li><em>Fluid width</em> — the height stays put and the width can grow or shrink. <em>Fluid height</em> is the reverse. The picture keeps its size and stays centered; only the canvas around it changes.</li>
+        </ul></li>
+    <li><strong>Landscape</strong> swaps the width and the height. A square canvas does not change.</li>
+    <li><strong>Print setup:</strong> bleed, safe margin, crop marks, registration marks, and RGB or CMYK. Each one has an ⓘ that explains it.</li>
+    <li><strong>Export:</strong> Print PDF, a web folder of PNGs, every app-icon size, or <strong>Single image…</strong> for one PNG, JPEG, TIFF or PDF.</li>
+</ul>
+<div class="note">The first time you rename a numbered picture, the file is renamed. After that, each rename saves a copy under the new name and keeps the old file.</div>
+<div class="note">A print PDF over 150 MB shows a warning, because some print shops will not take a bigger file. The PDF is still saved.</div>
+
+<h3>Color Palette</h3>
+<p>Every color in the app comes from the palette. Tap or click a swatch to use the color, and change the color with the picker. <strong>Add color</strong> and <strong>Remove</strong> grow and shrink the palette. <strong>Save Palette</strong> and <strong>Load Palette</strong> move a palette between pictures.</p>
+<figure>
+    <img src="../media/imageproducer/imageproducer-color-palette.jpg" alt="The Color Palette panel">
+    <figcaption>The Color Palette panel: the eight starting colors, Add color, and Save Palette and Load Palette.</figcaption>
+</figure>
+
+<h3>Move / Transform</h3>
+<figure>
+    <img src="../media/imageproducer/imageproducer-move-no-layer.jpg" alt="Move / Transform with no layer selected">
+    <figcaption>With no layer selected, the Move / Transform panel asks you to pick a layer first.</figcaption>
+</figure>
+<ol>
+    <li>Select the layer.</li>
+    <li>Drag inside the dashed box to move the layer. Drag a corner to resize the layer.</li>
+    <li>Or use the <strong>Scale</strong> and <strong>Rotation</strong> sliders. <strong>Fit</strong> puts the picture inside the canvas; <strong>Fill</strong> covers the whole canvas.</li>
+    <li>Choose another tool when you are done. The original is kept underneath, hidden.</li>
+</ol>
+<p>Crop is here too: choose a shape, adjust the box, then press <strong>Apply Crop</strong>.</p>
+<figure>
+    <img src="../media/imageproducer/imageproducer-move-scale.jpg" alt="Scaling a layer with the sliders">
+    <figcaption>A lighthouse cutout made smaller with the Scale slider.</figcaption>
+</figure>
+
+<h3>Mask</h3>
+<p>The mask marks the part of the picture to keep. Everything outside the mask goes dim, and exports keep only what is inside. The mask can be a rectangle, an oval, a polygon, a star, a typed character or a symbol. The mask never changes your picture.</p>
+<ol>
+    <li>Press <strong>Add Mask</strong>.</li>
+    <li>Drag a corner to resize the mask. Drag inside to move the mask.</li>
+    <li><strong>Remove Mask</strong> takes the mask off.</li>
+</ol>
+<figure>
+    <img src="../media/imageproducer/imageproducer-mask-empty.jpg" alt="The Mask panel before a mask is added">
+    <figcaption>The Mask panel before a mask is added: press Add Mask to start.</figcaption>
+</figure>
+
+<h3>Paint Drop / Bucket</h3>
+<ul>
+    <li><strong>Fill Layer</strong> fills the whole selected layer with the color.</li>
+    <li>On a picture, move over an area to see what will fill, then tap or click inside an outlined area to pour the color up to the outline. <strong>Tolerance</strong> sets how strict the outline is.</li>
+</ul>
+<div class="caution">Fill Layer fills the entire layer. To change the color of a symbol, use the Symbol tool instead.</div>
+<figure>
+    <img src="../media/imageproducer/imageproducer-paint-bucket.jpg" alt="The Paint Drop / Bucket panel">
+    <figcaption>The Paint Drop / Bucket panel.</figcaption>
+</figure>
+<figure>
+    <img src="../media/imageproducer/imageproducer-paint-bucket-mac.jpg" alt="The Paint Drop / Bucket panel with only Fill Layer showing">
+    <figcaption>With no picture layer selected, the panel shows only Fill Layer. Select a layer with a picture to pour color up to its outlines.</figcaption>
+</figure>
+
+<h3>Pen (Pixels)</h3>
+<p>The Pen draws in squares, like graph paper. Each layer has its own grid size. Choose a color and drag on the canvas. Switch to <strong>Erase</strong> to take squares away. On the Mac, dragging with a right-click also erases.</p>
+<figure>
+    <img src="../media/imageproducer/imageproducer-pen-grid.jpg" alt="The Pen grid over the canvas">
+    <figcaption>Choosing the Pen shows its grid over the canvas. Select a layer to start drawing.</figcaption>
+</figure>
+
+<h3>Eraser</h3>
+<figure>
+    <img src="../media/imageproducer/imageproducer-eraser-empty.jpg" alt="The Eraser panel with no layer selected">
+    <figcaption>The Eraser asks for a layer that holds a picture before it shows Brush and Magic.</figcaption>
+</figure>
+<ul>
+    <li><strong>Brush</strong> — drag to erase by hand.</li>
+    <li><strong>Magic</strong> — pick the background color with the Eyedropper, raise <strong>Tolerance</strong> until the whole background turns magenta, then press <strong>Erase Color → Transparent</strong>.</li>
+</ul>
+<div class="tip">Fill a layer with black behind the picture before you erase. Leftover bits are much easier to see against black.</div>
+<figure>
+    <img src="../media/imageproducer/imageproducer-eraser-backdrop.jpg" alt="Erasing against a black backdrop">
+    <figcaption>Black behind the lighthouse shows a leftover wisp of cloud.</figcaption>
+</figure>
+<figure>
+    <img src="../media/imageproducer/imageproducer-eraser-cloud-erased.jpg" alt="The cloud erased by hand">
+    <figcaption>The cloud erased by hand.</figcaption>
+</figure>
+
+<h3>Eyedropper</h3>
+<p>Tap or click the picture to pick up a color. The color goes into the palette and becomes the color for filling and drawing. A bigger <strong>Sample size</strong> averages more of the picture, for a steadier color on a soft background.</p>
+<figure>
+    <img src="../media/imageproducer/imageproducer-eyedropper.jpg" alt="The Eyedropper panel">
+    <figcaption>The Eyedropper panel: Sample size, and the color you picked.</figcaption>
+</figure>
+
+<h3>Text</h3>
+<ol>
+    <li>Type in the Text field.</li>
+    <li>Press <strong>New Text Layer</strong>. The new layer is named after its words.</li>
+    <li>Choose a font, a size, a color, and bold, italic or underline. Every change shows right away.</li>
+    <li>Press Return to finish a line, type the next line, and press New Text Layer again.</li>
+    <li>Use Move to place the text.</li>
+</ol>
+<figure>
+    <img src="../media/imageproducer/imageproducer-text-panel.jpg" alt="The Text panel">
+    <figcaption>The Text panel: the text field, New Text Layer, style buttons, Size, Font, and Insert glyph — tap or click a character to add it to your text.</figcaption>
+</figure>
+<p>Renaming a text layer changes the words on the canvas. Emoji are the exception: an emoji layer is named with the emoji’s name, like “Sunflower” for 🌻, and renaming the layer never changes the emoji.</p>
+<div class="tip"><strong>Outline</strong> draws an edge around the letters in any palette color. White letters with a thin black outline read well on a busy picture.</div>
+
+<h3>Symbol</h3>
+<figure>
+    <img src="../media/imageproducer/imageproducer-symbol-panel.jpg" alt="The Symbol panel">
+    <figcaption>The Symbol panel before a symbol is picked: Color, the search box, and the starting set.</figcaption>
+</figure>
+<ol>
+    <li>Pick a <strong>Color</strong>.</li>
+    <li>Search for a symbol, or tap or click one from the starting set. Nothing changes on the canvas yet — a preview in your color shows above the search box.</li>
+    <li>Press <strong>Create New Layer</strong> to add the symbol on a new layer, or <strong>Apply to Selected Layer</strong> to swap the symbol on the selected symbol layer.</li>
+</ol>
+<div class="tip">To recolor or replace a symbol you already placed, select the symbol’s layer, pick a color, tap the same symbol or a different one, and press Apply to Selected Layer. The symbol keeps its size and place.</div>
+<div class="caution">SF Symbols belong to Apple. Apple does not allow them, or anything that looks like them, in an app icon or a logo. They are fine in your own pictures.</div>
+
+<h3>Image</h3>
+<p><strong>Import Image to New Layer…</strong> adds a picture on a new layer named for the file. <strong>Import Image to Selected Layer…</strong> replaces what is on the selected layer. Use Move to size and place the picture. Image Producer opens PNG, JPEG, HEIC, TIFF, GIF and BMP, and on the Mac, PSD.</p>
+<figure>
+    <img src="../media/imageproducer/imageproducer-image-panel.jpg" alt="The Image panel">
+    <figcaption>The Image panel. Import Image to Selected Layer stays gray until a layer is selected.</figcaption>
+</figure>
+
+<h3>The Image Playground Tool</h3>
+<p>The Image Playground Tool hands your words to Apple’s Image Playground, Apple’s image generation on your own device. Turn on Apple Intelligence in Settings first. The Image Playground Tool works two ways:</p>
+<h4>Add a new layer</h4>
+<ol>
+    <li>Type a few key words in the Image Playground Tool’s box that describe what Apple’s Image Playground should make — not in Apple’s window.</li>
+    <li>Press <strong>Image Playground: New Layer</strong>.</li>
+    <li>Apple’s Image Playground opens with your key words. Make an image, choose a style if you like, and press <strong>Done</strong>.</li>
+</ol>
+<p>The picture is added on a new layer, named with your key words.</p>
+<h4>Restyle the selected layer</h4>
+<ol>
+    <li>Select a layer with a picture.</li>
+    <li>Press <strong>Filter → Edit Current Layer</strong>, choose a style in Apple’s Image Playground, and press <strong>Done</strong>.</li>
+</ol>
+<p>The restyled picture goes on a new layer above, and the original is kept underneath, hidden.</p>
+<figure>
+    <img src="../media/imageproducer/imageproducer-playground-sheet.jpg" alt="Image Playground with words typed">
+    <figcaption>Apple’s Image Playground window with your words in it.</figcaption>
+</figure>
+<figure>
+    <img src="../media/imageproducer/imageproducer-playground-result.jpg" alt="An Image Playground result">
+    <figcaption>The result, ready for Done.</figcaption>
+</figure>
+<figure>
+    <img src="../media/imageproducer/imageproducer-playground-layer-named.jpg" alt="Layer named from the typed words">
+    <figcaption>The new layer, named from the words: “sunflower illuminated black”.</figcaption>
+</figure>
+
+<h3>Layer… — Translucent, Glow, Green Key, Gradient, Blend</h3>
+<p>Five effects for the selected layer. You see each effect as you adjust it, and nothing is permanent until you press <strong>Apply</strong>. Apply keeps the original underneath, hidden.</p>
+<ul>
+    <li><strong>Translucent</strong> — makes the layer see-through.</li>
+    <li><strong>Glow</strong> — a soft glow around the picture, in one color (Neon) or two (Plasma).</li>
+    <li><strong>Green Key</strong> — makes one color disappear everywhere on the layer, like a green screen.</li>
+    <li><strong>Gradient</strong> — on an empty layer, a blend of two colors, with <strong>Blend starts</strong> and <strong>Blend ends</strong> to make the blend wide and soft or short and sharp; on a picture, a fade.</li>
+    <li><strong>Blend</strong> — mixes the layer with the layers below: darker, lighter, or more contrast. <strong>Strength</strong> sets how much.</li>
+</ul>
+<figure>
+    <img src="../media/imageproducer/imageproducer-layer-tool.jpg" alt="The Layer tool with its five sections">
+    <figcaption>Layer… with a layer selected and all five sections open: Translucent, Glow, Green Key, Gradient and Blend.</figcaption>
+</figure>
+<h4>Blend: light on black, over a photo</h4>
+<figure>
+    <img src="../media/imageproducer/imageproducer-blend-1-clouds.jpg" alt="Clouds alone">
+    <figcaption>1. The clouds on their own.</figcaption>
+</figure>
+<figure>
+    <img src="../media/imageproducer/imageproducer-blend-2-normal.jpg" alt="A glowing A on black, Blend set to Normal">
+    <figcaption>2. A glowing A on a black background, added above the clouds. On <strong>Normal</strong>, the black covers the clouds.</figcaption>
+</figure>
+<figure>
+    <img src="../media/imageproducer/imageproducer-blend-3-screen.jpg" alt="The A set to Screen over the clouds">
+    <figcaption>3. The same layer set to <strong>Screen</strong>. The black disappears and only the light stays, so the A glows in the sky.</figcaption>
+</figure>
+<figure>
+    <img src="../media/imageproducer/imageproducer-blend-4-strength.jpg" alt="Screen at 61 percent strength">
+    <figcaption>4. <strong>Strength</strong> at 61%: part way back toward Normal, so some of the black returns and the sky darkens around the A.</figcaption>
+</figure>
+
+<h4>Green Key on a black background</h4>
+<ol>
+    <li>Select the layer. Open <strong>Green Key</strong> and check <strong>Key this layer</strong>.</li>
+    <li>Pick black as the color to remove.</li>
+    <li>Keep <strong>Tolerance</strong> low, so only the background goes.</li>
+    <li>Raise <strong>Softness</strong> until soft light fades into the layer below instead of ending in a ragged edge.</li>
+    <li>Press <strong>Apply</strong>.</li>
+</ol>
+<div class="caution">Too much Softness also fades dark parts of your subject. Lower Softness to keep the subject solid.</div>
+<div class="caution">Glow needs an edge to glow from. A layer that fills the whole canvas, like Light or Dark, has no edge — select the layer with your picture.</div>
+<figure>
+    <img src="../media/imageproducer/imageproducer-layer-greenkey-open.jpg" alt="The Layer tool with Green Key open">
+    <figcaption>Layer… with Green Key open.</figcaption>
+</figure>
+<figure>
+    <img src="../media/imageproducer/imageproducer-greenkey-hard.jpg" alt="Green Key with Softness at 0">
+    <figcaption>Softness at 0: the black is gone, and the spotlight ends in a ragged edge.</figcaption>
+</figure>
+<figure>
+    <img src="../media/imageproducer/imageproducer-greenkey-soft.jpg" alt="Green Key with Softness raised">
+    <figcaption>Softness raised: the beam fades smoothly into the purple layer below.</figcaption>
+</figure>
+<figure>
+    <img src="../media/imageproducer/imageproducer-gradient-two-colors.jpg" alt="A two-color gradient on an empty layer">
+    <figcaption>Gradient on an empty layer: pick a From color, a To color and a direction. On a layer that already has a picture, Gradient shows sliders instead and fades the picture.</figcaption>
+</figure>
+<figure>
+    <img src="../media/imageproducer/imageproducer-gradient-blend-sliders.jpg" alt="A blue-to-purple gradient with the blend sliders">
+    <figcaption>Blue to purple, with the blend starting at 14% and ending at 63%: the colors are solid at each end and mix only in between.</figcaption>
+</figure>
+<figure>
+    <img src="../media/imageproducer/imageproducer-glow-neon-white.jpg" alt="A white Neon Glow on the black outline">
+    <figcaption>Glow on the black outline layer: Neon Glow in white, Reach 10%, Intensity 1.31×. The glow lights up the colored sheets from the edges in. Nothing is permanent until Apply.</figcaption>
+</figure>
+
+<h3>Remove Background</h3>
+<p>Select a layer with a picture and press <strong>Remove Background</strong>. Image Producer finds the subject and clears everything behind it. If Image Producer finds more than one subject, choose the ones to keep. The cutout goes on a new layer, and the original is kept underneath, hidden.</p>
+<div class="note">Remove Background is not perfect. On the lighthouse, a wisp of cloud stayed attached to the tower. Finish with the Eraser.</div>
+<figure>
+    <img src="../media/imageproducer/imageproducer-remove-bg-armed.jpg" alt="Remove Background ready on the lighthouse layer">
+    <figcaption>Before: the panel names the layer it will change.</figcaption>
+</figure>
+<figure>
+    <img src="../media/imageproducer/imageproducer-remove-bg-result.jpg" alt="Remove Background result">
+    <figcaption>After one press: the scene is gone and the lighthouse stands on the picture below.</figcaption>
+</figure>
+<figure>
+    <img src="../media/imageproducer/imageproducer-remove-bg-a-before.jpg" alt="A glowing A on black, before Remove Background">
+    <figcaption>Before: a glowing A on a black background, with Remove Background ready.</figcaption>
+</figure>
+<figure>
+    <img src="../media/imageproducer/imageproducer-remove-bg-a-after.jpg" alt="The A cut out over the clouds">
+    <figcaption>After: “A (cutout)” stands on the clouds and the original A is hidden below. The soft glow went with the background — to keep a glow, use Blend ▸ Screen instead.</figcaption>
+</figure>
+
+<h3>Magic Lasso</h3>
+<p>Move over an area to see it outlined in red, then tap or click to clear it — sky, then water, then rock. Only the connected area clears. All the clears go on one new layer, and History steps back through them one at a time.</p>
+<figure>
+    <img src="../media/imageproducer/imageproducer-magic-lasso.jpg" alt="Magic Lasso clearing the white inside the A">
+    <figcaption>One click inside the white of the A: the white clears and the clouds below show through the letter. The original A is kept, hidden.</figcaption>
+</figure>
+
+<h3>Zoom</h3>
+<p>Double-click to zoom in. On the Mac, Option-double-click zooms out and Shift-Option-double-click returns to 100%. On the iPad, pinch. Drag to move around. The Zoom panel turns the floating preview on and off.</p>
+<figure>
+    <img src="../media/imageproducer/imageproducer-zoom-panel.jpg" alt="The Zoom panel">
+    <figcaption>The Zoom panel: the Floating preview switch. The preview is the small copy at the top left of the canvas.</figcaption>
+</figure>
+
+<h3>Camera</h3>
+<p>Press <strong>Capture</strong> to take a picture of everything you can see, onto a new top layer. The capture is also copied, ready to paste anywhere. You can choose a see-through or solid background, a larger size, and trimming to the picture.</p>
+<div class="caution">Each capture replaces whatever you had copied.</div>
+<figure>
+    <img src="../media/imageproducer/imageproducer-camera-panel-2.jpg" alt="The Camera panel after capturing the stacked picture">
+    <figcaption>The Camera panel after one capture of the stacked picture over the clouds. The capture lands on a new top layer, “Image Producer Icon (Camera)”.</figcaption>
+</figure>
+<figure>
+    <img src="../media/imageproducer/imageproducer-camera-pasted.jpg" alt="The capture pasted into Messages" style="max-width:480px">
+    <figcaption>The same capture, pasted straight into Messages.</figcaption>
+</figure>
+
+<h3 id="stopmotion">Stop motion and the Lightbox</h3>
+<p>The Camera also makes stop-motion animation. Each capture is one frame.</p>
+<ol>
+    <li>Put each moving part on its own layer.</li>
+    <li>Choose Camera and turn on <strong>Animation mode</strong>.</li>
+    <li>Press <strong>Capture</strong> for frame 1.</li>
+    <li>Switch to Move and nudge the moving part a little. Switch back to Camera and press Capture again. Repeat.</li>
+    <li>Turn on <strong>Onion skin</strong> to see the last few frames faintly while you set up the next one.</li>
+    <li>Press <strong>Play</strong> to watch. Set the speed, and leave <strong>Loop</strong> on to watch it repeat. <strong>Exit preview</strong> goes back to editing.</li>
+    <li>To smooth the motion, set <strong>Frames between</strong> and press <strong>Generate</strong>. Image Producer draws the in-between frames for you.</li>
+</ol>
+<div class="caution">In Animation mode, a move you did not capture is not kept. Pressing Capture is what saves each position.</div>
+<div class="tip"><em>Slow in + out</em> makes motion start and stop gently, like real things do.</div>
+
+<h2 id="examples">Projects to try</h2>
+
+<h3>Make an animated GIF</h3>
+<p>A star that slides across the picture and loops.</p>
+<ol>
+    <li>Make a <strong>New Image</strong> and select <strong>Foreground</strong>.</li>
+    <li>Choose <strong>Symbol</strong>, search “star”, tap or click a star, and press <strong>Create New Layer</strong>.</li>
+    <li>Choose <strong>Camera</strong>, turn on <strong>Animation mode</strong>, and press <strong>Capture</strong>.</li>
+    <li>Choose <strong>Move</strong> and drag the star a little to the right. Choose <strong>Camera</strong> and press Capture.</li>
+    <li>Repeat until you have five or six frames. Press <strong>Play</strong> to check, then <strong>Exit preview</strong>.</li>
+    <li>Press <strong>Export</strong> and choose <strong>Animated GIF</strong>. Leave <strong>Camera frames only</strong> on, and press <strong>Export…</strong>.</li>
+</ol>
+<div class="note">GIFs have a limited number of colors, so soft glows can look rough. Turning on a solid background when you capture helps.</div>
+
+<h3>Make a banner ad</h3>
+<p>A 1500 × 500 banner: a 3D headline, a picture, a symbol on each side, and a tagline.</p>
+<div class="tip">Before using any tool that adds a layer, select the layer the new one should sit above.</div>
+<ol>
+    <li>Make a <strong>New Image</strong>. Choose <strong>Canvas</strong>, open <strong>Canvas size presets ▸ Social</strong>, and pick <strong>X header</strong> — 1500 × 500.
+        <figure><img src="../media/imageproducer/imageproducer-banner-step01.jpg" alt="Canvas set to 1500 by 500"><figcaption>The canvas set to 1500 × 500.</figcaption></figure></li>
+    <li>Select <strong>Background</strong>. Choose <strong>Paint Drop / Bucket</strong>, pick a color, and press <strong>Fill Layer</strong>.
+        <figure><img src="../media/imageproducer/imageproducer-banner-step02.jpg" alt="Background filled blue"><figcaption>Background filled.</figcaption></figure></li>
+    <li>Choose <strong>Text</strong>, type “Image Producer”, pick white, and press <strong>New Text Layer</strong>. Choose a font and a size.
+        <figure><img src="../media/imageproducer/imageproducer-banner-step03.jpg" alt="Headline text layer"><figcaption>The headline.</figcaption></figure></li>
+    <li>Duplicate the headline twice. Give the copies darker colors and nudge each one a few pixels with Move. The stacked copies look 3D.
+        <figure><img src="../media/imageproducer/imageproducer-banner-step05.jpg" alt="Three stacked text copies"><figcaption>Three copies, offset slightly, make the 3D headline.</figcaption></figure></li>
+    <li>Check all three headline layers and press <strong>Link</strong>, so the three move as one.
+        <figure><img src="../media/imageproducer/imageproducer-banner-step06.jpg" alt="Three headline layers checked"><figcaption>The three headline layers checked, ready to link.</figcaption></figure></li>
+    <li>Select <strong>Foreground</strong>. Choose <strong>Image</strong> and press <strong>Import Image to New Layer…</strong>. The picture lands behind the headline.
+        <figure><img src="../media/imageproducer/imageproducer-banner-step07.jpg" alt="Picture behind the headline"><figcaption>The picture behind the headline.</figcaption></figure></li>
+    <li>Choose <strong>Text</strong>, type the tagline, and press <strong>New Text Layer</strong>. With Move, drag a side corner of the text box outward until the tagline fits on one line, and drag the tagline to the bottom.
+        <figure><img src="../media/imageproducer/imageproducer-banner-step09.jpg" alt="Tagline on one line"><figcaption>The tagline stretched to one line.</figcaption></figure></li>
+    <li>Add a symbol on each side with <strong>Symbol ▸ Create New Layer</strong>, and size them with Move.
+        <figure><img src="../media/imageproducer/imageproducer-banner-step10.jpg" alt="A symbol on each side"><figcaption>A symbol on each side.</figcaption></figure></li>
+    <li>Save the banner with <strong>Save to Desktop</strong> (Mac) or <strong>Share</strong>. The banner comes out 1500 × 500.
+        <figure><img src="../media/imageproducer/imageproducer-banner-step11.jpg" alt="Finished banner"><figcaption>The finished banner.</figcaption></figure></li>
+</ol>
+<div class="caution">For a banner you will publish, use your own artwork on the sides, not SF Symbols — see Symbol.</div>
+<div class="note"><strong>Link is not Merge.</strong> Linked layers stay editable text. Merge turns layers into one flat picture.</div>
+
+<h3>Make a three-color stacked picture (iPad)</h3>
+<p>Four symbols stacked into one picture: three colored sheets with a black outline on top.</p>
+<ol>
+    <li>Start with a background — this one is a purple-to-blue gradient from <strong>Layer… ▸ Gradient</strong>. Choose <strong>Symbol</strong> and search “layers”.
+        <figure><img src="../media/imageproducer/imageproducer-stack-step1.jpg" alt="Gradient with the Symbol tool open"><figcaption>The gradient, with the Symbol tool searching “layers”.</figcaption></figure></li>
+    <li>Pick <strong>blue</strong>, tap <strong>3 Layers 3D Bottom Filled</strong>, and press <strong>Create New Layer</strong>.
+        <figure><img src="../media/imageproducer/imageproducer-stack-step2.jpg" alt="Blue bottom-filled symbol"><figcaption>The preview, the two buttons, and the blue symbol on its own layer.</figcaption></figure></li>
+    <li>Pick <strong>green</strong>, tap <strong>3 Layers 3D Middle Filled</strong>, and press <strong>Create New Layer</strong>.
+        <figure><img src="../media/imageproducer/imageproducer-stack-step3.jpg" alt="Green middle-filled symbol"><figcaption>Green on top of blue.</figcaption></figure></li>
+    <li>Pick <strong>red</strong>, tap <strong>3 Layers 3D Top Filled</strong>, and press <strong>Create New Layer</strong>.
+        <figure><img src="../media/imageproducer/imageproducer-stack-step4.jpg" alt="Red top-filled symbol"><figcaption>Red on top.</figcaption></figure></li>
+    <li>Pick <strong>black</strong>, tap the plain <strong>3 Layers 3D</strong> outline, and press <strong>Create New Layer</strong>.
+        <figure><img src="../media/imageproducer/imageproducer-stack-step5.jpg" alt="Finished stacked picture"><figcaption>Finished: a black outline over red, green and blue.</figcaption></figure></li>
+</ol>
+<div class="tip">The four symbols are the same shape, so the layers line up exactly with no erasing. To resize the whole picture, link the four layers and resize one with Move.</div>
+<div class="caution">Because the picture is made from SF Symbols, the picture is for your own use, not for an app icon or a logo.</div>
+
+<h3>Cut a subject out of its scene</h3>
+<ol>
+    <li>Import the picture onto its own layer and select the layer.</li>
+    <li>Choose <strong>Remove Background</strong> and press the button.</li>
+    <li>Clean up leftover bits with the Eraser, with black behind the cutout.</li>
+    <li>Use Move to size and place the cutout.</li>
+</ol>
+
+<h3>Remove a black background and keep the light</h3>
+<p>See <strong>Green Key on a black background</strong>, under Layer….</p>
+
+<h2 id="export">Exporting</h2>
+<figure>
+    <img src="../media/imageproducer/imageproducer-toolbar.jpg" alt="Export, Share, Save to Desktop and About buttons" style="max-width:480px">
+    <figcaption>The buttons at the top right, enlarged: Export, Share, Save to Desktop (Mac), About.</figcaption>
+</figure>
+<ul>
+    <li><strong>Export</strong> saves the picture as PNG, JPEG, TIFF, HEIC, GIF, BMP, PDF, a PDF with one page per layer, an animated GIF, or (Mac) an Icon Set. On the Mac, press ⌘E.</li>
+    <li><strong>Share</strong> sends a PNG to Messages, Mail, AirDrop and more.</li>
+    <li><strong>Save to Desktop</strong> (Mac) puts a PNG on your Desktop. Save to Desktop never replaces a different file with the same name.</li>
+    <li><strong>About</strong> shows the version and contact information.</li>
+</ul>
+<p>The saved picture is the size of the canvas — a 1500 × 500 banner comes out 1500 × 500.</p>
+<p><strong>Icon Set</strong> (Mac) makes a folder with light and dark 1024-pixel PNGs, ready to drag into Xcode.</p>
+<figure>
+    <img src="../media/imageproducer/imageproducer-iconset-export.jpg" alt="After an Icon Set export">
+    <figcaption>An Icon Set export.</figcaption>
+</figure>
+
+<h2 id="trouble">Troubleshooting</h2>
+<table>
+    <tr><th>Problem</th><th>Try this</th></tr>
+    <tr><td>A tool does nothing</td><td>Select a layer first. The tool’s panel says what kind of layer the tool needs.</td></tr>
+    <tr><td>Glow or another Layer… effect doesn’t show</td><td>Select the layer with your picture, not Light or Dark.</td></tr>
+    <tr><td>Green Key leaves a ragged edge</td><td>Raise Softness.</td></tr>
+    <tr><td>The subject turns see-through after Green Key</td><td>Lower Softness, then Tolerance.</td></tr>
+    <tr><td>A new layer from the Image Playground Tool is just named “Image Playground”</td><td>Type your key words in the Image Playground Tool’s box before pressing Image Playground: New Layer.</td></tr>
+    <tr><td>Fill Layer turned a symbol into a solid block</td><td>Go back one step in History, then change the color with the Symbol tool.</td></tr>
+    <tr><td>A History step came back after reopening</td><td>Looking at a step does not keep it. Press Keep this step.</td></tr>
+    <tr><td>I want to undo</td><td>Delete the new layer and turn the hidden original back on, or use History.</td></tr>
+    <tr><td>I want to go back further</td><td>File ▸ Revert to Open… or Revert to Last Save….</td></tr>
+</table>
+
+<h2 id="bulletins">Service bulletins</h2>
+<p>None open. If something doesn’t work the way this page says, email the address below and the problem will be listed here until it is fixed.</p>
+
+<h2 id="help">Need help?</h2>
+<p>Email <a href="mailto:michael@fluharty.com">michael@fluharty.com</a> with what happened and your device and system version. The version is in <strong>About Image Producer</strong> — the ⓘ button at the top right.</p>
+
+<div class="footer">
+    Part of <a href="https://fluharty.me">fluharty.me</a> &middot; <a href="https://fluharty.me/privacy.html">Privacy</a><br>
+    Image Playground, Apple Intelligence and SF Symbols are trademarks of Apple Inc. Image Producer is not affiliated with or endorsed by Apple.
+</div>
+
+</div>
+</body>
+</html>
