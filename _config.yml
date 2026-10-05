@@ -1,0 +1,13 @@
+# fluharty.me — GitHub Pages (Jekyll)
+url: "https://fluharty.me"
+
+# Builds /sitemap.xml on every publish (a GitHub Pages–supported plugin).
+plugins:
+  - jekyll-sitemap
+
+# Kept out of the sitemap: work-in-progress drafts.
+defaults:
+  - scope:
+      path: "support/imageproducer-plain-draft.html"
+    values:
+      sitemap: false
