@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Support for Rep Crew (Daily Rep Crew Accountability): daily rep challenges with your crew, leaderboards, photos, and keeping the crew decent.">
+    <title>Rep Crew Support — Daily Accountability</title>
+    <!-- Support section standard (2026-09-28): fluharty.me/support/{app}.html. Not listed in
+         support/index.html, which lists only apps live on the App Store. Rep Crew is in
+         TestFlight. Also the "published contact information" App Review guideline 1.2 asks
+         for; the app's About screen links here. -->
+    <style>
+        :root { color-scheme: light dark; }
+        html { font-size: 18px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; line-height: 1.6; color: #333; max-width: 960px; margin: 0 auto; padding: 2rem; background-color: #f5f5f7; }
+        .container { background-color: white; padding: 3rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { color: #1d1d1f; font-size: 2.4rem; margin-bottom: 0.5rem; }
+        h2 { color: #1d1d1f; font-size: 1.6rem; margin-top: 2.5rem; margin-bottom: 0.75rem; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3rem; }
+        p, li { margin: 0.5rem 0; }
+        ol, ul { padding-left: 1.6rem; }
+        .hero { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+        .hero img { width: 128px; height: 128px; border-radius: 28px; box-shadow: 0 4px 14px rgba(0,0,0,0.18); }
+        .subtitle { color: #6e6e73; font-size: 1.15rem; margin-bottom: 1.5rem; }
+        .secondary-link { display: inline-block; color: #0071e3; padding: 0.85rem 1.4rem; border: 1px solid #0071e3; border-radius: 8px; text-decoration: none; font-size: 1.05rem; margin: 1rem 0.5rem 1rem 0; font-weight: 500; }
+        .secondary-link:hover { background-color: #f0f9ff; }
+        .note { background: #f0f9ff; border-left: 4px solid #0071e3; padding: 0.7rem 1rem; margin: 1rem 0; border-radius: 4px; }
+        .caution { background: #fff4e5; border-left: 4px solid #c46a00; padding: 0.7rem 1rem; margin: 1rem 0; border-radius: 4px; }
+        table { border-collapse: collapse; width: 100%; margin: 0.8rem 0 1.2rem 0; font-size: 1rem; }
+        th, td { border: 1px solid #e0e0e0; padding: 0.45rem 0.6rem; text-align: left; vertical-align: top; }
+        th { background: #f5f5f7; color: #1d1d1f; }
+        .toc a { color: #0071e3; text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+        .footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #e0e0e0; font-size: 1rem; color: #6e6e73; }
+        .footer a { color: #0071e3; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        /* Follows the viewer's light or dark mode — his rule, 2026-10-03. */
+        @media (prefers-color-scheme: dark) {
+            body { background-color: #000; color: #e5e5ea; }
+            .container { background-color: #1c1c1e; box-shadow: none; }
+            h1, h2, th { color: #f5f5f7; }
+            h2, th, td, .footer { border-color: #3a3a3c; }
+            th { background: #2c2c2e; }
+            .subtitle, .footer { color: #a1a1a6; }
+            .note { background: #0a2540; }
+            .caution { background: #3a2500; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<div class="hero">
+    <img src="../media/repcrew/repcrew-icon.png" alt="Rep Crew app icon">
+    <div>
+        <h1>Rep Crew</h1>
+        <p class="subtitle">Daily accountability for you and your crew. Set a daily rep goal, log your reps through the day, and see how everyone is doing.</p>
+    </div>
+</div>
+
+<p>
+    <a class="secondary-link" href="https://github.com/fluhartyml/Rep-Crew">GitHub Repository</a>
+    <a class="secondary-link" href="#help">Need help?</a>
+</p>
+
+<p class="toc"><strong>On this page:</strong>
+<a href="#start">Start a challenge</a> ·
+<a href="#log">Log your reps</a> ·
+<a href="#crew">Your crew</a> ·
+<a href="#boards">Leaderboards</a> ·
+<a href="#photos">Photos</a> ·
+<a href="#decent">Report, block and ban</a> ·
+<a href="#shared">What the crew can see</a> ·
+<a href="#help">Need help?</a></p>
+
+<h2 id="start">Start a challenge</h2>
+<ol>
+    <li>Tap <strong>+</strong> at the top right of Home.</li>
+    <li>Name the challenge, choose how many days it runs, and the day it starts.</li>
+    <li>Under <strong>Daily routine</strong>, add each exercise and its daily goal, like 100 push-ups a day.</li>
+    <li><strong>Public</strong> is on by default: everyone with Rep Crew sees the challenge and its leaderboard. Turn Public off and only the crew you check or invite sees it.</li>
+    <li>Tap <strong>Save</strong>.</li>
+</ol>
+<div class="note">A challenge of one is still a challenge. A personal goal shows on the leaderboards like any other.</div>
+
+<h2 id="log">Log your reps</h2>
+<ul>
+    <li>Open a challenge. Under <strong>Today</strong>, each exercise shows what you've done and what's left.</li>
+    <li>Tap <strong>+5</strong>, <strong>+10</strong>, or the last button, which adds your whole daily goal at once. For any other number, tap <strong>Other</strong>.</li>
+    <li>Reps are saved the moment you tap. The <strong>undo</strong> arrow takes back your last entry for today.</li>
+    <li><strong>Every day</strong> lists each day of the challenge with a check for every day you met your goals.</li>
+</ul>
+
+<h2 id="crew">Your crew</h2>
+<ul>
+    <li>In <strong>Settings</strong> (the gear on Home), enter your first name. Your crew sees it on the leaderboards and on your invites.</li>
+    <li><strong>Invite to Crew</strong> sends a text or email with the Rep Crew TestFlight link and a link that brings the challenge onto your friend's phone.</li>
+    <li>Once someone has joined one of your challenges, they get a check box when you start a new one.</li>
+    <li><strong>Crew messages</strong> on each challenge send a short line to everyone in it. Answer right from the notification with <strong>Reply</strong> (just the sender) or <strong>Reply All</strong>.</li>
+</ul>
+
+<h2 id="boards">Leaderboards</h2>
+<ul>
+    <li>Tap the <strong>bar chart</strong> at the top of any screen to open Leaderboards: your challenges first, then everyone else's public challenges.</li>
+    <li>Each board lists the crew by <strong>today's</strong> reps. Every board starts fresh each morning, so anyone can top it on a good day.</li>
+    <li>🔥 and a number is a streak: days in a row with every goal met.</li>
+    <li>The header shows the day of the challenge and how many in the crew are done today.</li>
+    <li>The <strong>house</strong> at the top of any screen takes you back to Home.</li>
+</ul>
+
+<h2 id="photos">Photos</h2>
+<ul>
+    <li>On a challenge you're in, tap <strong>Take Photo</strong> or <strong>Choose Photo</strong> to share a picture with the crew.</li>
+    <li>Tap a thumbnail to see the photo full size.</li>
+    <li>To keep a photo, long-press its thumbnail and choose <strong>Save to Photos</strong>, or use the save button in the full-size view.</li>
+    <li>Whoever posted a photo can remove it. The challenge's leader can remove any photo in that challenge.</li>
+</ul>
+
+<h2 id="decent">Report, block and ban</h2>
+<ul>
+    <li><strong>Report a photo:</strong> open the photo, tap <strong>•••</strong>, then <strong>Report Photo</strong>. The report goes to the developer, who reviews every report, and the photo is hidden for you right away.</li>
+    <li><strong>Block a person:</strong> long-press their name on a leaderboard, or tap <strong>•••</strong> on one of their photos, and choose <strong>Block</strong>. You stop seeing their reps, photos and messages everywhere. They aren't told. Unblock anyone in Settings, under <strong>Blocked</strong>.</li>
+    <li><strong>Remove and ban (leaders):</strong> the person who started a challenge can long-press a name on its board, or use <strong>•••</strong> on a photo, to remove someone for good. Their name shows as <strong>Disqualified</strong> on the board, their photos and messages are hidden, and they can't rejoin. Their own reps stay on their own phone.</li>
+</ul>
+<div class="caution">If something in Rep Crew is harmful or makes you feel unsafe, report it and email the address below.</div>
+
+<h2 id="shared">What the crew can see</h2>
+<p>Rep Crew keeps your challenges and reps on your iPhone. To share with your crew, it uses Rep Crew's own space in Apple's iCloud. There is no other server.</p>
+<table>
+    <tr><th>Shared with the crew</th><th>Stays on your iPhone</th></tr>
+    <tr><td>Your first name, each challenge, today's total reps and streak, photos you post, and crew messages. For a public challenge, everyone with Rep Crew sees them.</td><td>Your rep-by-rep log, your settings, and the list of people you blocked.</td></tr>
+</table>
+<p>Rep Crew is a way to keep track of your own exercise. It is not medical advice. Check with a doctor before starting a new exercise routine, and stop if something hurts.</p>
+
+<h2 id="help">Need help?</h2>
+<p>Email <a href="mailto:michael@fluharty.com">michael@fluharty.com</a> with what happened and your iPhone and iOS version. The build number is in <strong>About</strong>, the ⓘ button on Home.</p>
+
+<div class="footer">
+    Part of <a href="https://fluharty.me">fluharty.me</a> &middot; <a href="https://fluharty.me/privacy.html">Privacy</a><br>
+    iPhone, iCloud and TestFlight are trademarks of Apple Inc. Rep Crew is not affiliated with or endorsed by Apple.
+</div>
+
+</div>
+</body>
+</html>
