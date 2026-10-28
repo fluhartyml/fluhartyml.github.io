@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Support for video-colorizer: colorize black-and-white video with DDColor, on a Mac (PyTorch or Core ML) or a PC with an NVIDIA GPU.">
+    <title>video-colorizer Support</title>
+    <!-- Support section standard (2026-09-28): fluharty.me/support/{app}.html. Not listed in support/index.html,
+         which lists only apps live on the App Store. video-colorizer is an open-source tool on GitHub; its repo's
+         homepage points here. Written by Claude at Michael Fluharty's direction, 2026-10-27. -->
+    <style>
+        :root { color-scheme: light dark; }
+        html { font-size: 18px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; line-height: 1.6; color: #333; max-width: 960px; margin: 0 auto; padding: 2rem; background-color: #f5f5f7; }
+        .container { background-color: white; padding: 3rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { color: #1d1d1f; font-size: 2.4rem; margin-bottom: 0.5rem; }
+        h2 { color: #1d1d1f; font-size: 1.6rem; margin-top: 2.5rem; margin-bottom: 0.75rem; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3rem; }
+        p, li { margin: 0.5rem 0; }
+        ol, ul { padding-left: 1.6rem; }
+        .hero { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+        .hero img { width: 128px; height: 128px; border-radius: 28px; box-shadow: 0 4px 14px rgba(0,0,0,0.18); }
+        .subtitle { color: #6e6e73; font-size: 1.15rem; margin-bottom: 1.5rem; }
+        .secondary-link { display: inline-block; color: #0071e3; padding: 0.85rem 1.4rem; border: 1px solid #0071e3; border-radius: 8px; text-decoration: none; font-size: 1.05rem; margin: 1rem 0.5rem 1rem 0; font-weight: 500; }
+        .secondary-link:hover { background-color: #f0f9ff; }
+        .note { background: #f0f9ff; border-left: 4px solid #0071e3; padding: 0.7rem 1rem; margin: 1rem 0; border-radius: 4px; }
+        .caution { background: #fff4e5; border-left: 4px solid #c46a00; padding: 0.7rem 1rem; margin: 1rem 0; border-radius: 4px; }
+        table { border-collapse: collapse; width: 100%; margin: 0.8rem 0 1.2rem 0; font-size: 1rem; }
+        th, td { border: 1px solid #e0e0e0; padding: 0.45rem 0.6rem; text-align: left; vertical-align: top; }
+        th { background: #f5f5f7; color: #1d1d1f; }
+        .toc a { color: #0071e3; text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+        .footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #e0e0e0; font-size: 1rem; color: #6e6e73; }
+        .footer a { color: #0071e3; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        /* Follows the viewer's light or dark mode — his rule, 2026-10-03. */
+        @media (prefers-color-scheme: dark) {
+            body { background-color: #000; color: #e5e5ea; }
+            .container { background-color: #1c1c1e; box-shadow: none; }
+            h1, h2, th { color: #f5f5f7; }
+            h2, th, td, .footer { border-color: #3a3a3c; }
+            th { background: #2c2c2e; }
+            .subtitle, .footer { color: #a1a1a6; }
+            .note { background: #0a2540; }
+            .caution { background: #3a2500; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<h1>video-colorizer</h1>
+<p class="subtitle">Colorize black-and-white films and shows, frame by frame, with the open-source DDColor model. Then steady the color so it doesn't flicker.</p>
+
+<a class="secondary-link" href="https://github.com/fluhartyml/video-colorizer">Source on GitHub</a>
+<a class="secondary-link" href="https://github.com/fluhartyml/video-colorizer#troubleshooting">Troubleshooting</a>
+
+<div class="note"><strong>Directed by Michael Fluharty. Written by Claude.</strong> Claude, Anthropic's AI, wrote every script and document, ran the tests and measured the results. Michael set the goal and made the calls. The colorization model itself is DDColor, by its own authors (credits below).</div>
+
+<p class="toc"><a href="#what">What it does</a> · <a href="#start">Getting started</a> · <a href="#speed">How fast</a> · <a href="#problems">Common problems</a> · <a href="#credits">Credits</a> · <a href="#help">Need help?</a></p>
+
+<h2 id="what">What it does</h2>
+<ol>
+    <li><strong>Colorize each frame.</strong> The picture's brightness and detail stay exactly as they were. The model only adds the color.</li>
+    <li><strong>Smooth the color.</strong> Color is averaged over 7 frames while brightness comes from the original, so the color doesn't flicker and the picture stays sharp.</li>
+    <li><strong>Batch it.</strong> Point it at a list of videos. Each result lands beside its original as <em>"name (Colorized).mp4"</em>. Originals are never changed, and a stopped batch picks up where it left off.</li>
+</ol>
+
+<h2 id="start">Getting started</h2>
+<table>
+    <tr><th>You need</th><th>Notes</th></tr>
+    <tr><td>A Mac with Apple silicon, or a PC with an NVIDIA graphics card</td><td>It also runs on any computer's processor alone, but far more slowly.</td></tr>
+    <tr><td>Python</td><td>3.14 works for the standard path. The faster Mac-only Core ML path needs Python 3.9 to 3.13 (the Mac's built-in Python works).</td></tr>
+    <tr><td>FFmpeg</td><td>For reading and writing video. On a Mac: <code>brew install ffmpeg</code>.</td></tr>
+    <tr><td>About 1 GB free, plus room for one extra copy of your largest video</td><td>The model's weights are about 0.9 GB and download on first use.</td></tr>
+</table>
+<p>Step-by-step setup, every command, and the options are in the <a href="https://github.com/fluhartyml/video-colorizer#setup">README on GitHub</a>.</p>
+
+<h2 id="speed">How fast</h2>
+<p>Measured on an Apple M1 Mac mini with an 8-core GPU, on the same 100 frames:</p>
+<table>
+    <tr><th>Engine</th><th>Speed</th><th>Picture</th></tr>
+    <tr><td>PyTorch on the Mac's GPU</td><td>1.86 frames a second</td><td>reference</td></tr>
+    <tr><td><strong>Core ML on the Mac's GPU</strong> (recommended)</td><td><strong>2.72 frames a second</strong>, 1.5× faster</td><td>looks the same</td></tr>
+    <tr><td>Core ML on the Neural Engine</td><td>4.58 frames a second, 2.5× faster</td><td>colors come out washed out</td></tr>
+</table>
+<p>At the recommended setting, a 25-minute episode takes about 3 hours 50 minutes, and a 90-minute film about 13 hours, on an M1.</p>
+
+<h2 id="problems">Common problems</h2>
+<ul>
+    <li><strong>"No matching distribution found for coremltools"</strong>: your Python is too new for the Core ML path. Use Python 3.9 to 3.13.</li>
+    <li><strong>Colors look gray or washed out</strong>: you ran Core ML with the Neural Engine (<code>ALL</code>). Use <code>CPU_AND_GPU</code>.</li>
+    <li><strong>"ffmpeg: command not found" only in a background job</strong>: background jobs don't load your shell's settings. Add <code>export PATH=/opt/homebrew/bin:$PATH</code> at the top of the job.</li>
+    <li><strong>Very slow, under 1 frame a second</strong>: it's using the processor, not the graphics chip. The README shows how to check.</li>
+    <li><strong>Squeezed or stretched picture</strong>: the video's shape is copied from the original; widescreen sources without that information need the fallback changed.</li>
+</ul>
+<p>The full troubleshooting table is in the <a href="https://github.com/fluhartyml/video-colorizer#troubleshooting">README</a>.</p>
+<div class="caution">Check that you have the right to colorize and share a film or show. Many older works are in the public domain, but not all, and some have newer restorations that aren't.</div>
+
+<h2 id="credits">Credits</h2>
+<p>video-colorizer's scripts are MIT-licensed. <strong>Michael Fluharty's copyright claims none of the following work</strong>; each belongs to its authors:</p>
+<ul>
+    <li><strong>DDColor</strong>, the colorization model and its weights, by Xiaoyang Kang, Tao Yang, Wenqi Ouyang, Peiran Ren, Lingzhi Li and Xuansong Xie (ICCV 2023), first released by Alibaba DAMO Academy on ModelScope. Apache License 2.0.</li>
+    <li><strong>PyTorch</strong> and torchvision (BSD), <strong>coremltools</strong> by Apple (BSD), <strong>timm</strong> by Ross Wightman (Apache 2.0), <strong>huggingface_hub</strong> and <strong>safetensors</strong> by Hugging Face (Apache 2.0), <strong>OpenCV</strong> (Apache 2.0), <strong>NumPy</strong> (BSD), and <strong>FFmpeg</strong> with x264 (LGPL/GPL), which you install separately.</li>
+</ul>
+
+<h2 id="help">Need help?</h2>
+<p>Open an issue on <a href="https://github.com/fluhartyml/video-colorizer/issues">GitHub</a>, or email <a href="mailto:michael@fluharty.com">michael@fluharty.com</a> with what happened, your computer and its operating system version, and the command you ran.</p>
+
+<div class="footer">
+    Part of <a href="https://fluharty.me">fluharty.me</a> &middot; <a href="https://fluharty.me/privacy.html">Privacy</a><br>
+    Mac, Apple silicon and Core ML are trademarks of Apple Inc. NVIDIA is a trademark of NVIDIA Corporation. video-colorizer is not affiliated with or endorsed by Apple, NVIDIA, Anthropic or the DDColor authors.
+</div>
+
+</div>
+</body>
+</html>
