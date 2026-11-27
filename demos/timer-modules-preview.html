@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TimerModules concept preview: a living specification for a live Gantt chart where each row is a running timer.">
+<title>TimerModules — Concept Preview</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0a0a;
+    --panel: #141414;
+    --panel-edge: #222;
+    --ink: #f5f5f5;
+    --ink-dim: #9a9a9a;
+    --ink-fade: #555;
+    --accent: #ff9500;
+    --accent-soft: rgba(255, 149, 0, 0.18);
+    --good: #34c759;
+    --warn: #ff9500;
+    --bad: #ff3b30;
+    --brick-functional: #5ac8fa;
+    --brick-connector: #ff9500;
+    --brick-supplemental: #af52de;
+    --grid: rgba(255, 255, 255, 0.06);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    min-height: 100vh;
+    padding-top: 70px;
+  }
+
+  /* Demo banner */
+  .demo-banner {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(52, 199, 89, 0.92);
+    color: white;
+    text-align: center;
+    padding: 8px 16px;
+    font-size: 14px;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+  }
+  .demo-banner a { color: white; font-weight: 600; text-decoration: underline; }
+
+  .disclaimer {
+    position: fixed;
+    top: 38px; left: 0; right: 0;
+    background: rgba(255, 149, 0, 0.92);
+    color: white;
+    text-align: center;
+    padding: 6px 16px;
+    font-size: 12px;
+    z-index: 999;
+    backdrop-filter: blur(10px);
+  }
+
+  /* Layout */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+  }
+
+  /* Hero */
+  .hero {
+    margin-bottom: 40px;
+  }
+  .hero h1 {
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+  .hero .tagline {
+    font-size: 22px;
+    color: var(--ink-dim);
+    font-weight: 300;
+  }
+  .hero .lineage {
+    font-size: 14px;
+    color: var(--ink-fade);
+    margin-top: 12px;
+    font-family: "SF Mono", Menlo, monospace;
+  }
+
+  /* Sections */
+  section {
+    margin-bottom: 48px;
+  }
+  section h2 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
+  }
+  section h2 .anchor {
+    color: var(--ink-fade);
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 16px;
+    margin-right: 10px;
+    font-weight: 400;
+  }
+  section .lede {
+    color: var(--ink-dim);
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  section h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 24px 0 10px;
+    color: var(--ink);
+  }
+
+  /* Brick palette */
+  .palette {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .family {
+    background: var(--panel);
+    border: 1px solid var(--panel-edge);
+    border-radius: 14px;
+    padding: 18px;
+  }
+  .family .family-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--ink-fade);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .family .family-name {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .family.functional   { border-top: 3px solid var(--brick-functional); }
+  .family.connector    { border-top: 3px solid var(--brick-connector); }
+  .family.supplemental { border-top: 3px solid var(--brick-supplemental); }
+
+  .brick {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    margin: 4px 4px 4px 0;
+    font-size: 15px;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .brick.timer   { background: rgba(90, 200, 250, 0.14); border-color: rgba(90, 200, 250, 0.3); }
+  .brick.gate    { background: rgba(255, 149, 0, 0.14);  border-color: rgba(255, 149, 0, 0.3); }
+  .brick.dep     { background: rgba(255, 149, 0, 0.08);  border-color: rgba(255, 149, 0, 0.22); }
+  .brick.suppl   { background: rgba(175, 82, 222, 0.14); border-color: rgba(175, 82, 222, 0.3); }
+  .brick .glyph  { font-family: "SF Mono", Menlo, monospace; font-weight: 700; color: var(--accent); }
+  .brick.timer .glyph { color: var(--brick-functional); }
+  .brick.suppl .glyph { color: var(--brick-supplemental); }
+  .brick.deferred { opacity: 0.45; font-style: italic; }
+
+  .sub-family-label {
+    font-size: 13px;
+    color: var(--ink-fade);
+    margin: 12px 0 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  /* Gantt canvas */
+  .gantt-wrap {
+    background: var(--panel);
+    border: 1px solid var(--panel-edge);
+    border-radius: 14px;
+    padding: 20px;
+  }
+  .controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+  button.action {
+    background: var(--accent);
+    color: #000;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  button.action:hover { filter: brightness(1.1); }
+  button.action.reset { background: rgba(255, 255, 255, 0.1); color: var(--ink); }
+  button.action.running { background: var(--bad); color: white; }
+
+  .gate-toggle {
+    display: inline-flex;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 4px;
+    gap: 2px;
+  }
+  .gate-toggle button {
+    background: transparent;
+    color: var(--ink-dim);
+    border: none;
+    padding: 8px 14px;
+    border-radius: 7px;
+    font-family: "SF Mono", Menlo, monospace;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .gate-toggle button.active {
+    background: var(--accent);
+    color: #000;
+  }
+
+  .gantt-svg-wrap {
+    background: #050505;
+    border-radius: 10px;
+    padding: 16px;
+    overflow-x: auto;
+  }
+  svg { display: block; min-width: 600px; }
+
+  .gantt-caption {
+    margin-top: 14px;
+    color: var(--ink-dim);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .gantt-state {
+    margin-top: 10px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 14px;
+    color: var(--ink-dim);
+  }
+  .gantt-state span b { color: var(--ink); }
+
+  /* What you're seeing block */
+  .explainer {
+    background: var(--panel);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    color: var(--ink-dim);
+    font-size: 17px;
+    line-height: 1.55;
+  }
+  .explainer b { color: var(--ink); }
+
+  /* Wanted features */
+  .wanted-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .wanted-card {
+    background: var(--panel);
+    border: 1px solid var(--panel-edge);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .wanted-card .status {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 9px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+  }
+  .status.demoed      { background: rgba(52, 199, 89, 0.18); color: var(--good); }
+  .status.partial     { background: rgba(255, 149, 0, 0.18); color: var(--warn); }
+  .status.wanted      { background: rgba(255, 255, 255, 0.08); color: var(--ink-dim); }
+  .status.open        { background: rgba(255, 59, 48, 0.16);  color: var(--bad); }
+  .wanted-card h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .wanted-card p {
+    font-size: 14px;
+    color: var(--ink-dim);
+    line-height: 1.45;
+  }
+
+  /* Glossary */
+  .glossary { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+  .term {
+    background: var(--panel);
+    border: 1px solid var(--panel-edge);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .term dt {
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--ink);
+  }
+  .term dd {
+    color: var(--ink-dim);
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--panel-edge);
+    color: var(--ink-fade);
+    font-size: 14px;
+    text-align: center;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* Mobile */
+  @media (max-width: 700px) {
+    body { font-size: 17px; }
+    .hero h1 { font-size: 34px; }
+    .hero .tagline { font-size: 18px; }
+    section h2 { font-size: 24px; }
+    .container { padding: 20px 16px 48px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-banner">
+  Concept Preview · <a href="/">fluharty.me</a> · TimerModules
+</div>
+<div class="disclaimer">
+  This is a living specification — not a shipped app. Iterating in place.
+</div>
+
+<div class="container">
+
+  <header class="hero">
+    <h1>TimerModules</h1>
+    <p class="tagline">A snap-together Gantt chart for timers — with boolean logic gates instead of conventional dependencies.</p>
+    <p class="lineage">Rooted from OPerationsHOS Timer module · NightGard namespace · GPL v3 · Concept preview 2026-05-19</p>
+  </header>
+
+  <!-- ============================================================ -->
+  <section id="what-this-is">
+    <h2><span class="anchor">§1</span>What this is</h2>
+    <div class="explainer">
+      Most timer apps give you one timer at a time. Most Gantt charts give you a static plan. <b>TimerModules</b> is the intersection: a live Gantt chart where each row is a running timer, the connectors between them are <b>snap-together bricks</b>, and the connector family includes <b>boolean logic gates</b> (AND, OR, NOR, NOT) alongside the conventional project-management dependency types (FS, SS, FF). Most PM software has one or the other — TimerModules has both, and they compose.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="palette">
+    <h2><span class="anchor">§2</span>Brick palette</h2>
+    <p class="lede">Three families of Lego pieces. Snap them onto the Gantt canvas to build whatever shape you need.</p>
+
+    <div class="palette">
+
+      <div class="family functional">
+        <div class="family-label">Family 1 — Functional</div>
+        <div class="family-name">Timer</div>
+        <span class="brick timer"><span class="glyph">⏱</span> Timer block</span>
+        <p style="color: var(--ink-dim); font-size: 14px; margin-top: 8px;">
+          The main brick. Has a duration, a state (idle / running / paused / done), and inputs/outputs. Inherits the analog dial UI from OPerationsHOS's TimerSectionView.
+        </p>
+      </div>
+
+      <div class="family connector">
+        <div class="family-label">Family 2 — Connectors</div>
+        <div class="family-name">Logic gates + PM types</div>
+
+        <div class="sub-family-label">Logic gates · v1.0</div>
+        <span class="brick gate"><span class="glyph">∧</span> AND</span>
+        <span class="brick gate"><span class="glyph">∨</span> OR</span>
+        <span class="brick gate"><span class="glyph">¬</span> NOT</span>
+        <span class="brick gate"><span class="glyph">↓</span> NOR</span>
+
+        <div class="sub-family-label">Logic gates · deferred to v1.1+</div>
+        <span class="brick gate deferred"><span class="glyph">⊼</span> NAND</span>
+        <span class="brick gate deferred"><span class="glyph">⊕</span> XOR</span>
+        <span class="brick gate deferred"><span class="glyph">⊙</span> XNOR</span>
+
+        <div class="sub-family-label">PM dependency types · v1.0</div>
+        <span class="brick dep">FS · Finish → Start</span>
+        <span class="brick dep">SS · Start → Start</span>
+        <span class="brick dep">FF · Finish → Finish</span>
+        <span class="brick dep">Lag/Lead · offset</span>
+
+        <div class="sub-family-label">PM dependency types · deferred</div>
+        <span class="brick dep deferred">SF · Start → Finish (rare)</span>
+      </div>
+
+      <div class="family supplemental">
+        <div class="family-label">Family 3 — Supplemental</div>
+        <div class="family-name">Annotations &amp; side effects</div>
+        <span class="brick suppl"><span class="glyph">≡</span> Note</span>
+        <span class="brick suppl"><span class="glyph">◆</span> Marker</span>
+        <span class="brick suppl"><span class="glyph">▶</span> Trigger</span>
+        <span class="brick suppl"><span class="glyph">⚡</span> Action</span>
+        <span class="brick suppl deferred"><span class="glyph">▢</span> Group (stretch)</span>
+        <p style="color: var(--ink-dim); font-size: 14px; margin-top: 10px;">
+          Note &amp; Marker = pure annotation. Trigger = entry-point brick that starts a flow. Action = side-effect brick (sound, notification, log entry, deep-link out).
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="live">
+    <h2><span class="anchor">§3</span>Live demo — three timers, one logic gate</h2>
+    <p class="lede">Press play to watch three Timer bricks run. The <b>logic-gate connector</b> waits for its inputs to complete, then routes a signal to the third timer's start. Switch the gate type to see how the same three timers behave under different boolean rules.</p>
+
+    <div class="gantt-wrap">
+
+      <div class="controls">
+        <button class="action" id="play-btn">▶ Play</button>
+        <button class="action reset" id="reset-btn">↺ Reset</button>
+
+        <div class="gate-toggle" id="gate-toggle">
+          <button data-gate="AND" class="active">AND</button>
+          <button data-gate="OR">OR</button>
+          <button data-gate="NOT">NOT</button>
+          <button data-gate="NOR">NOR</button>
+        </div>
+      </div>
+
+      <div class="gantt-svg-wrap">
+        <svg id="gantt" viewBox="0 0 720 280" preserveAspectRatio="xMinYMin meet" aria-label="Gantt canvas demo">
+          <!-- Time axis -->
+          <g id="axis"></g>
+          <!-- Row grid + labels -->
+          <g id="rows"></g>
+          <!-- Bars -->
+          <g id="bars"></g>
+          <!-- Connectors -->
+          <g id="connectors"></g>
+          <!-- Gate node -->
+          <g id="gate-node"></g>
+          <!-- Playhead -->
+          <line id="playhead" x1="120" y1="20" x2="120" y2="260" stroke="#ff9500" stroke-width="2" stroke-dasharray="4 3" opacity="0"/>
+        </svg>
+      </div>
+
+      <div class="gantt-state" id="state-readout">
+        <span>Gate: <b id="state-gate">AND</b></span>
+        <span>Prep: <b id="state-prep">idle</b></span>
+        <span>Setup: <b id="state-setup">idle</b></span>
+        <span>Run: <b id="state-run">idle</b></span>
+        <span>Gate output: <b id="state-gate-out">false</b></span>
+      </div>
+
+      <div class="gantt-caption" id="gate-explainer">
+        <b>AND</b> — the Run timer starts only when <em>both</em> Prep and Setup have finished. Sync barrier pattern, common in project-management Gantts as a "merge point."
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="wanted">
+    <h2><span class="anchor">§4</span>Roadmap snapshot — wanted features</h2>
+    <p class="lede">What's already visible in this demo vs. what's still wanted. Iterates as we settle decisions.</p>
+
+    <div class="wanted-grid">
+
+      <div class="wanted-card">
+        <span class="status demoed">Demoed</span>
+        <h4>Timer brick (Functional)</h4>
+        <p>Bar with duration, idle/running/done states. Three instances on screen.</p>
+      </div>
+
+      <div class="wanted-card">
+        <span class="status demoed">Demoed</span>
+        <h4>Logic-gate connector</h4>
+        <p>AND/OR/NOT/NOR live-switchable. Gate sits between predecessor outputs and downstream timer start.</p>
+      </div>
+
+      <div class="wanted-card">
+        <span class="status partial">Partial</span>
+        <h4>PM dependency types</h4>
+        <p>FS implicit in the demo (Run starts after gate fires). SS, FF, Lag/Lead not yet visible.</p>
+      </div>
+
+      <div class="wanted-card">
+        <span class="status wanted">Wanted</span>
+        <h4>Drag-and-drop palette (user-Lego)</h4>
+        <p>Drag bricks from the palette onto the canvas. Snap into rows. Connect outputs to inputs with click-drag wires.</p>
+      </div>
+
+      <div class="wanted-card">
+        <span class="status wanted">Wanted</span>
+        <h4>Trigger brick</h4>
+        <p>Entry-point brick — manual button / scheduled clock / external event. Every flow needs a start.</p>
+      </div>
+
+      <div class="wanted-card">
+        <span class="status wanted">Wanted</span>
+        <h4>Action brick</h4>
+        <p>Side-effect at end of timer or gate fire: sound, notification, journal log, deep-link.</p>
+      </div>
+
+      <div class="wanted-card">
+        <span class="status wanted">Wanted</span>
+        <h4>Marker / Note</h4>
+        <p>Milestone diamond on the time axis, sticky-note attached to bricks.</p>
+      </div>
+
+      <div class="wanted-card">
+        <span class="status wanted">Wanted</span>
+        <h4>Multiple gates per flow</h4>
+        <p>Chain gates: (A AND B) OR (C NOR D). Demo currently shows one gate; production app will compose.</p>
+      </div>
+
+      <div class="wanted-card">
+        <span class="status open">Open</span>
+        <h4>Developer-Lego vs. user-Lego</h4>
+        <p>Does the user assemble bricks at runtime, or does the app ship with pre-composed layouts? Demo leans toward user-Lego.</p>
+      </div>
+
+      <div class="wanted-card">
+        <span class="status open">Open</span>
+        <h4>Persistence model</h4>
+        <p>SwiftData / @AppStorage / in-memory. Demo doesn't persist anything across reload.</p>
+      </div>
+
+      <div class="wanted-card">
+        <span class="status open">Open</span>
+        <h4>Distribution ambition</h4>
+        <p>Personal use only · free App Store release · book appendix. Decision affects ship-prep scope.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="glossary">
+    <h2><span class="anchor">§5</span>Glossary</h2>
+    <p class="lede">Reference vocabulary for describing revisions. Refer to bricks by name when you want changes.</p>
+
+    <div class="glossary">
+      <dl class="term"><dt>Brick</dt><dd>A snap-together piece of the app — timer, connector, or supplemental.</dd></dl>
+      <dl class="term"><dt>Functional brick</dt><dd>Family 1 — the Timer block. Runs time.</dd></dl>
+      <dl class="term"><dt>Connector brick</dt><dd>Family 2 — wires bricks together. Two sub-families: logic gates + PM dependencies.</dd></dl>
+      <dl class="term"><dt>Supplemental brick</dt><dd>Family 3 — annotation (Note, Marker) or side effects (Trigger, Action).</dd></dl>
+      <dl class="term"><dt>Logic gate</dt><dd>Boolean combination of input signals: AND, OR, NOT, NOR. The unique twist vs. conventional Gantt tools.</dd></dl>
+      <dl class="term"><dt>PM dependency</dt><dd>Project-management edge type: FS (Finish-to-Start), SS (Start-to-Start), FF (Finish-to-Finish), Lag/Lead.</dd></dl>
+      <dl class="term"><dt>Canvas</dt><dd>The Gantt surface where bricks are placed and connected. Time runs left to right.</dd></dl>
+      <dl class="term"><dt>Row</dt><dd>A horizontal track on the canvas. One timer per row (typically).</dd></dl>
+      <dl class="term"><dt>Trigger</dt><dd>Entry-point brick. Without one, the canvas is a diagram, not a runnable program.</dd></dl>
+      <dl class="term"><dt>Action</dt><dd>Side-effect brick. Fires when an upstream timer or gate signals.</dd></dl>
+      <dl class="term"><dt>Composition</dt><dd>Logic-gate sub-family + PM-dependency sub-family combine: "B starts (FS) when A AND C both finish (AND gate)."</dd></dl>
+    </div>
+  </section>
+
+  <footer>
+    <p>TimerModules — concept preview · <a href="/">back to fluharty.me</a></p>
+    <p style="margin-top: 8px;">Last edit: <span id="edit-date">2026-05-19</span> · iterating in place</p>
+  </footer>
+
+</div>
+
+<script>
+(() => {
+  // ============================================================
+  // CONFIG — three timers, one gate. Edit here to tune the demo.
+  // ============================================================
+  const TIMERS = [
+    { id: "prep",  label: "Prep",  durationSec: 8,  row: 0, role: "input" },
+    { id: "setup", label: "Setup", durationSec: 12, row: 1, role: "input" },
+    { id: "run",   label: "Run",   durationSec: 10, row: 2, role: "output" }
+  ];
+  const TIME_WINDOW_SEC = 30;
+  const TICK_MS = 100;
+
+  // Layout constants
+  const VIEW_W = 720, VIEW_H = 280;
+  const PAD_LEFT = 100, PAD_RIGHT = 40, PAD_TOP = 30, PAD_BOTTOM = 30;
+  const CHART_W = VIEW_W - PAD_LEFT - PAD_RIGHT;
+  const ROW_H = (VIEW_H - PAD_TOP - PAD_BOTTOM) / 3;
+  const BAR_H = 28;
+
+  const svg = document.getElementById("gantt");
+  const axisG = document.getElementById("axis");
+  const rowsG = document.getElementById("rows");
+  const barsG = document.getElementById("bars");
+  const connectorsG = document.getElementById("connectors");
+  const gateNodeG = document.getElementById("gate-node");
+  const playhead = document.getElementById("playhead");
+
+  const playBtn = document.getElementById("play-btn");
+  const resetBtn = document.getElementById("reset-btn");
+  const gateToggle = document.getElementById("gate-toggle");
+
+  let state = {
+    running: false,
+    elapsedSec: 0,
+    gate: "AND",
+    timers: TIMERS.map(t => ({ ...t, startedAt: null, endedAt: null }))
+  };
+  let interval = null;
+  let startWall = 0;
+
+  // ============================================================
+  // RENDERING
+  // ============================================================
+
+  function timeToX(sec) {
+    return PAD_LEFT + (sec / TIME_WINDOW_SEC) * CHART_W;
+  }
+  function rowY(row) {
+    return PAD_TOP + row * ROW_H + ROW_H / 2;
+  }
+
+  function drawAxis() {
+    axisG.innerHTML = "";
+    // Baseline
+    const base = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    base.setAttribute("x1", PAD_LEFT); base.setAttribute("y1", PAD_TOP - 4);
+    base.setAttribute("x2", PAD_LEFT + CHART_W); base.setAttribute("y2", PAD_TOP - 4);
+    base.setAttribute("stroke", "rgba(255,255,255,0.15)"); base.setAttribute("stroke-width", "1");
+    axisG.appendChild(base);
+    // Tick marks every 5 sec
+    for (let s = 0; s <= TIME_WINDOW_SEC; s += 5) {
+      const x = timeToX(s);
+      const tick = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      tick.setAttribute("x1", x); tick.setAttribute("y1", PAD_TOP - 4);
+      tick.setAttribute("x2", x); tick.setAttribute("y2", PAD_TOP - 10);
+      tick.setAttribute("stroke", "rgba(255,255,255,0.25)"); tick.setAttribute("stroke-width", "1");
+      axisG.appendChild(tick);
+      const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      label.setAttribute("x", x); label.setAttribute("y", PAD_TOP - 14);
+      label.setAttribute("fill", "#666"); label.setAttribute("font-size", "11");
+      label.setAttribute("text-anchor", "middle"); label.setAttribute("font-family", "SF Mono, Menlo, monospace");
+      label.textContent = s + "s";
+      axisG.appendChild(label);
+    }
+  }
+
+  function drawRows() {
+    rowsG.innerHTML = "";
+    state.timers.forEach(t => {
+      const y = rowY(t.row);
+      // Row label
+      const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      label.setAttribute("x", PAD_LEFT - 14); label.setAttribute("y", y + 5);
+      label.setAttribute("fill", "#9a9a9a"); label.setAttribute("font-size", "15");
+      label.setAttribute("text-anchor", "end"); label.setAttribute("font-weight", "600");
+      label.textContent = t.label;
+      rowsG.appendChild(label);
+      // Duration tag
+      const dur = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      dur.setAttribute("x", PAD_LEFT - 14); dur.setAttribute("y", y + 20);
+      dur.setAttribute("fill", "#555"); dur.setAttribute("font-size", "11");
+      dur.setAttribute("text-anchor", "end"); dur.setAttribute("font-family", "SF Mono, Menlo, monospace");
+      dur.textContent = t.durationSec + "s";
+      rowsG.appendChild(dur);
+      // Row baseline (faint)
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", PAD_LEFT); line.setAttribute("y1", y);
+      line.setAttribute("x2", PAD_LEFT + CHART_W); line.setAttribute("y2", y);
+      line.setAttribute("stroke", "rgba(255,255,255,0.05)"); line.setAttribute("stroke-width", "1");
+      rowsG.appendChild(line);
+    });
+  }
+
+  function drawBars() {
+    barsG.innerHTML = "";
+    state.timers.forEach(t => {
+      const y = rowY(t.row) - BAR_H / 2;
+      // Planned background bar
+      const planned = computePlannedSpan(t);
+      const plannedRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      plannedRect.setAttribute("x", timeToX(planned.startSec));
+      plannedRect.setAttribute("y", y);
+      plannedRect.setAttribute("width", Math.max(2, timeToX(planned.endSec) - timeToX(planned.startSec)));
+      plannedRect.setAttribute("height", BAR_H);
+      plannedRect.setAttribute("rx", 6);
+      plannedRect.setAttribute("fill", "rgba(90, 200, 250, 0.12)");
+      plannedRect.setAttribute("stroke", "rgba(90, 200, 250, 0.35)");
+      plannedRect.setAttribute("stroke-width", "1");
+      plannedRect.setAttribute("stroke-dasharray", "3 3");
+      barsG.appendChild(plannedRect);
+      // Actual filled bar (grows as timer runs)
+      if (t.startedAt !== null) {
+        const startSec = t.startedAt;
+        const endSec = t.endedAt !== null ? t.endedAt : Math.min(startSec + t.durationSec, state.elapsedSec);
+        if (endSec > startSec) {
+          const actualRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+          actualRect.setAttribute("x", timeToX(startSec));
+          actualRect.setAttribute("y", y);
+          actualRect.setAttribute("width", Math.max(2, timeToX(endSec) - timeToX(startSec)));
+          actualRect.setAttribute("height", BAR_H);
+          actualRect.setAttribute("rx", 6);
+          const color = t.endedAt !== null ? "rgba(52, 199, 89, 0.85)" : "rgba(90, 200, 250, 0.85)";
+          actualRect.setAttribute("fill", color);
+          barsG.appendChild(actualRect);
+        }
+      }
+      // Status text inside the row
+      const stateLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      stateLabel.setAttribute("x", timeToX(planned.startSec) + 8);
+      stateLabel.setAttribute("y", y + BAR_H / 2 + 4);
+      stateLabel.setAttribute("fill", "#fff");
+      stateLabel.setAttribute("font-size", "12");
+      stateLabel.setAttribute("font-family", "SF Mono, Menlo, monospace");
+      stateLabel.setAttribute("font-weight", "600");
+      stateLabel.textContent = currentStateLabel(t);
+      barsG.appendChild(stateLabel);
+    });
+  }
+
+  function computePlannedSpan(t) {
+    // For visualization: input timers planned at t=0 to duration; output timer planned at (latest input end) to (+ output duration).
+    if (t.role === "input") {
+      return { startSec: 0, endSec: t.durationSec };
+    } else {
+      const latestInput = Math.max(...state.timers.filter(x => x.role === "input").map(x => x.durationSec));
+      return { startSec: latestInput, endSec: latestInput + t.durationSec };
+    }
+  }
+
+  function currentStateLabel(t) {
+    if (t.startedAt === null) return "idle";
+    if (t.endedAt !== null) return "done";
+    return "running";
+  }
+
+  function drawGateNode() {
+    gateNodeG.innerHTML = "";
+    // Gate node sits in the gutter between the two input rows and the output row, on the right side of input bars.
+    const inputs = state.timers.filter(x => x.role === "input");
+    const output = state.timers.find(x => x.role === "output");
+    const latestInputEnd = Math.max(...inputs.map(x => x.durationSec));
+    const gx = timeToX(latestInputEnd);
+    const gy = (rowY(inputs[0].row) + rowY(inputs[1].row)) / 2;
+    // Gate body
+    const body = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    body.setAttribute("cx", gx); body.setAttribute("cy", gy);
+    body.setAttribute("r", 18);
+    body.setAttribute("fill", gateFired() ? "#ff9500" : "rgba(255, 149, 0, 0.15)");
+    body.setAttribute("stroke", "#ff9500");
+    body.setAttribute("stroke-width", "2");
+    gateNodeG.appendChild(body);
+    // Gate label
+    const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    label.setAttribute("x", gx); label.setAttribute("y", gy + 5);
+    label.setAttribute("text-anchor", "middle");
+    label.setAttribute("font-family", "SF Mono, Menlo, monospace");
+    label.setAttribute("font-weight", "700");
+    label.setAttribute("font-size", "13");
+    label.setAttribute("fill", gateFired() ? "#000" : "#ff9500");
+    label.textContent = state.gate;
+    gateNodeG.appendChild(label);
+    // Output edge from gate to output timer's start
+    const outputX = timeToX(computePlannedSpan(output).startSec);
+    const outputY = rowY(output.row);
+    const edge = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    const midX = (gx + outputX) / 2;
+    edge.setAttribute("d", `M ${gx + 18} ${gy} C ${midX} ${gy}, ${midX} ${outputY}, ${outputX} ${outputY}`);
+    edge.setAttribute("stroke", gateFired() ? "#ff9500" : "rgba(255, 149, 0, 0.35)");
+    edge.setAttribute("stroke-width", "2");
+    edge.setAttribute("fill", "none");
+    gateNodeG.appendChild(edge);
+  }
+
+  function drawConnectors() {
+    connectorsG.innerHTML = "";
+    // Wires from each input timer's end → gate node
+    const inputs = state.timers.filter(x => x.role === "input");
+    const latestInputEnd = Math.max(...inputs.map(x => x.durationSec));
+    const gx = timeToX(latestInputEnd);
+    const gy = (rowY(inputs[0].row) + rowY(inputs[1].row)) / 2;
+    inputs.forEach(t => {
+      const fx = timeToX(t.durationSec);
+      const fy = rowY(t.row);
+      const wire = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      wire.setAttribute("d", `M ${fx} ${fy} C ${(fx + gx) / 2} ${fy}, ${(fx + gx) / 2} ${gy}, ${gx - 18} ${gy}`);
+      const fired = t.endedAt !== null;
+      wire.setAttribute("stroke", fired ? "#34c759" : "rgba(255,255,255,0.15)");
+      wire.setAttribute("stroke-width", "2");
+      wire.setAttribute("fill", "none");
+      connectorsG.appendChild(wire);
+    });
+  }
+
+  // ============================================================
+  // SIMULATION
+  // ============================================================
+
+  function gateInputsDone() {
+    return state.timers.filter(t => t.role === "input").map(t => t.endedAt !== null);
+  }
+
+  function gateFired() {
+    const inputs = gateInputsDone();
+    switch (state.gate) {
+      case "AND": return inputs.every(x => x);
+      case "OR":  return inputs.some(x => x);
+      case "NOT": return !inputs[0]; // single-input convention: invert first input
+      case "NOR": return !inputs.some(x => x);
+      default:    return false;
+    }
+  }
+
+  function tick() {
+    const now = performance.now();
+    state.elapsedSec = (now - startWall) / 1000;
+
+    // Input timers: start at t=0 (after first play press), end at their duration
+    state.timers.forEach(t => {
+      if (t.role === "input") {
+        if (t.startedAt === null) t.startedAt = 0;
+        if (t.endedAt === null && state.elapsedSec >= t.durationSec) {
+          t.endedAt = t.durationSec;
+        }
+      }
+    });
+
+    // Output timer: starts when gate fires (and we haven't started yet)
+    const output = state.timers.find(t => t.role === "output");
+    if (output.startedAt === null && gateFired()) {
+      output.startedAt = state.elapsedSec;
+    }
+    if (output.startedAt !== null && output.endedAt === null && state.elapsedSec >= output.startedAt + output.durationSec) {
+      output.endedAt = output.startedAt + output.durationSec;
+    }
+
+    // Playhead
+    if (state.elapsedSec <= TIME_WINDOW_SEC) {
+      playhead.setAttribute("x1", timeToX(state.elapsedSec));
+      playhead.setAttribute("x2", timeToX(state.elapsedSec));
+      playhead.setAttribute("opacity", "0.7");
+    }
+
+    drawBars();
+    drawConnectors();
+    drawGateNode();
+    updateReadout();
+
+    // Auto-stop when all done OR we run past the time window
+    const allDone = state.timers.every(t => t.endedAt !== null);
+    if (allDone || state.elapsedSec > TIME_WINDOW_SEC + 1) {
+      stop();
+    }
+  }
+
+  function play() {
+    if (state.running) return;
+    state.running = true;
+    playBtn.textContent = "⏸ Pause";
+    playBtn.classList.add("running");
+    startWall = performance.now() - state.elapsedSec * 1000;
+    interval = setInterval(tick, TICK_MS);
+  }
+
+  function stop() {
+    state.running = false;
+    playBtn.textContent = "▶ Play";
+    playBtn.classList.remove("running");
+    if (interval) { clearInterval(interval); interval = null; }
+  }
+
+  function reset() {
+    stop();
+    state.elapsedSec = 0;
+    state.timers = TIMERS.map(t => ({ ...t, startedAt: null, endedAt: null }));
+    playhead.setAttribute("opacity", "0");
+    redrawAll();
+  }
+
+  function setGate(gate) {
+    state.gate = gate;
+    gateToggle.querySelectorAll("button").forEach(b => {
+      b.classList.toggle("active", b.dataset.gate === gate);
+    });
+    updateGateExplainer();
+    updateReadout();
+    drawGateNode();
+  }
+
+  function updateGateExplainer() {
+    const el = document.getElementById("gate-explainer");
+    const texts = {
+      AND: "<b>AND</b> — the Run timer starts only when <em>both</em> Prep and Setup have finished. Sync barrier pattern, common in project-management Gantts as a 'merge point.'",
+      OR:  "<b>OR</b> — the Run timer starts as soon as <em>either</em> Prep or Setup finishes. First-to-finish pattern; useful for racing or fallback paths.",
+      NOT: "<b>NOT</b> — single-input inverter. Convention here: inverts Prep's signal. Run starts <em>immediately</em> (Prep starts idle = not-done), then Run stops registering after Prep finishes. Demo simplifies — in a real flow, NOT is usually a wire transformer combined with another gate.",
+      NOR: "<b>NOR</b> — Run starts only if <em>neither</em> Prep nor Setup finishes. In this demo both will finish, so Run never starts. Useful for deadline / race-detection patterns where you want to act only if nothing else completed first."
+    };
+    el.innerHTML = texts[state.gate];
+  }
+
+  function updateReadout() {
+    document.getElementById("state-gate").textContent = state.gate;
+    document.getElementById("state-prep").textContent = currentStateLabel(state.timers[0]);
+    document.getElementById("state-setup").textContent = currentStateLabel(state.timers[1]);
+    document.getElementById("state-run").textContent = currentStateLabel(state.timers[2]);
+    document.getElementById("state-gate-out").textContent = gateFired() ? "true" : "false";
+  }
+
+  function redrawAll() {
+    drawAxis();
+    drawRows();
+    drawBars();
+    drawConnectors();
+    drawGateNode();
+    updateReadout();
+  }
+
+  // ============================================================
+  // WIRING
+  // ============================================================
+  playBtn.addEventListener("click", () => {
+    if (state.running) {
+      stop();
+    } else {
+      play();
+    }
+  });
+  resetBtn.addEventListener("click", reset);
+  gateToggle.querySelectorAll("button").forEach(b => {
+    b.addEventListener("click", () => {
+      const wasRunning = state.running;
+      stop();
+      // If the gate change affects output timer's start eligibility, recompute it now
+      const output = state.timers.find(t => t.role === "output");
+      output.startedAt = null;
+      output.endedAt = null;
+      setGate(b.dataset.gate);
+      if (wasRunning) play();
+    });
+  });
+
+  redrawAll();
+  updateGateExplainer();
+})();
+</script>
+
+</body>
+</html>
